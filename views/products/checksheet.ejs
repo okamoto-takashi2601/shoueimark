@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/stylesheet2.css">
+
+    <style>
+        body{
+                font-size: medium;
+                padding-top: 102px; 
+            }
+
+        input[class=form_radio] {
+          display: none;
+        }
+
+        #form_label{ 
+          text-align: center;
+          padding : 1px 6px;
+          width : fit-content;
+          min-width: 60px;
+          font-size: large;
+
+        }
+        #form_label_sm{ 
+          text-align: center;
+          padding : 1px 6px;
+          width : fit-content;
+          font-size: medium;
+
+        }
+        [class=form_radio]:checked + #form_label_sm ,[class=form_radio]:checked + #form_label {
+            border: 1px solid black;
+            border-radius: 50%;
+            padding : 0px 5px;
+
+        }
+
+        input{
+            text-align: center;
+            border: none;
+            width: 70%;
+            margin: 2px;
+        }
+        select{
+            border: none;
+            
+        }
+
+        td{
+            vertical-align: middle;
+        }
+
+    </style>
+</head>
+<body class="d-flex flex-column vh-100" >
+    <%- include('../partials/navbar2') %>
+    <%- include('../partials/flash') %>
+    <p id ="docId" style="display:none"><?= data.id ?></p>
+    <div >
+        <form class="text-center  mx-3" action="/products/<%= data.id %>/checksheet?_method=PUT" method="POST" novalidate class="validated-form"> 
+            <table class="table table-bordered caption-top table-sm border-dark-subtle text-center  mb-1 mt-1">
+                <caption>
+                    伝票番号
+                    <input type="text">
+                </caption>
+                <thead>
+                    <tr>
+                        <th colspan="5">工程チェックシート</th>
+                        <th colspan="2">量産</th>
+                        <th colspan="3">一括</th>
+                        <th colspan="2">不良補填</th>
+                        <th colspan="4">
+                            発行日：
+                            <input type="date">
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td rowspan="5" style="width: 30px;">生産管理課</td>
+                        <td colspan="3">得意先名</td>
+                        <td colspan="2"></td>
+                        <td colspan="2">部品番号</td>
+                        <td colspan="3"> </td>
+                        <td>部品名</td>
+                        <td colspan="5"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">印刷ロット No.</td>
+                        <td colspan="2"></td>
+                        <td>材料名</td>
+                        <td colspan="3"></td>
+                        <td>材料厚</td>
+                        <td></td>
+                        <td colspan="2">
+                            t=
+                        </td>
+                        <td>材料アニール</td>
+                        <td colspan="2">
+                            <div class="d-flex flex-row mt-3  justify-content-center ">
+                                <input class="form_radio" type="radio"  name="q_session2" id="session21"  value="不要">
+                                <label  for="session21" id="form_label">不要</label>
+                                <label style="font-size: large;">・</label>
+                                <input class="form_radio" type="radio" name="q_session2" id="session22"  value="要" >
+                                <label for="session22" id="form_label">要</label>
+                            </div> 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" rowspan="2">
+                            ﾁｪｯｸ工程
+                        </td>
+                        <td colspan="2" rowspan="2">
+                            確認項目
+                        </td>
+                        <td colspan="4">
+                            温度範囲　　　20℃±15℃
+                        </td>
+                        <td colspan="4">
+                            湿度範囲　　　65％RH±20％RH
+                        </td>
+                        <td>
+                            注 文 数
+                        </td>
+                        <td>
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>確認</td>
+                        <td>確認者</td>
+                        <td colspan="6">特記事項</td>
+                        <td>
+                            印 刷 面 付
+                        </td>
+                        <td>
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div class="d-flex flex-row mt-3  justify-content-center ">
+                                <input class="form_radio" type="radio"  name="q_session2" id="session21"  value="確認">
+                                <label  for="session21" id="form_label">確認</label>
+                                <label style="font-size: large;">・</label>
+                                <input class="form_radio" type="radio" name="q_session2" id="session22"  value="準備" >
+                                <label for="session22" id="form_label">準備</label>
+                            </div> 
+                        </td>
+                        <td>1</td>
+                        <td colspan="2">
+                            <div class="d-flex flex-row mt-3  justify-content-center ">
+                                <input class="form_radio" type="radio"  name="q_session2" id="session21"  value="作業手配伝票">
+                                <label  for="session21" id="form_label">作業手配伝票</label>
+                                <label style="font-size: large;">・</label>
+                                <input class="form_radio" type="radio" name="q_session2" id="session22"  value="構造工程表" >
+                                <label for="session22" id="form_label">構造工程表</label>
+                                <label style="font-size: large;">・</label>
+                                <input class="form_radio" type="radio" name="q_session2" id="session22"  value="製品仕様書" >
+                                <label for="session22" id="form_label">製品仕様書</label>
+                                <label style="font-size: large;">・</label>
+                                <input class="form_radio" type="radio" name="q_session2" id="session22"  value="材料" >
+                                <label for="session22" id="form_label">材料</label>
+         
+                            </div> 
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td colspan="6"></td>
+                        <td >今回印刷シート数</td>
+                        <td ></td>
+                    </tr>
+                    <tr>
+                        <td rowspan="32"  style="width: 30px;">製版係 / 印刷係</td>
+                        <td colspan="3">印刷者</td>
+                        <td colspan="2"></td>
+                        <td colspan="3">印刷助手</td>
+                        <td colspan="5">／</td>
+                        <td>累計印刷シート数</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">ﾁｪｯｸ工程</td>
+                        <td colspan="2">確認項目</td>
+                        <td>確認</td>
+                        <td>確認者</td>
+                        <td colspan="6">特記事項</td>
+                        <td rowspan="2">今回印刷個数</td>
+                        <td rowspan="2"></td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2" colspan="2">
+                            <div class="d-flex flex-row mt-3  justify-content-center ">
+                                <input class="form_radio" type="radio"  name="q_session2" id="session21"  value="確認">
+                                <label  for="session21" id="form_label">確認</label>
+                                <label style="font-size: large;">・</label>
+                                <input class="form_radio" type="radio" name="q_session2" id="session22"  value="準備" >
+                                <label for="session22" id="form_label">準備</label>
+                            </div> 
+                        </td>
+                        <td>1</td>
+                        <td colspan="2">「機械始業前点検」</td>
+                        <td></td>
+                        <td rowspan="4"></td>
+                        <td colspan="2"></td>
+                        <td colspan="4">クロスカットテープ貼り付け欄</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td colspan="2">「作業手配伝票・図面・構造工程表・製品仕様書」</td>
+                        <td></td>
+                        <td colspan="2"></td>
+                        <td colspan="4" rowspan="3"></td>
+                        <td colspan="2" rowspan="3" class="text-start">
+                            『工程フロー』…生産管理課記入。<br>
+                            『リリース責任者』…製品仕様書と<br>
+                            照合確認。<br>
+                            作業後サイン又は、捺印。
+                        </td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2" colspan="2">
+                            製版
+                        </td>
+                        <td>3</td>
+                        <td colspan="2">図面・フィルム照合確認</td>
+                        <td></td>
+                        <td colspan="2"></td>
+                    <tr>
+                        <td>4</td>
+                        <td colspan="3">目止め検査</td>
+                        <td></td>
+                        <td colspan="2"></td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2"  colspan="2">
+                            <div class="d-flex flex-row mt-3  justify-content-center ">
+                                <input class="form_radio" type="radio"  name="q_session2" id="session21"  value="確認">
+                                <label  for="session21" id="form_label">確認</label>
+                                <label style="font-size: large;">・</label>
+                                <input class="form_radio" type="radio" name="q_session2" id="session22"  value="準備" >
+                                <label for="session22" id="form_label">準備</label>
+                            </div> 
+                        </td>
+                        <td>1</td>
+                        <td colspan="2">「機械始業前点検」</td>
+                        <td></td>
+                        <td rowspan="15"></td>
+                        <td colspan="2"></td>
+                        <td colspan="4">LOT No.履歴</td>
+
+                        <td>工程フロー</td>
+                        <td>リリース責任者</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td colspan="2">「作業手配伝票・図面・構造工程表・製品仕様書・日報」</td>
+                        <td></td>
+                        <td colspan="2"></td>
+                        <td>色目</td>
+                        <td>インキ</td>
+                        <td>溶剤</td>
+                        <td>硬化剤</td>                        
+                        <td rowspan="5"></td>
+                        <td rowspan="8">
+                            確認日
+                        </td>
+                    </tr>
+                    <tr>
+                        <td rowspan="11"  colspan="2">試刷り</td>
+                        <td>3</td>
+                        <td colspan="2">版取付方向</td>
+                        <td></td>
+                        <td colspan="2"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>                    
+                    <tr>
+                    <tr>
+                        <td>4</td>
+                        <td colspan="2">カラーチップ/色サンプル</td>
+                        <td></td>
+                        <td colspan="2"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    <tr>
+
+                    <tr>
+                        <td>5</td>
+                        <td colspan="2">インキ配合</td>
+                        <td></td>
+                        <td colspan="2"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td rowspan="3">⇩</td>
+                    <tr>
+                                                
+                    <tr>
+
+                        <td>6</td>
+                        <td colspan="2">硬化剤 (有・無)</td>
+                        <td></td>
+                        <td colspan="2"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    <tr>
+
+                    <tr>
+                        <td>7</td>
+                        <td colspan="2">見当</td>
+                        <td></td>
+                        <td colspan="2"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td rowspan="5"></td>
+                        <td rowspan="8">
+                            確認日
+                        </td>
+                    <tr>
+                    <tr>
+                        <td>8</td>
+                        <td colspan="2">印刷面 (表裏・天地の確認)</td>
+                        <td></td>
+                        <td colspan="2"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    <tr>
+                    <tr>
+                        <td colspan="2">(色調/工程確認)</td>
+                        <td>9</td>
+                        <td colspan="2">1・2・3・4・5・6・7・8・9・10・11・12・13・14・15</td>
+                        <td></td>
+                        <td colspan="2"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    <tr>
+
+                    <tr>
+                        <td rowspan="2"  colspan="2">最終確認</td>
+                        <td rowspan="2">1</td>
+                        <td colspan="2" rowspan="2">最終品質確認　2名で確認</td>
+                        <td>オペレーター</td>
+                        <td>承認</td>
+                        <td colspan="2" rowspan="2"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td rowspan="2">⇩</td>
+
+                    </tr>
+                    <tr>
+                        <td>A</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td  colspan="2">乾燥</td>
+                        <td>1</td>
+                        <td colspan="2">最終乾燥</td>
+                        <td>℃</td>
+                        <td>分</td>
+                        <td>UV</td>
+                        <td>自然乾燥</td>
+                        <td c>アタリ位置</td>
+                        <td colspan="3">左　・　右</td>
+                        <td rowspan="3"></td>
+                        <td rowspan="5">
+                            確認日
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td rowspan="2" colspan="2">密着</td>
+                        <td>1</td>
+                        <td colspan="2">クロスカット試験</td>
+                        <td> </td>
+                        <td rowspan="2"></td>
+                        <td> </td>
+                        <td> </td>
+                        <td >印刷面</td>
+                        <td colspan="3">表　・　裏</td>
+
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td colspan="2">爪ひっかきテスト</td>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td colspan="4">次工程申し送り事項 ※記入だけでなく各課への連絡も実施すること</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="5"  colspan="2">員数検査</td>
+                        <td colspan="2" rowspan="5">印刷数量</td>
+                        <td colspan="1" rowspan="5">シート</td>
+                        <td rowspan="4">内訳</td>
+                        <td>1</td>
+                        <td>良品</td>
+                        <td> </td>
+                        <td rowspan="5">シート</td>
+                        <td colspan="3" rowspan="20"></td>
+                        <td rowspan="2">⇩</td>
+                    </tr>
+    
+                    <tr>
+                        <td>2</td>
+                        <td>不良品(ヤレ板)</td>
+                        <td> </td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>不良品(廃棄)</td>
+                        <td> </td>
+                        <td rowspan="3"></td>
+                        <td rowspan="5">
+                            確認日
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>キープサンプル品</td>
+                        <td> </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">1～4合計</td>
+                        <td> </td>
+                    </tr>
+
+
+                    <tr>
+                        <td rowspan="29">
+                            加工係
+                        </td>
+                        <td colspan="3">ﾁｪｯｸ工程</td>
+                        <td colspan="3">スクリーン リーダーのサポートを有効にする </td>
+                        <td>確認</td>
+                        <td>確認者</td>
+                        <td colspan="2">作業時の不具合</td>
+                        <td rowspan="2">⇩</td>
+
+                    </tr>
+                    <tr>
+                        <td rowspan="4">M/S工程</td>
+                        <td rowspan="2">確認・準備</td>
+                        <td>1</td>
+                        <td colspan="3">「機械始業前点検」</td>
+                        <td></td>
+                        <td rowspan="4"></td>
+                        <td colspan="3"></td>
+
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td colspan="3">「作業手配伝票・図面・構造工程表・製品仕様書」</td>
+                        <td></td>
+                        <td colspan="3"></td>
+                        <td rowspan="3"></td>
+                        <td rowspan="5">確認日</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2"></td>
+                        <td>3</td>
+                        <td colspan="3">ＭＳ貼り面　（ 　表面　・　裏面　 ）</td>
+                        <td ></td>
+                        <td colspan="3"></td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td colspan="3">気泡・ゴミ混入</td>
+                        <td ></td>
+
+                        <td colspan="3"></td>
+                    </tr>
+                    <tr>
+                        <td rowspan="4">L/C工程</td>
+                        <td rowspan="2">確認・準備</td>
+                        <td>1</td>
+                        <td colspan="3">「機械始業前点検」</td>
+                        <td></td>
+                        <td rowspan="4"></td>
+                        <td colspan="2"></td>
+                        <td rowspan="2">⇩</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td colspan="3">「作業手配伝票・図面・構造工程表・製品仕様書」</td>
+                        <td></td>
+                        <td colspan="3"></td>
+
+                    </tr>
+                    <tr>
+                        <td rowspan="2"></td>
+                        <td>3</td>
+                        <td colspan="3">LC貼り面　（ 　表面　・　裏面　 ）</td>
+                        <td ></td>
+                        <td colspan="3"></td>
+                        <td rowspan="3"></td>
+                        <td rowspan="5">確認日</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td colspan="3">気泡・ゴミ混入</td>
+                        <td ></td>
+
+                        <td colspan="3"></td>
+                    </tr>
+                    <tr>
+                        <td rowspan="4">W/F工程</td>
+                        <td rowspan="2">確認・準備</td>
+                        <td>1</td>
+                        <td colspan="3">「機械始業前点検」</td>
+                        <td></td>
+                        <td rowspan="4"></td>
+                        <td colspan="3"></td>
+
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td colspan="3">「作業手配伝票・図面・構造工程表・製品仕様書」</td>
+                        <td></td>
+                        <td colspan="3"></td>
+                        <td rowspan="2">⇩</td>
+
+                    </tr>
+                    <tr>
+                        <td rowspan="2"></td>
+                        <td>3</td>
+                        <td colspan="3">WF貼り面　（ 　表面　・　裏面　 ）</td>
+                        <td ></td>
+                        <td colspan="3"></td>
+
+
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td colspan="3">気泡・ゴミ混入</td>
+                        <td ></td>
+                        <td colspan="3"></td>
+                        <td rowspan="3"></td>
+                        <td rowspan="5">確認日</td>
+                    </tr>
+
+                    <tr>
+                        <td rowspan="16">ビク抜き工程</td>
+                        <td rowspan="2">確認・準備</td>
+                        <td>1</td>
+                        <td colspan="3">「機械始業前点検」</td>
+                        <td></td>
+                        <td rowspan="9"></td>
+                        <td colspan="2"></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td colspan="3">「作業手配伝票・図面・構造工程表・製品仕様書」</td>
+                        <td></td>
+                        <td colspan="2"></td>
+
+                    </tr>
+                    <tr>
+                        <td rowspan="7">試抜き</td>
+                        <td>1</td>
+                        <td colspan="3">マーク寸法／断裁</td>
+                        <td></td>
+                        <td colspan="2"></td>
+                        <td>生産管理課</td>
+                        <td>製版係</td>
+                        <td>印刷係</td>
+                        <td rowspan="2">⇩</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td colspan="3">糊のはみ出し確認／断裁</td>
+                        <td></td>
+                        <td colspan="2"></td>
+                        <td rowspan="2"></td>
+                        <td rowspan="2"></td>
+                        <td rowspan="2"></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td colspan="3">ビク型確認 （天地・破損・汚損）</td>
+                        <td></td>
+                        <td colspan="2"></td>
+                        <td rowspan="3"></td>
+                        <td rowspan="5">確認日</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td colspan="3">試し抜き</td>
+                        <td></td>
+                        <td colspan="2"></td>
+                        <td>加工係</td>
+                        <td>検査課</td>
+                        <td>品質管理課</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td colspan="3">抜きズレ・折れ・シワ・欠け</td>
+                        <td></td>
+                        <td colspan="2"></td>
+                        <td rowspan="2"></td>
+                        <td rowspan="2"></td>
+                        <td rowspan="2"></td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td colspan="3">抜き刃の切れ具合</td>
+                        <td></td>
+                        <td colspan="2"></td>
+                        <td rowspan="2"></td>
+
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td colspan="3">送りガイド曲がり</td>
+                        <td></td>
+                        <td colspan="2"></td>
+                    </tr>
+                    <tr>
+                        <td >工程検査</td>
+                        <td>9</td>
+                        <td colspan="3">特記事項記載</td>
+                        <td colspan="9"></td>
+                    </tr>
+                    <tr>
+                        <td rowspan="6">員数検査</td>
+                        <td colspan="2">加工日</td>
+                        <td >/</td>
+                        <td >/</td>
+                        <td >/</td>
+                        <td >/</td>
+                        <td >/</td>
+                        <td >/</td>
+                        <td >/</td>
+                        <td >/</td>
+                        <td >/</td>
+                        <td >/</td>
+                        <td >/</td>
+
+                    </tr>
+                    <tr>
+                        <td colspan="2">良品シート数</td>
+                        <td ></td>
+                        <td ></td>
+                        <td ></td>
+                        <td ></td>
+                        <td ></td>
+                        <td ></td>
+                        <td ></td>
+                        <td ></td>
+                        <td ></td>
+                        <td ></td>
+                        <td ></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">不良シート数</td>
+                        <td ></td>
+                        <td ></td>
+                        <td ></td>
+                        <td ></td>
+                        <td ></td>
+                        <td ></td>
+                        <td ></td>
+                        <td ></td>
+                        <td ></td>
+                        <td ></td>
+                        <td ></td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2">累計</td>
+                        <td >シート数</td>
+                        <td ></td>
+                        <td ></td>
+                        <td ></td>
+                        <td ></td>
+                        <td ></td>
+                        <td ></td>
+                        <td ></td>
+                        <td ></td>
+                        <td ></td>
+                        <td ></td>
+                        <td ></td>
+                    </tr>
+                    <tr>
+                        <td >個数</td>
+                        <td ></td>
+                        <td ></td>
+                        <td ></td>
+                        <td ></td>
+                        <td ></td>
+                        <td ></td>
+                        <td ></td>
+                        <td ></td>
+                        <td ></td>
+                        <td ></td>
+                        <td ></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">確認印</td>
+                        <td ></td>
+                        <td ></td>
+                        <td ></td>
+                        <td ></td>
+                        <td ></td>
+                        <td ></td>
+                        <td ></td>
+                        <td ></td>
+                        <td ></td>
+                        <td ></td>
+                        <td ></td>
+                    </tr>
+                    <tr>
+                        <td rowspan="11">出荷検査課</td>
+                        <td colspan="3">チェック工程</td>
+                        <td colspan="3">確認項目</td>
+                        <td></td>
+                        <td></td>
+                        <td colspan="7">特記事項</td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2" rowspan="3">検査前準備</td>
+                        <td>1</td>
+                        <td colspan="3">「作業手配伝票・図面・構造工程表・製品仕様書・製品」</td>
+                        <td></td>
+                        <td rowspan="3"></td>
+                        <td colspan="7"></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td colspan="3">製品サンプルの確認</td>
+                        <td></td>
+                        <td colspan="7"></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td colspan="3">検査基準書の確認</td>
+                        <td></td>
+                        <td colspan="7"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" rowspan="6">員数検査</td>
+                        <td rowspan="6">1</td>
+                        <td colspan="2">検査日</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        
+                    </tr>
+                    <tr>
+                        <td colspan="2">良品数</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        
+                    </tr>
+                    <tr>
+                        <td colspan="2">不良数</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        
+                    </tr>
+                    <tr>
+                        <td rowspan="2">累計数</td>
+                        <td>良品</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>不良品</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">確認印</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">最終検査</td>
+                        <td>1</td>
+                        <td colspan="3">最終出荷の承認</td>
+                        <td></td>
+                        <td></td>
+                        <td colspan="5"></td>
+                        <td rowspan="4">生産完了</td>
+                        <td >最終出荷責任者</td>
+                    </tr>
+                    <tr>
+                        <td colspan="15" class="text-start">１．各工程を確認し、日付と担当者のサインをすること。</td>
+                        <td rowspan="3"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="15" class="text-start">２．発行「生産管理」→記入「製版係」⇒「印刷係」→「加工係」→「出荷検査課」→確認「品質管理課」</td>
+                    </tr>
+                    <tr>
+                        <td colspan="15" class="text-start">３．各検査工程に於いて営業予備率を不良率が上回った場合には、即｢生産管理｣「品質管理」に報告すること。</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="d-flex justify-content-center align-items-center">
+                <button class="btn btn-primary mb-3 p-2 mt-2" id="btn">保存する</button>
+            </div>
+        </form>
+    </div>
+</body>
+<%- include('../partials/footer') %>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/start/jquery-ui.css"/>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+<script src="/javascript/flash.js"></script>
+<script src="/javascript/forForm.js"></script>
+
+</html>

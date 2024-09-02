@@ -1,0 +1,53 @@
+<% layout('layouts/boilerplate') %>
+<div class="container w-25" style="min-width: 500px;">
+    <h1 class=" text-center">L O G I N</h1>
+    <form id="loginForm" method="POST" class="validated-form mb-3" novalidate>
+        <div class="d-flex flex-column">
+            <div class="d-flex flex-row  justify-content-around mt-3">
+                <div class="d-flex flex-row  justify-content-around">
+                    <input type="radio" class="mx-3"  name="type" id="user"  value="user" checked>
+                    <label class="mx-3"   for="user">ユーザー</label>
+                </div>
+                <div class="d-flex flex-row  justify-content-center">
+                    <input type="radio"  class="mx-3" name="type" id="admin"  value="admin">
+                    <label  for="admin"  >管理者</label>
+                </div>
+    
+            </div>
+    
+            <div class="mb-3 mt-3">
+                <label class="form-label" for="email">Email</label>
+                <input class="form-control" type="email" name="email" id="email" required>
+                <div class="valid-feedback">
+                    OK!
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="password">パスワード</label>
+                <input class="form-control" type="password" name="password" id="password" required>
+                <div class="valid-feedback">
+                    OK!
+                </div>
+            </div>
+            <div class="text-center">
+                <button class="btn btn-success w-25 ">ログイン</button>
+            </div>
+        </div>
+    </form>
+    <div class="d-flex flex-column">
+        <label class="form-label">確認用アカウント</label>
+        <div class="mb-3">
+            <label class="form-label">一般ユーザー</label>
+            <label class="form-label" >Email : user@kigataya.com</label>
+        </div>
+    
+        <div class="mb-3">
+            <label class="form-label" >管理者</label>
+            <label class="form-label" >Email : admin@kigataya.com</label>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" >パスワード : Noda2024</label>
+        </div>
+    </div>
+
+</div>

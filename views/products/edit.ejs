@@ -1,0 +1,180 @@
+<% layout('layouts/boilerplate') %>
+
+    <div class="row text-center">
+        <h1 class="text-center">案 件 変 更</h1>
+        <div class="offset-3 col-6">
+            <form id="edit_form" action="/products/<%= data.id %>?_method=PUT" method="POST" novalidate class="validated-form">
+                <input style="display: none;" name="id" value="<%= data.id %>">
+                <div class="d-flex flex-row">
+                    <div class="input-group input-group-sm mb-2">
+                        <span class="input-group-text w-25">得 意 先 ｺｰﾄﾞ</span>
+                        <input class="form-control" name="cus_id" id="cus_id" value="<%= data.cus_id %>" readonly onclick ="setCusName(this.value)">
+                        <div class="valid-feedback"> OK!</div>
+                    </div>
+
+                    <div class="input-group input-group-sm mb-2">
+                        <span class="input-group-text w-25">得 意 先 名</span>
+                        <input class="form-control" type="text" name="cus_name" id="cus_name" value="<%= data.cus_name %>" readonly   onclick ="setCusName(<%= data.cus_id %>)">
+                    </div>
+                </div>
+
+                <div class="d-flex flex-row">
+                    <div class="input-group input-group-sm mb-2 ">
+                        <span class="input-group-text w-25">機 種 名</span>
+                        <input class="form-control" type="text" id="machine_name" name="machine_name" value="<%= data.machine_name %>">
+                    </div>
+                    <div class="input-group input-group-sm mb-2">
+                        <span class="input-group-text w-25">部 番</span>
+                        <input class="form-control" type="text" name="path_no" id="path_no" value="<%= data.path_no %>">
+                    </div>
+                    
+                </div>
+                <div class="input-group input-group-sm mb-2">
+                    <span class="input-group-text" style="width:12.5%;">品 名</span>
+                    <input class="form-control" class="form-control" type="text" name="product_name" value="<%= data.product_name %>">
+                </div>
+                <div class="d-flex flex-row">
+                    <div class="input-group input-group-sm mb-2">
+                        <span class="input-group-text w-25">材 料 仕 入 先</span>
+                        <input class="form-control" id="material_cus_name" name="material_cus_name"  readonly
+                        onclick="selectMaterialCusName(event)"
+                        value="<%= data.material_cus_name?data.material_cus_name:'' %>"  placeHolder="Click to select">
+                    </div>
+
+                    <div class="input-group input-group-sm mb-2">
+                        <span class="input-group-text w-25" >材 料 名</span>
+                        <input class="form-control" type="text" name="material_name" id="material_name" 
+                        value="<%= data.material_name %>" readonly onclick="selectMaterialCusName(event)">
+                    </div>
+                </div>
+
+                <div class="d-flex flex-row">
+                    <div class="input-group input-group-sm mb-2">
+                        <span class="input-group-text w-25">定 尺 X×Y</span>
+                        <input class="form-control" name="t_material_x" id="t_material_x" placeHolder="Xmm" value="<%= data.t_material_x %>" readonly
+                        onclick="selectMaterialCusName(event)">
+                        <input class="form-control" name="t_material_y" id="t_material_y" placeHolder="Ymm" value="<%= data.t_material_y %>" readonly
+                        onclick="selectMaterialCusName(event)">
+                        
+                        </div>
+                        <div class="input-group input-group-sm mb-2">
+                            <span class="input-group-text">厚</span>
+                            <input class="form-control" name="t_material_z" id="t_material_z" placeHolder="Zmm" value="<%= data.t_material_z %>" readonly
+                            onclick="selectMaterialCusName(event)">
+                            <span class="input-group-text">種</span>
+                            <input class="form-control" name="t_material_type" id="t_material_type"  value="<%= data.t_material_type %>" readonly
+                            onclick="selectMaterialCusName(event)">
+                            <span class="input-group-text">￥</span>
+                        <input class="form-control" name="t_material_price" id="t_material_price" value="<%= data.t_material_price %>" readonly
+                        onclick="selectMaterialCusName(event)">
+                    </div>
+                </div>
+                <div class="d-flex flex-row">
+                    <div class="input-group input-group-sm mb-2">
+                        <span class="input-group-text w-25">裁断 回数</span>
+                        <input class="form-control" name="cut_x" id="cut_x" placeHolder="X方向 Click to input" value="<%= data.cut_x %>" readonly onclick="inputCutNo(event)">
+                        <input class="form-control" name="cut_y" id="cut_y" placeHolder="Y方向" value="<%= data.cut_y %>" readonly onclick="inputCutNo(event)">
+
+                    </div>
+                    <div class="input-group input-group-sm mb-2">
+                        <span class="input-group-text w-25">材 寸</span>
+                        <input class="form-control" type="number" name="material_x" id="material_x" placeHolder="Xmm" value="<%= data.material_x %>" readonly>
+                        <input class="form-control" type="number" name="material_y" id="material_y" placeHolder="Ymm" value="<%= data.material_y %>" readonly>
+                    </div>
+                </div>
+                <div class="d-flex flex-row">
+                    <div class="input-group input-group-sm mb-2">
+                        <span class="input-group-text w-25">面 付</span>
+                        <input class="form-control" type="number" name="layout_x" id="layout_x" placeHolder="Xmm" value="<%= data.layout_x %>">
+                        <input class="form-control" type="number" name="layout_y" id="layout_y" placeHolder="Ymm" value="<%= data.layout_y %>">
+                    </div>
+                    <div class="input-group input-group-sm mb-2">
+                        <span class="input-group-text w-25">マーク 寸法</span>
+                        <input class="form-control" name="mark" id="mark" placeHolder="Click to input" value="<%= data.mark %>" onclick="selectKindOfMark(event)">
+                    </div>
+                </div>
+                <div class="d-flex flex-row">
+                    <div class="input-group input-group-sm mb-2">
+                        <span class="input-group-text w-25">型 面 数</span>
+                        <input class="form-control" type="number" name="die_quantity_x" id="die_quantity_x" value="<%= data.die_quantity_x %>"  placeHolder="Xmm" type="number" value="1">
+                        <input class="form-control" type="number" name="die_quantity_y" id="die_quantity_y" placeHolder="Ymm"  value="<%= data.die_quantity_y %>">
+                    </div>
+                    <div class="input-group input-group-sm mb-2">
+                        <span class="input-group-text w-25">送り</span>
+                        <input class="form-control" type="number" name="pitch_x" id="pitch_x" value="<%= data.pitch_x %>"  placeHolder="Xmm" type="number" value="1" >
+                        <input class="form-control" type="number" name="pitch_y" id="pitch_y" placeHolder="Ymm" value="<%= data.pitch_y %>">
+                    </div>
+                </div>
+                <div class="d-flex flex-row">
+                    <div class="input-group input-group-sm mb-2">
+                        <span class="input-group-text w-25" for="place">手 配 先</span>
+                        <input class="form-control" name="place" id="place" placeHolder="Click to select" value="<%= data.place %>" onclick="selectPlace(event)" readonly>
+                    </div>
+                    <div class="input-group input-group-sm mb-2">
+                        <span class="input-group-text w-25">線 数</span>
+                        <input class="form-control" name="line_no" id="line_no" value="<%= data.line_no %>">
+                    </div>
+                </div>
+                <div class="d-flex flex-row">
+                    <div class="input-group input-group-sm mb-2">
+                        <span class="input-group-text w-25">進 行</span>
+    
+                        <%   let statuss = setting._status; 
+                             let notSelectstatuss = statuss.filter(d => d.name !== data.status); 
+                             let selectStatus =  statuss.filter(d => d.name == data.status)[0]
+                        %>
+    
+                        <select class="form-control" style="background: <%= selectStatus.background %>; color: <%=  selectStatus.color %>"name="status" id="status" >
+                            <option value="<%= data.status %>"><%= data.status %></option>
+                            <%
+                               for (let s of notSelectstatuss) { 
+                            %>
+                            <option value="<%= s.name %>"><%= s.name %></option>
+                            <% } %>
+                        </select>
+                    </div>
+    
+                    <div class="input-group input-group-sm mb-2">
+                        <span class="input-group-text w-25">納入便</span>
+    
+                        <% let deliverys = setting._delivery; %>
+                        <% let notSelectDeliverys = deliverys.filter(d => d.name !== data.delivery); %>
+                        <% let selectdelivery = deliverys.find(d => d.name === data.delivery); %>
+    
+                        <select class="form-control" style="background: <%= selectdelivery.background %>; color: <%= selectdelivery.color %>" name="delivery" id="delivery" >
+                            <option value="<%= data.delivery %>"><%= data.delivery %></option>
+                            <% for (let d of notSelectDeliverys) { %>
+                                <option value="<%= d.name %>"><%= d.name %></option>
+                            <% } %>
+                        </select>
+    
+                    </div>
+                </div>
+                <div class="d-flex flex-row">
+                    <div class="input-group input-group-sm mb-2">
+                        <span class="input-group-text w-25" for="date">納 期</span>
+                        <input class="form-control" type="date" name="date" id="date" value="<%= data.date %>">
+                    </div>
+                    <div class="input-group input-group-sm mb-2">
+                        <span class="input-group-text w-25">担 当 者</span>
+                        <input class="form-control" type="text" name="staff1" id="staff1" value="<%= data.staff1 %>">
+                    </div>
+                </div>
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text" style="width: 12.5%;">備 考</span>
+                    <input class="form-control" name="note" id="note" placeHolder="note" value="<%= data.note %>">
+                </div>
+                <button  type="submit" class="btn btn-primary p-2">保 存</button>
+
+            </form>
+        </div>
+    </div>
+    
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/start/jquery-ui.css"/>
+    <script src="/javascript/forForm.js"></script>
+

@@ -1,0 +1,159 @@
+
+    <% layout('layouts/boilerplate') %>
+
+    <div class="row text-center">
+        <h1 class="text-center">案件 登録</h1>
+        <div class="offset-3 col-6">
+            <form action="/products" method="POST" novalidate class="validated-form">
+                <div class="d-flex flex-row">
+                    <div class="input-group input-group-sm mb-2">
+                        <span class="input-group-text w-25">得 意 先 ｺｰﾄﾞ</span>
+                        <input class="form-control" name="cus_id" id="cus_id" readonly  onclick ="setCusName()"  placeHolder="Click to input" >
+                    </div>
+
+                    <div class="input-group input-group-sm mb-2">
+                        <span class="input-group-text w-25">得 意 先 名</span>
+                        <input class="form-control" type="text" name="cus_name" id="cus_name" readonly   onclick ="setCusName()">
+                    </div>
+                </div>
+
+                <div class="d-flex flex-row">
+                    <div class="input-group input-group-sm mb-2 ">
+                        <span class="input-group-text w-25">機 種 名</span>
+                        <input class="form-control" type="text" id="machine_name" name="machine_name">
+                    </div>
+                    <div class="input-group input-group-sm mb-2">
+                        <span class="input-group-text w-25">部 番</span>
+                        <input class="form-control" type="text" name="path_no" id="path_no">
+                    </div>
+                    
+                </div>
+                <div class="input-group input-group-sm mb-2">
+                    <span class="input-group-text" style="width:12.5%;">品 名</span>
+                    <input class="form-control" class="form-control" type="text" name="product_name">
+                </div>
+                <div class="d-flex flex-row">
+                    <div class="input-group input-group-sm mb-2">
+                        <span class="input-group-text w-25">材 料 仕 入 先</span>
+                        <input class="form-control" id="material_cus_name" name="material_cus_name"   readonly
+                        onclick="selectMaterialCusName(event)" placeHolder="Click to select" >
+                    </div>
+
+                    <div class="input-group input-group-sm mb-2">
+                        <span class="input-group-text w-25" >材 料 名</span>
+                        <input class="form-control" type="text" name="material_name" id="material_name" readonly  onclick="selectMaterialCusName(event)">
+                    </div>
+                </div>
+
+                <div class="d-flex flex-row">
+                    <div class="input-group input-group-sm mb-2">
+                        <span class="input-group-text w-25">定 尺 X×Y</span>
+                        <input class="form-control" name="t_material_x" id="t_material_x" placeHolder="Xmm" readonly  onclick="selectMaterialCusName(event)">
+                        <input class="form-control" name="t_material_y" id="t_material_y" placeHolder="Ymm" readonly  onclick="selectMaterialCusName(event)">
+                        
+                        </div>
+                        <div class="input-group input-group-sm mb-2">
+                            <span class="input-group-text">厚</span>
+                            <input class="form-control" name="t_material_z" id="t_material_z" placeHolder="Zmm" readonly  onclick="selectMaterialCusName(event)">
+                            <span class="input-group-text">種</span>
+                            <input class="form-control" name="t_material_type" id="t_material_type" readonly  onclick="selectMaterialCusName(event)">
+                            <span class="input-group-text">￥</span>
+                        <input class="form-control" name="t_material_price" id="t_material_price" readonly  onclick="selectMaterialCusName(event)">
+                    </div>
+                </div>
+                <div class="d-flex flex-row">
+                    <div class="input-group input-group-sm mb-2">
+                        <span class="input-group-text w-25">裁断 回数</span>
+                        <input class="form-control" name="cut_x" id="cut_x" placeHolder="X方向 Click to input" readonly onclick="inputCutNo(event)">
+                        <input class="form-control" name="cut_y" id="cut_y" placeHolder="Y方向" readonly onclick="inputCutNo(event)">
+
+                    </div>
+                    <div class="input-group input-group-sm mb-2">
+                        <span class="input-group-text w-25">材 寸</span>
+                        <input class="form-control" type="number" name="material_x" id="material_x" placeHolder="Xmm" readonly>
+                        <input class="form-control" type="number" name="material_y" id="material_y" placeHolder="Ymm" readonly>
+                    </div>
+                </div>
+                <div class="d-flex flex-row">
+                    <div class="input-group input-group-sm mb-2">
+                        <span class="input-group-text w-25">面 付</span>
+                        <input class="form-control" type="number" name="layout_x" id="layout_x" placeHolder="Xmm" >
+                        <input class="form-control" type="number" name="layout_y" id="layout_y" placeHolder="Ymm" >
+                    </div>
+                    <div class="input-group input-group-sm mb-2">
+                        <span class="input-group-text w-25">マーク 寸法</span>
+                        <input class="form-control" name="mark" id="mark" placeHolder="Click to input" onclick="selectKindOfMark(event)">
+                    </div>
+                </div>
+                <div class="d-flex flex-row">
+                    <div class="input-group input-group-sm mb-2">
+                        <span class="input-group-text w-25">型 面 数</span>
+                        <input class="form-control" type="number" name="die_quantity_x" id="die_quantity_x" placeHolder="Xmm" type="number" value="1">
+                        <input class="form-control" type="number" name="die_quantity_y" id="die_quantity_y" placeHolder="Ymm" >
+                    </div>
+                    <div class="input-group input-group-sm mb-2">
+                        <span class="input-group-text w-25">送り</span>
+                        <input class="form-control" type="number" name="pitch_x" id="pitch_x" placeHolder="Xmm" type="number" value="1" >
+                        <input class="form-control" type="number" name="pitch_y" id="pitch_y" placeHolder="Ymm" >
+                    </div>
+                </div>
+                <div class="d-flex flex-row">
+                    <div class="input-group input-group-sm mb-2">
+                        <span class="input-group-text w-25" for="place">手 配 先</span>
+                        <input class="form-control" name="place" id="place" placeHolder="Click to select"  onclick="selectPlace(event)" readonly>
+                    </div>
+                    <div class="input-group input-group-sm mb-2">
+                        <span class="input-group-text w-25">線 数</span>
+                        <input class="form-control" name="line_no" id="line_no"  >
+                    </div>
+                </div>
+                <div class="d-flex flex-row">
+                    <div class="input-group input-group-sm mb-2">
+                        <span class="input-group-text w-25">進 行</span>
+                        <select class="form-control" name="status" id="status" >
+                            <%
+                               for (let s of  setting._status) { 
+                            %>
+                            <option value="<%= s.name %>"><%= s.name %></option>
+                            <% } %>
+                        </select>
+                    </div>
+    
+                    <div class="input-group input-group-sm mb-2">
+                        <span class="input-group-text w-25">納入便</span>
+                        <select class="form-control" name="delivery" id="delivery" >
+                            <% for (let d of setting._delivery) { %>
+                                <option value="<%= d.name %>"><%= d.name %></option>
+                            <% } %>
+                        </select>
+    
+                    </div>
+                </div>
+                <div class="d-flex flex-row">
+                    <div class="input-group input-group-sm mb-2">
+                        <span class="input-group-text w-25" for="date">納 期</span>
+                        <input class="form-control" type="date" name="date" id="date">
+                    </div>
+                    <div class="input-group input-group-sm mb-2">
+                        <span class="input-group-text w-25">担 当 者</span>
+                        <input class="form-control" type="text" name="staff1" id="staff1">
+                    </div>
+                </div>
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text" style="width: 12.5%;">備 考</span>
+                    <input class="form-control" name="note" id="note" placeHolder="note">
+                </div>
+                <button  type="submit" class="btn btn-primary p-2">登 録</button>
+
+            </form>
+        </div>
+    </div>
+    
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/start/jquery-ui.css"/>
+    <script src="/javascript/forForm.js"></script>
+

@@ -1,0 +1,160 @@
+<% layout('layouts/boilerplate') %>
+
+<% 
+    let rangeSize = 100;
+    let result = {};
+    let max_id = 1
+    for (const key in all_customers) { 
+        let cus_id = Number(all_customers[key].cus_id);
+        if(cus_id  > max_id){ max_id = cus_id }
+        
+        let rangeStart = Math.floor(cus_id / rangeSize) * rangeSize;
+        let rangeEnd = rangeStart + rangeSize - 1;
+        let rangeKey = `${rangeStart}～${rangeEnd}`;
+        if (result[rangeKey]) {
+            result[rangeKey]++;
+        } else {
+            result[rangeKey] = 1;
+        }
+    }
+
+    const customers = {};
+        for (const key in all_customers) {
+            if (all_customers.hasOwnProperty(key)){
+                if(all_customers[key].cus_id && Number(all_customers[key].cus_id) > 9901 && Number(all_customers[key].cus_id) < 9999){
+                    customers[key] = all_customers[key];
+                }
+            }
+        }
+%>
+
+<div class="container d-flex justify-content-center">
+    <div class="d-flex flex-row  ">
+        <button class="btn btn-danger btn-sm mx-0 fs-5 text">得意先</button>
+        <button class="btn btn-light btn-sm mx-0  fs-5 text">
+            <a class="nav-link" href="/settings/materials">材料</a>
+        </button>
+        <button class="btn btn-light btn-sm mx-0 fs-5 text">
+            <a class="nav-link" href="/settings/subcontractors">外注先</a>
+        </button>
+        <button class="btn btn-light btn-sm mx-0 fs-5 text">
+            <a class="nav-link" href="/settings/other">その他</a>
+        </button>
+    </div>
+</div>
+
+<table class="table text-start caption-top mx-2 ">
+    <caption class="mx-2 fs-5 text ">得意先 登録</caption>
+    <tr>
+        <form method="POST" action="/settings/customers" novalidate class="validated-form" id="registerForm">
+            <td class="w-25 align-middle">
+                <input class="w-100 border" type="number" name="_cus_id" id="cus_id_input" min="<%= max_id + 1 %>" max="<%= max_id + 1 %>" value="<%= max_id + 1 %>"  >
+            </td>
+            <td class="w-25 align-middle">
+                <input class="w-100 border" type="text" name="_cus_name" id="cus_name_input" onchange="document.getElementById('_delivery').focus();" placeholder="得意先名 入力">
+            </td>
+            <td class="w-25 align-middle">
+                <select class="w-100 border"  style="height: 32px;" name="_delivery" id="_delivery" onchange="document.getElementById('_note').focus();">
+                    <option>納入便 選択</option>
+                    <% for (let d of delivery) { %>
+                        <option value="<%= d.name %>"><%= d.name %></option>
+                    <% } %>
+                </select>
+            </td>
+            <td class="w-25  align-middle">
+                <input class="w-100 border" type="text" id="_note" name="_note" id="note_input"  placeholder="基本 注意点">
+            </td>
+            <td>
+                <button class="btn btn-success mx-5" style="min-width: 100px;" type="submit">登録</button>
+            </td>
+        </form>
+    </tr>
+</table>
+
+
+<table class="table text-start caption-top mx-2" id="customerTable">
+    <caption class="fs-5 text  mx-2">得意先 一覧</caption>
+    <thead >
+        <tr>
+            <th>
+                <div class="form-group mb-2">
+                    <label class="sr-only">ID</label>
+                    <select class="form-control-plaintext border w-100" id="filter_id" onchange="filterCustomers()">
+                        <% for (const [key, value] of Object.entries(result)) { %>
+                            <% if(key =="9900～9999"){ %>
+                                <option value="<%= key %>" selected><%= key %>(<%= value %>件 )</option>
+    
+                            <% }else{ %>
+                                <option value="<%= key %>"><%= key %>(<%= value %>件 )</option>
+                            <% } %>
+                        <% } %>
+                    </select>
+
+                </div>
+            </th>
+            <th>
+                <div class="form-group mb-2">
+                    <label class="sr-only">得意先名</label>
+                    <input class="form-control-plaintext border" style="height: 38px;" id="filter_name"  onchange="filterCustomers()" placeholder="得意先名 フィルター">
+                </div>
+            </th>
+            <th>
+                <div class="form-group mb-2">
+                    <label class="sr-only">納入便</label>
+                    <select class="form-control-plaintext border" id="filter_delivery"  onchange="filterCustomers()">
+                        <option value="">基本納入便 フィルター</option>
+                        <% for (let d of delivery) { %>
+                            <option value="<%= d.name %>"><%= d.name %></option>
+                        <% } %>
+                    </select>                
+                </div>
+            </th>
+            <th>備考</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <%     
+            for (const key in customers) { %>
+            <tr>
+                <form method="POST" action="/settings/customers/<%= customers[key].cus_id %>?_method=PUT" novalidate class="validated-form">
+                    <td>
+                        <input class="w-100 border-0 " type="number" name="cus_id" value="<%= customers[key].cus_id %>" readonly>
+                    </td>
+                    <td>
+                        <input class="w-100 border-0" type="text" name="cus_name" value="<%= customers[key].cus_name %>">
+                    </td>
+                    <td>
+                        <select class="w-100 border-0" name="delivery" >
+                            <option value="<%= customers[key].delivery %>"><%= customers[key].delivery %></option>
+                            <% for (let d of delivery.filter(d => d.name !== customers[key].delivery)) { %>
+                                <option value="<%= d.name %>"><%= d.name %></option>
+                            <% } %>
+                        </select>
+                    </td>
+                    <td>
+                        <input class="w-100 border-0" type="text" name="note" value="<%= customers[key].note %>">
+                    </td>
+                    <td>
+                        <button class="btn btn-info btn-sm">更新</button>
+                    </td>
+                </form>
+                <td>
+                    <form method="POST" action="/settings/customers/<%= customers[key].cus_id %>?_method=DELETE" class="d-inline">
+                        <button class="btn btn-danger btn-sm">削除</button>
+                    </form>
+                </td>
+            </tr>
+        <% } %>
+    </tbody>
+
+</table>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+<script src="/javascript/forShowDB.js"></script>
+
+
+

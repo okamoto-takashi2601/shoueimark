@@ -1,0 +1,90 @@
+<% layout('layouts/boilerplate') %>
+
+
+<div class="container d-flex justify-content-center">
+    <div class="d-flex flex-row ">
+        <button class="btn btn-light btn-sm mx-0 fs-5 text">
+            <a class="nav-link" href="/settings/customers">得意先</a>
+        </button>
+        <button class="btn btn-light btn-sm mx-0 btn-sm  fs-5 text">
+            <a class="nav-link" href="/settings/materials">材料</a>
+        </button>
+        <button class="btn btn-danger btn-sm mx-0 fs-5 text">外注先</button>
+        <button class="btn btn-light btn-sm mx-0 fs-5 text">
+            <a class="nav-link" href="/settings/other">その他</a>
+        </button>
+    </div>
+</div>
+
+<% 
+    let max_id = 1
+    for (const key in subcontractors) { 
+        if(Number( subcontractors[key].cus_id) > max_id){ max_id = Number( subcontractors[key].cus_id) }
+    }
+%>
+<div class="container w-75">
+    <table class="table text-start caption-top " id="cusTable">
+        <caption class="mx-2 fs-5 text ">外注先 一覧</caption>
+    
+        <thead >
+            <tr>
+                <th scope="col" >ID</th>
+                <th scope="col">外注先名</th>
+                <th scope="col">依頼</th>
+                <th scope="col" ></th>
+                <th scope="col" ></th>
+            </tr>
+            <tr class="align-middle">
+                <form method="POST" action="/settings/subcontractors/" novalidate class="validated-form"  >
+                    <td>
+                        <input class="w-100 border-0" type="number" name="cus_id" id="new_cus_id" min="1" max = "<%= max_id %>" placeholder="0" onchange="findNameSub(this.value)" >
+    
+                    </td>
+                    <td>
+                        <input class="w-100 border-0" name="cus_name"  id="new_cus_name" placeholder="外注先名 入力" onchange='document.getElementById("process").focus();'>
+                    </td>
+                    <td>
+                        <select class="w-100 border-0" name="process" id="process"  placeholder="加工種類名 入力">
+                            <% for(let p of process){%>
+                                <option value="<%= p %>"><%= p %></option>
+                            <% }%>
+                    </td>
+                    <td colspan="2">
+                        <button class="btn btn-success btn-sm " >追加</button>
+                    </td>
+                </form>
+            </tr>
+        </thead>
+        <tbody>
+            <% for (const key in subcontractors) {%>
+                <tr class="align-middle" id="<%= subcontractors[key].cus_id  %>@@<%= subcontractors[key].cus_name  %> ">
+                    <td>
+                        <%= subcontractors[key].cus_id %>                    
+                    </td>
+                    <td>
+                        <%= subcontractors[key].cus_name %>                    
+                    </td>
+                    <td  id="<%= key %>@process">
+                        <%= subcontractors[key].process.join(",") %>                    
+                    </td>
+
+                    <td>
+                        <button class="btn btn-info btn-sm" id="<%= key %>" onclick="changeProcess(event)">編集</button>
+                    </td>
+                    <td>
+                        <form method="POST" action="/settings/subcontractors/<%= key %>?_method=DELETE" class="d-inline">
+                            <button class="btn btn-danger btn-sm">削除</button>
+                        </form>
+                    </td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/javascript/forShowDB.js"></script>
+
+

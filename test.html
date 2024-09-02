@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>九九計算テスト</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-size: 2rem;
+            padding: 5px;
+            
+
+        }
+        input[type=radio]{
+            width: 24px;
+            height: 24px;
+            vertical-align: middle; /* ラジオボタンとラベルを中央揃え */
+
+        }
+        .correct {
+            color: green;
+        }
+        .incorrect {
+            color: red;
+        }
+        .choice-container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+        }
+        h3{
+            color : blue;
+            text-align: center;
+        }
+        button {
+            width: 40%;
+            height: 8vh;
+            font-size: 32px;
+        }
+
+    </style>
+</head>
+<body>
+        <h3 class="mb-4">毎日の九九計算テスト</h3>
+        <form id="quiz-form">
+            <!-- 質問がここに挿入されます -->
+        </form>
+        <div class="d-flex justify-content-center mt-3">
+            <button class="btn btn-primary mx-2" style="font-size: xx-large;" onclick="submitQuiz()">採点</button>
+            <button class="btn btn-danger mx-2" style="font-size: xx-large;" onclick="generateQuiz()">リセット</button>
+        </div>
+
+    <script>
+        const numQuestions = 20;
+
+        function generateQuestion() {
+            const num1 = Math.floor(Math.random() * 9) + 1;
+            const num2 = Math.floor(Math.random() * 9) + 1;
+            const correctAnswer = num1 * num2;
+
+            const incorrectAnswers = [
+                correctAnswer + 1,
+                correctAnswer - 1,
+                correctAnswer + 2
+            ];
+
+            // シャッフル用の関数
+            function shuffle(array) {
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
+                }
+                return array;
+            }
+
+            const choices = shuffle([
+                { value: correctAnswer, isCorrect: true },
+                { value: incorrectAnswers[0], isCorrect: false },
+                { value: incorrectAnswers[1], isCorrect: false },
+                { value: incorrectAnswers[2], isCorrect: false }
+            ]);
+
+            return { question: `${num1} × ${num2} は？`, choices };
+        }
+
+        function generateQuiz() {
+            const form = document.getElementById('quiz-form');
+            form.innerHTML = ''; // 既存の質問をクリア
+            for (let i = 0; i < numQuestions; i++) {
+                let no = String.fromCodePoint(9312 + Number(i))
+                const questionData = generateQuestion();
+                const questionElement = document.createElement('div');
+                questionElement.classList.add('form-group');
+                questionElement.innerHTML = `
+                    <div class="mb-3 border-bottom mx-2 mb-3 mt-3">
+                        <p>門${no}　${questionData.question}</p>
+                        <div class="choice-container">
+                            ${questionData.choices.map((choice, index) => `
+                                <div class="form-check mx-3 align-middle">
+                                    <input class="form-check-input" type="radio" name="question${i}" value="${choice.value}" data-correct="${choice.isCorrect}">
+                                    <label class="form-check-label mx-2">
+                                        ${choice.value}
+                                    </label>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+                form.appendChild(questionElement);
+            }
+        }
+
+
+        function submitQuiz() {
+            const questions = document.querySelectorAll('.form-group');
+            let score = 0;
+            let quesNo = 0
+            questions.forEach((question, index) => {
+                const selected = question.querySelector('input[type="radio"]:checked');
+                if (selected) {quesNo++}
+            });
+
+            if(quesNo < 20){
+                Swal.fire("まだ答えてない質問があるよ","","error")
+
+            }else{
+                questions.forEach((question, index) => {
+                const selected = question.querySelector('input[type="radio"]:checked');
+                if (selected) {
+                        const isCorrect = selected.getAttribute('data-correct') === 'true';
+                        if (isCorrect) {
+                            score += 5;
+                            selected.parentElement.classList.add('correct');
+                        } else {
+                            selected.parentElement.classList.add('incorrect');
+                        }
+                    }
+                });
+
+                let mes = "今回のスコアは" + score + "点だ"
+                let type = "info"
+                if(score < 80){
+                    mes+="\nダメだ。\nもっと頑張って下さい"
+                    type = "error"
+                }else if( score < 100){
+                    mes+="\nもう少し頑張ったら満点とるよ"
+
+                }else{
+                    mes+="ナイス！満点だ！\nおめでとう！！"
+                }
+                Swal.fire(mes,"",type)
+            }
+        }
+
+
+        window.onload = generateQuiz;
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</body>
+</html>

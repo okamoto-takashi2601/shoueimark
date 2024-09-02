@@ -1,0 +1,25 @@
+<% layout('layouts/boilerplate') %>
+<div class="container w-25">
+    <h1 class=" text-center">ユーザー登録</h1>
+    <form action="/register" method="POST" class="validated-form" novalidate>
+        <div class="d-flex flex-column">  
+            <div class="mb-3">
+                <label class="form-label" for="email">メールアドレス</label>
+                <input class="form-control" type="email" name="email" id="email" required>
+                <div class="valid-feedback">
+                    OK!
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="password">パスワード</label>
+                <input class="form-control" type="password" name="password" id="password" required>
+                <div class="valid-feedback">
+                    OK!
+                </div>
+            </div>
+            <div class="text-center">
+                <button class="btn btn-success w-25 ">登録する</button>
+            </div>
+        </div>
+    </form>
+</div>

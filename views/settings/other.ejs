@@ -1,0 +1,274 @@
+<% layout('layouts/boilerplate') %>
+
+<div class="container d-flex justify-content-center">
+    <div class="d-flex flex-row  ">
+        <button class="btn btn-light btn-sm mx-0 fs-5 text">
+            <a class="nav-link" href="/settings/customers">得意先</a>
+        </button>
+        <button class="btn btn-light btn-sm mx-0  fs-5 text">
+            <a class="nav-link" href="/settings/subcontractors">材料</a>
+        </button>
+        <button class="btn btn-light btn-sm mx-0 fs-5 text">
+            <a class="nav-link" href="/settings/subcontractors">外注先</a>
+        </button>
+        <button class="btn btn-danger btn-sm mx-0 fs-5 text">その他
+        </button>
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="d-flex">
+        <table class="table  caption-top table-sm  text-center  mx-3">
+            <caption class="mx-2 fs-5 text ">工程名 設定</caption>
+            <thead>
+                <tr>
+                    <th>工程名</th>
+                    <th>背景色</th>
+                    <th>文字色</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for (const i in status) { %>
+                    <tr>
+                        <form method="POST" action="/settings/other/<%= i %>?kind=status&_method=PUT" class="w-100">
+                            <td class=" align-middle">
+                                <input  name="name"  class="w-100 border-0" value="<%= status[i].name %>">
+                            </td>
+                            <td>
+                                <input style="width: 30px;" type="color" name="background" value="<%=status[i].background  %>">
+                            </td>
+                            <td>
+                                <input style="width: 30px;" type="color" name="color"  value="<%=status[i].color  %>">
+                            </td>
+                            <td>
+                                <button class="btn btn-info btn-sm mx-3">更新</button>
+                            </td>
+                        </form>
+                        <td>
+                            <form method="POST" action="/settings/other/<%= i %>?kind=status&_method=DELETE" class="d-inline">
+                                <button class="btn btn-danger btn-sm">削除</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% } %>
+                <tr class="mt-5">
+                    <form action="/settings/other?kind=status" method="POST" class="validated-form" novalidate >
+                        <td>
+                            <input  class="w-100 border-0" type="text" name="name"  required placeholder="追加したい工程名 入力">
+                        </td>
+                        <td>
+                            <input style="width: 30px;" type="color" name="background" >
+                        </td>
+                        <td>
+                            <input style="width: 30px;" type="color" name="color" >
+                        </td>
+                        <td>
+                            <button class="btn btn-success btn-sm mx-3">追加</button>
+                        </td>
+                        <td></td>
+                    </form>
+                </tr>
+            </tbody>
+        </table>
+    
+        <table class="table caption-top table-sm  text-center  mx-3">
+            <caption class="mx-2 fs-5 text ">納入便 設定</caption>
+            <thead>
+                <tr>
+                    <th>納入便名</th>
+                    <th>背景色</th>
+                    <th>文字色</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for (const i in delivery) { %>
+                    <tr class=" align-middle">
+                        <form method="POST" action="/settings/other/<%= i %>?kind=delivery&_method=PUT" class="w-100">
+                            <td>
+                                <input  name="name" class="w-100 border-0" value="<%= delivery[i].name  %>">
+                            </td>
+                            <td>
+                                <input style="width: 30px;" type="color" name="background" value="<%= delivery[i].background  %>">
+                            </td>
+                            <td>
+                                <input style="width: 30px;" type="color" name="color" value="<%= delivery[i].color  %>">
+                            </td>
+                            <td>
+                                <button class="btn btn-info btn-sm mx-3">更新</button>
+                            </td>
+                        </form>
+                        <td>
+                            <form method="POST" action="/settings/other/<%= i %>?kind=delivery&_method=DELETE" class="d-inline">
+                                <button class="btn btn-danger btn-sm">削除</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% } %>
+                <tr class="mt-5">
+                    <form action="/settings/other?kind=delivery" method="POST" class="validated-form" novalidate >
+                        <td>
+                            <input  class="w-100 border-0" type="text" name="name"  required placeholder="追加したい納入便名 入力">
+                        </td>
+                        <td>
+                            <input style="width: 30px;" type="color" name="background" >
+                        </td>
+                        <td>
+                            <input style="width: 30px;" type="color" name="color" >
+                        </td>
+                        <td>
+                            <button class="btn btn-success btn-sm mx-3">追加</button>
+                        </td>
+                        <td></td>
+                    </form>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <table class="table caption-top table-sm  text-center  mx-3">
+        <caption class="mx-2 fs-5 text ">工場 設定</caption>
+        <tr>
+            <form method="POST" action="/settings/other/1?kind=branch&_method=PUT" class="w-100">
+                <% for( let branch of branchs ){ %>
+                    <td>
+                        <input  name="<%= branch %>" class="w-100 border-0" value="<%= branch %>">
+                    </td>
+                <% } %>
+                <td> <input  name="new_branch" class="w-100 border-0" placeholder="追加したい新工場名 入力"></td>
+                <td>
+                    <button class="btn btn-info btn-sm mx-3">更新</button>
+                </td>
+            </form>
+        </tr>
+    </table>
+
+    <table class="table  caption-top table-sm  text-start  mx-3">
+        <caption class="mx-2 fs-5 text ">インク 設定</caption>        
+        <thead>
+            <tr>
+                <th>インク名</th>
+                <th>単価</th>
+                <th>単位</th>
+                <th>備考</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for (const i in inks) { %>
+                <tr>
+                    <form method="POST" action="/settings/other/<%= inks[i].name %>?kind=ink&_method=PUT" class="w-100">
+                        <td>
+                            <input  name="name" class="w-100 border-0" value="<%= inks[i].name %>" readonly>
+                        </td>
+                        <td>
+                            <input  type="number" name="price" class="w-100 border-0"  value="<%= inks[i].price %>">
+                        </td>
+                        <td>
+                            <input  name="unit" class="w-100 border-0"  value="<%= inks[i].unit %>">
+                        </td>
+                        <td>
+                            <input  name="note" class="w-100 border-0"  value="<%= inks[i].note %>">
+                        </td>
+
+                        <td>
+                            <button class="btn btn-info btn-sm mx-3">更新</button>
+                        </td>
+                    </form>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+
+    <table class="table  caption-top table-sm  text-start  mx-3">
+        <caption class="mx-2 fs-5 text ">加工種類 設定</caption>        
+        <thead>
+            <tr>
+                <th>種類①</th>
+                <th>種類②</th>
+                <% for( let branch of branchs ){ %>
+                    <th><%= branch %></th>
+                <% }%>
+                <th></th>
+                <th></th>
+            </tr>
+            <tr class="mt-5">
+                <form action="/settings/other?kind=process" method="POST" class="validated-form" novalidate >
+                    <th>
+                        <select  name="type"   class="w-100 border-0">
+                            <% 
+                            let types = ["内製 印刷","内製 加工","内製 検査","外注 印刷","外注 加工","外注 検査"]
+                            for (const st of types) { %>
+                                <option value="<%= st %>"><%= st %></option>
+                            <% } %>
+                        </select>
+                    </th>
+                    <th>
+                        <input  name="name"  class="w-100 border-0" placeholder="新加工種類名 入力">
+                    </th>
+                    <th>
+                        <input class ="checkbox" type="checkbox" name="tokyo"  class="w-100 border-0"  >
+                    </th>
+                    <th>
+                        <input class ="checkbox" type="checkbox" name="fukushima"  class="w-100 border-0"  >
+                    </th>
+
+                    <th>
+                        <button class="btn btn-success btn-sm mx-3">追加</button>
+                    </th>
+                </form>
+            </tr>
+        </thead>
+        <tbody>
+            <% 
+            let cnt = 1;
+            for (const i in processs) { %>
+                <tr>
+                    <form method="POST" action="/settings/other/<%= processs[i].type + "_" + processs[i].name %>?kind=process&_method=PUT" class="w-100">
+                        <td>
+                            <select id="process_<%= cnt %>"  name="type"   class="w-100 border-0" onchange="changeProcessType(event)">
+                                <% 
+                                let untype = processs[i].type.includes("内製")?processs[i].type.replace("内製","外注"):processs[i].type.replace("外注","内製");
+                                %>
+                                <option value="<%=  processs[i].type  %>"  ><%=  processs[i].type  %></option>
+                                <option value="<%=  untype  %>"  ><%=  untype  %></option>
+                            </select>
+
+                        </td>
+                        <td>
+                            <input  name="name" class="w-100 border-0"  value="<%= processs[i].name %>">
+                        </td>
+                        <% for( branch of branchs ){ %>
+                        <td  id ="process_<%= cnt %>_<%= branch %>">
+                            <% if(processs[i].type .includes("内製")){ %>
+                                <input class="checkbox" type="checkbox"  name="<%= branch %>" <%= processs[i][branch]?'checked':"" %>>
+                            <%  } %>
+                        </td>
+
+                        <% }
+                        cnt++
+                        %>
+
+                        <td>
+                            <button class="btn btn-info btn-sm mx-3">更新</button>
+                        </td>
+                    </form>
+                    <td>
+                        <form method="POST" action="/settings/other/<%=  processs[i].type + "_" + processs[i].name  %>?kind=process&_method=DELETE" class="d-inline">
+                            <button class="btn btn-danger btn-sm">削除</button>
+                        </form>
+                    </td>
+                </tr>
+            <% } %>
+
+        </tbody>
+    </table>
+
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+<script  src="/javascript/forShowDB.js"></script>

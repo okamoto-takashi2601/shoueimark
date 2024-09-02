@@ -1,0 +1,147 @@
+
+#btn,#nav, footer {
+    display: block; /* 通常時の表示設定 */
+}
+
+@media print {
+    #btn,#nav, footer {
+        display: none; /* 印刷時に非表示にする設定 */
+        
+    }
+    
+    body {
+        font-size: 10pt; /* 基本のフォントサイズを設定 */
+        padding-top: 0;
+
+    }
+    .box {
+        page-break-inside: avoid; /* ページ内でボックスが分割されないようにする */
+    }
+}
+.nav-item .nav-link.active {
+    font-weight: bold;
+}
+.swal2-custom-border {
+        border: 2px solid  silver; /* Example border: change as needed */
+        border-radius: 10px; /* Example border radius: change as needed */
+}
+
+.checkbox{
+    width: 20px;
+    height: 20px;
+}
+
+.sanpa{
+    width: 3%;
+}
+.yonpa{
+    width: 4%;
+}
+.gopa{
+    width: 5%;
+}
+.rokupa{
+    width: 6%;
+}
+.juppa{
+    width: 10%;
+}
+
+.diagonal_line{
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHN0eWxlPSJ3aWR0aDoxMDAlO2hlaWdodDoxMDAlOyI+PGxpbmUgeDE9IjEwMCUiIHkxPSIwJSIgeDI9IjAlIiB5Mj0iMTAwJSIgc3R5bGU9InN0cm9rZTogIzMzMzMzMztzdHJva2Utd2lkdGg6IDE7Ij48L2xpbmU+PC9zdmc+');
+ }
+
+ label {
+    font-weight: 900;
+ }
+
+ input{
+    text-align: center;
+    border : none;
+    padding: 1px;
+}
+
+th ,td{
+    text-align: center;
+}
+
+select {
+    -webkit-appearance: none; /* Safari and Chrome */
+    -moz-appearance: none; /* Firefox */
+    appearance: none; /* Modern browsers */
+    margin: 2px;
+    border: none;
+    text-align: center;
+}
+
+select::-ms-expand {
+    display: none; 
+}
+
+.caption-center {
+    caption-side: top;
+    text-align: center;
+    font-weight: bold;
+    font-size: larger;                
+}
+.no-resize {
+    resize: none; /* リサイズを無効にする */
+}
+
+
+.box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid silver;
+    border-right: none; 
+    border-bottom: none;
+}
+.box:last-child {
+border-right: 1px solid silver; /* 最後のボックスに右側のボーダーを追加 */
+}
+.box-row:first-child .box {
+    border-top: 1px solid silver; /* 最初の行のボックスに上部ボーダーを追加 */
+}
+.box-border-bottom {
+    border-bottom: 1px solid silver; /* 最後の行のボックスに下部ボーダーを追加 */
+}
+
+ .w-70{
+    width: 70%;
+ }
+ .w-30{
+    width: 30%;
+ }
+ .d-flex-center {
+    display: flex;
+    align-items: center;
+}
+.p-l-0{
+    padding-left: 0;
+}
+
+
+.logo {
+    width: 135px;
+    height: auto;
+    vertical-align: middle;
+     margin-right: 10px;
+}
+
+.upload-form {
+    display: none;
+}
+.upload-trigger {
+    display: block;
+}
+.upload-wrapper:hover .upload-trigger {
+    display: none;
+}
+.upload-wrapper:hover .upload-form {
+    display: block;
+}
+
+a{
+    min-width: fit-content;
+}

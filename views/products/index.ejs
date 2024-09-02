@@ -1,0 +1,112 @@
+<% layout('layouts/boilerplate') %>
+
+    <div class="container text-center">
+        <h1>案件　一覧</h1>
+    </div>
+    <form class="d-flex flex-row justify-content-center mb-3"  id="placeForm" method="POST" action="/products/filter">
+        <span class="input-group-text" for="place">手配先</span>
+        <select class="w-25 border" name="place" id="placeSelect">
+            <option value="<%= products._selectPlace?products._selectPlace:'' %>"><%= products._selectPlace?products._selectPlace:"All" %></option>
+            <% let notselectplaces = products._place.filter(s => s !== products._selectPlace); %>
+            <% for (let p of notselectplaces) { %>
+                <option value="<%= p %>"><%= p %></option>
+            <% } %>
+            <% if (products._selectPlace.length > 0) { %>
+                <option value="">All</option>
+            <% } %>
+        </select>
+    </form >
+    <script>
+        const form = document.getElementById('placeForm');
+        const select = document.getElementById('placeSelect');
+        select.addEventListener('change', () => {form.submit(); });
+    </script>
+
+    <table class="table table-bordered  table-hover table-sm border-dark-subtle text-center align-middle">
+        <thead>
+            <tr class="bg-light text-dark">
+                <th>削除</th>
+                <th>変更</th>
+                <th>ID</th>
+                <th>得意先名</th>
+                <th>納期</th>
+                <th>進行</th>
+                <th>機種名</th>
+                <th>部番</th>
+                <th>品名</th>
+                <!-- 
+                    <th>面付</th>
+                    <th>ﾏｰｸ寸</th>
+                    <th>材寸</th>
+                    <th>型面数</th>
+                    -->
+                <th>備考</th>
+                <th>担当者</th>
+                <th>納入便</th>
+                <th>関係資料</th>
+                <th>関係ファイル</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            <% for (let product of products._product){ %>
+                <tr>
+                    <td>
+                        <form  id="placeForm" method ="POST" action="/products/<%= product.id %>?_method=DELETE">
+                            <button class="btn btn-danger btn-sm">×</button>
+                        </form>
+
+                    </td>
+                    <td>
+                        <a class="btn btn-light btn-sm" href="/products/<%= product.id %>/edit">🖋</a>
+                    </td>
+                    <td><%= product.cus_id %></td>
+                    <td><%= product.cus_name %></td>
+                    <td><%= product.date %></td>
+                    <% let statusColorObj = products._status.find(s => s.name === product.status);  %>
+                    <td style="background: <%= statusColorObj.background %>; color: <%=  statusColorObj.color %>"><%= product.status %></td>
+                    <td><%= product.machine_name %></td>
+                    <td><%= product.path_no %></td>
+                    <td><%= product.product_name %></td>
+                    <!-- 
+                        <td><%= product.layout_x + "×" + product.layout_y %></td>
+                        <td><%= product.mark %></td>
+                        <td><%= product.t_material_x + "×" + product.t_material_y + "×" + product.t_material_z %></td>
+                        <td><%= product.die_quantity_x + "×" +  product.die_quantity_y %></td>
+                     -->
+                    <td><%= product.note  %></td>
+                    <td><%= product.staff1  %></td>
+
+                    <% let deliveryColorObj = products._delivery.find(s => s.name === product.delivery); %>
+                    <td style="background: <%= deliveryColorObj.background %>; color: <%=  deliveryColorObj.color %>"><%= product.delivery %></td>
+
+                    <td class="d-flex   justify-content-around flex-wrap" >
+                        <a class="btn btn-info btn-sm mx-1 mt-1 "  href="/products/<%= product.id %>/structural_work_chedule" >工程表</a>
+                        <a class="btn btn-success btn-sm mx-1 mt-1 "  href="/products/<%= product.id %>/quotation">概算書</a>
+                        <a class="btn btn-danger btn-sm mx-1 mt-1 "  href="/products/<%= product.id %>/quoteForm">見積書</a>
+                        <a class="btn btn-secondary btn-sm mx-1 mt-1 "  href="/products/<%= product.id %>/specs">仕様書</a>
+                        <a class="btn btn-primary btn-sm mx-1 mt-1 "  href="/products/<%= product.id %>/checksheet">CheckSheet</a>
+                    </td>
+                    <% let files =  product.files  %>
+                    <td >
+                        <% if(files && files.length>0){%>
+                            <% files.forEach(function(file, index) { %>
+                                <div class="d-flex align-items-center justify-content-between my-2">
+                                    <a href="<%= file.url %>" target="_blank"><%= file.name %></a>
+                                    <form action="/products/<%= product.id %>?kind=removeFile&fileIndex=<%= index %>" method="post">
+                                        <button class="btn btn-danger btn-sm mx-1">×</button>
+                                    </form>
+                                </div>
+                            <% }) %>
+                        <% }%>
+                            <div class="upload-wrapper">
+                                <form class="upload-form" action="/products/<%= product.id %>?kind=upload"  method="post" enctype="multipart/form-data">
+                                    <input type="file" name="files" multiple required onchange="this.files.length > 0? this.parentNode.submit():''">
+                                </form>     
+                                <div class="upload-trigger">✚ upload file</div>
+                            </div>
+                    </td>
+                </tr>
+            <% }  %>
+        </tbody>
+    </table>

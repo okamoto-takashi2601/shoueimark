@@ -1,0 +1,24 @@
+
+#btn,#nav, footer {
+    display: block; /* 通常時の表示設定 */
+}
+
+.logo {
+    width: 135px;
+    height: auto;
+    vertical-align: middle;
+     margin-right: 10px;
+}
+@media print {
+    #btn,#nav, footer {
+        display: none; /* 印刷時に非表示にする設定 */ 
+    }
+    
+    body {
+        font-size: 10pt; /* 基本のフォントサイズを設定 */
+        padding-top: 0px;
+    }
+    .box {
+        page-break-inside: avoid; /* ページ内でボックスが分割されないようにする */
+    }
+}

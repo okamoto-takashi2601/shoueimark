@@ -1,0 +1,192 @@
+<% layout('layouts/boilerplate') %>
+<div class="container d-flex justify-content-center">
+    <div class="d-flex flex-row">
+        <button class="btn btn-light btn-sm mx-0 fs-5 text">
+            <a class="nav-link" href="/settings/customers">得意先</a>
+        </button>
+        <button class="btn btn-danger btn-sm mx-0  fs-5 text">材料
+        </button>
+        <button class="btn btn-light btn-sm mx-0 fs-5 text">
+            <a class="nav-link" href="/settings/subcontractors">外注先</a>
+        </button>
+        <button class="btn btn-light btn-sm mx-0 fs-5 text">
+            <a class="nav-link" href="/settings/other">その他</a>
+        </button>
+    </div>
+</div>
+
+
+<div class="d-flex flex-row">
+    <% 
+        let max_id = 1
+        let filter_materials = {};
+        for (const key in materials) { 
+            if(Number( materials[key].cus_id) > max_id){ max_id = Number( materials[key].cus_id) }
+
+            if (materials.hasOwnProperty(key)){
+                if(materials[key].cus_id && Number(materials[key].cus_id) == 1){
+                    filter_materials[key] = materials[key];
+                }
+            }
+            
+        }
+    %>
+
+    <div class="container w-50">
+        <table class="table text-start caption-top" id="cusTable">
+            <caption class="mx-2 fs-5 text ">仕入先 一覧</caption>
+            <thead>
+                <tr>
+                    <td  class="w-100" >
+                        <div class="d-flex justify-content-between">
+
+                            <form  class="w-75" action="/settings/materials?kind=customer" method="POST" class="validated-form" novalidate >
+                                <div class="d-flex justify-content-between">
+                                    <input class="border-0 w-25" type="number" name="new_cus_id_2" min="<%= max_id + 1 %>" max="<%= max_id + 1 %>" value="<%= max_id + 1 %>" placeholder="仕入れ先コード" >
+                                    <input class="border-0 w-50" name="new_cus_name_2"  placeholder="仕入れ先名">
+                                    <button class="btn btn-success btn-sm mx-3">追加</button>
+                                </div>
+                            </form>
+                        </div>
+                    </td>
+
+                </tr>
+
+            </thead>
+            <tbody>
+                <% for (let i = cus_names.length-1; i >= 0; i--) { %>
+                    <tr id="<%=cus_names[i].cus_id  %>@@<%=cus_names[i].cus_name  %>">
+                        <td  class="w-100" >
+                            <div class="d-flex justify-content-between">
+                                <form class="w-75" method="POST" action="/settings/materials/<%= cus_names[i].cus_id %>?kind=customer&_method=PUT" novalidate class="validated-form" >
+                                    <div class="d-flex justify-content-between">
+                                        <input class="border-0" type="number" name="cus_id"  value="<%=cus_names[i].cus_id  %>" readonly>
+                                        <input  class="border-0 w-50" type="text" name="cus_name"  value="<%=cus_names[i].cus_name  %>">
+                                        <button class="btn btn-info btn-sm mx-3" >更新</button>
+                                    </div>
+                                </form>
+                                <form method="POST" action="/settings/materials/<%= cus_names[i].cus_id %>?kind=customer&_method=DELETE"  >
+                                    <button class="btn btn-danger btn-sm  mx-3" onclick="delete_a_material_cus(event)">削除</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                <% } %>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<table class="table text-start caption-top " id="materialsTable">
+    <caption class="mx-2 fs-5 text ">材料 一覧</caption>
+    <thead >
+        <tr>
+            <th scope="col" colspan="15">
+                <div class="d-flex flex-row justify-content-between">
+                    <label  class="yonpa">ID</label>
+                    <label  class="juppa">得意先名</label>
+                    <label  class="juppa">材料名</label>
+                    <label  class="sanpa">ロール</label>
+                    <label  class="yonpa">幅</label>
+                    <label  class="yonpa">長さ</label>
+                    <label  class="sanpa">厚み</label>
+                    <label  class="gopa">単価</label>
+                    <label  class="juppa">備考</label>
+                    <label  class="gopa">材料</label>
+                    <label  class="rokupa">保護フィルム</label>
+                    <label  class="gopa">マスキング</label>
+                    <label  class="gopa">ラミネート</label>
+                    <label  class="gopa">両面テープ</label>
+                    <label  class="gopa">セパレーター</label>
+                    <label  class="sanpa"></label>
+                </div>
+            </th>
+            <th>
+            </th>
+        </tr>
+        <tr class="align-middle">
+            <form method="POST" action="/settings/materials" novalidate class="validated-form"  >
+                <td  colspan="15">
+                    <div class="d-flex flex-row justify-content-between">
+                        <select  class="yonpa border-0" type="number" name="new_cus_id"  onchange="findName(this.value)" >
+                            <% for(let no = 1 ; no <= max_id ; no++) {%>
+                                <option value="<%= no  %>"><%= no  %></option>
+                            <% } %>
+                        </select>
+                        <input   class="juppa border-0" name="new_cus_name" id="new_cus_name"  onchange="document.getElementById('new_material_name').focus();" placeholder="仕入れ先名 入力" readonly>
+                        <input   class="juppa border-0" name="new_material_name" id="new_material_name"  onchange="document.getElementById('new_type').focus();" placeholder="材料名 入力">
+
+                        <input   class="sanpa checkbox" type="checkbox" name="new_type" id="new_type" 
+                            onchange="document.getElementById('new_y').focus();this.checked?document.getElementById('new_y').value=1000:document.getElementById('new_y').value='';">
+
+                        <input class="yonpa border-0" type="number" name="new_x" id="new_x" onchange="document.getElementById('new_y').focus();" placeholder="幅" min="1">
+
+                        <input class="yonpa border-0" type="number" name="new_y" id="new_y" onchange="document.getElementById('new_z').focus();" placeholder="長さ ロールなら [1000]として登録すること">
+
+                        <input  class="sanpa border-0" type="number" name="new_z" id="new_z" onchange="document.getElementById('new_price').focus();" placeholder="厚み"  min="0">
+
+                        <input  class="gopa border-0" type="number" name="new_price" id="new_price" onchange="document.getElementById('new_remark').focus();" placeholder="￥">
+    
+                        <input  class="border-0" id="new_remark" name="new_remark" placeholder="備考など 入力">
+
+                        <input  class="gopa checkbox"  type="checkbox"  name="new_ma" id="new_ma">
+                        <input  class="rokupa checkbox"  type="checkbox"  name="new_pf" id="new_pf">
+
+                        <input  class="gopa checkbox"   type="checkbox"  name="new_ms" id="new_ms">
+
+                        <input  class="gopa checkbox"    type="checkbox"  name="new_lm" id="new_lm">
+
+                        <input  class="gopa checkbox"   type="checkbox"  name="new_wf" id="new_wf">
+
+                        <input  class="gopa checkbox"  type="checkbox"  name="new_se" id="new_se">
+
+                        <button class="sanpa btn btn-success btn-sm " type="submit">追加</button>
+                    </div>
+                </td>
+                <td></td>
+            </form>
+        </tr>
+    </thead>
+    <tbody>
+        <% for (const key in filter_materials) {%>
+            <tr class="align-middle">
+                <td colspan="15">
+                    <form method="POST" action="/settings/materials/<%= key %>?_method=PUT" novalidate class="validated-form">
+                        <div class="d-flex flex-row justify-content-between">
+                            <input class="yonpa border-0" type="number" name="cus_id" value="<%= filter_materials[key].cus_id %>" readonly>
+                            <input class="juppa border-0" name="cus_name" value="<%= filter_materials[key].cus_name %>" readonly>
+                            <input class="juppa border-0" id="material_name<%= key %>" name="material_name" value="<%= filter_materials[key].material_name %>">
+                            <input class ="sanpa checkbox"  type="checkbox" id="type<%= key %>" name="type" <%= filter_materials[key].type?'checked':"" %>>
+                            <input class="yonpa border-0" id="x<%= key %>" name="x" value="<%= filter_materials[key].x %>">
+                            <input class="yonpa border-0" id="y<%= key %>" name="y" value="<%= filter_materials[key].y %>">
+                            <input class="sanpa border-0" id="z<%= key %>" name="z" value="<%= filter_materials[key].z %>">
+                            <input class="gopa border-0" type="number" id="price<%= key %>" name="price" value="<%= filter_materials[key].price %>">
+                            <input class="border-0" id="remark<%= key %>" name="remark" value="<%= filter_materials[key].remark %>">
+                            <input class ="gopa checkbox"  type="checkbox" id="ma<%= key %>" name="ma" <%= filter_materials[key].ma?'checked':"" %>>
+                            <input class ="rokupa checkbox"  type="checkbox" id="pf<%= key %>" name="pf" <%= filter_materials[key].pf?'checked':"" %>>
+                            <input class ="gopa checkbox"  type="checkbox" id="ms<%= key %>" name="ms" <%= filter_materials[key].ms?'checked':"" %>>
+                            <input class ="gopa checkbox"  type="checkbox" id="lm<%= key %>" name="lm" <%= filter_materials[key].lm?'checked':"" %>>
+                            <input class ="gopa checkbox"  type="checkbox" id="wf<%= key %>" name="wf" <%= materials[key].wf?'checked':"" %>>
+                            <input class ="gopa checkbox"  type="checkbox" id="se<%= key %>" name="se" <%= materials[key].se?'checked':"" %>>
+                            <button class=" sanpa btn btn-info btn-sm">更新</button>
+                        </div>
+                    </form>
+                </td>
+                <td>
+                    <form method="POST" action="/settings/materials/<%= key %>?_method=DELETE" class="d-inline">
+                        <button class="btn btn-danger btn-sm">削除</button>
+                    </form>
+                </td>
+            </tr>
+        <% } %>
+    </tbody>
+</table>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/javascript/forShowDB.js"></script>
+
+

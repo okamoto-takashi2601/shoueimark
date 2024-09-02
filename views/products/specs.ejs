@@ -1,0 +1,2953 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/stylesheet2.css">
+
+    <style>
+
+        body{
+                font-size: medium;
+                padding-top: 102px; 
+            }
+
+
+        input{
+            text-align: center;
+            border: none;
+            width: 100%;
+            margin: 2px;
+        }
+        select{
+            border: none;
+            width: 100%;
+            text-align: center;
+
+        }
+        td{
+            vertical-align: middle;
+        }
+
+    </style>
+</head>
+<body class="d-flex flex-column vh-100" >
+    <%- include('../partials/navbar2') %>
+    <%- include('../partials/flash') %>
+    <form class="text-center  mx-3" action="/products/<%= data.id %>/specs?_method=PUT" method="POST" novalidate class="validated-form"> 
+        <table class="table table-bordered caption-top table-sm border-dark-subtle text-center  mb-1 mt-1">
+            <caption>
+                <label for="">常に一人、一人がお客様に満足頂ける製品を提供する</label>
+            </caption>
+            <thead>
+                <tr>
+                    <th colspan="20"> 
+                        製   品   仕   様   書
+                    </th>
+                    <th colspan="5">
+                        <select name="" id="">
+                            <option value="量産">量産</option>
+                            <option value="試作">試作</option>
+                        </select>
+                    </th>
+                    <th colspan="16"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="6">発行日</td>
+                    <td colspan="14">
+                        <input type="date">
+                    </td>
+                    <td colspan="5">営 業 担 当 者</td>
+                    <td colspan="6">
+                        <input type="text">
+                    </td>
+                    <td colspan="5">業 務 担 当 者</td>
+                    <td colspan="5">
+                        <input type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <td rowspan="8"  style="width: 30px;">基本情報</td>
+                    <td colspan="5">得意先コード</td>
+                    <td colspan="14">
+                        <input type="text">
+                    </td>
+                    <td colspan="5">材料 仕 入 先</td>
+                    <td colspan="16">
+                        <input type="text">
+                    </td>
+
+                </tr>
+                <tr>
+                    <td colspan="5">得 意 先 名</td>
+                    <td colspan="14"></td>
+                    <td colspan="5">材料 メーカー</td>
+                    <td colspan="16">
+                        <input type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="5">部 品 番 号</td>
+                    <td colspan="14">
+                        <input type="text">
+                    </td>
+                    <td colspan="5">材 料 名</td>
+                    <td colspan="12">
+                        <input type="text">
+                    </td>
+                    <td colspan="2">t=</td>
+                    <td colspan="2">
+                        <input type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="5">部 品 名 称</td>
+                    <td colspan="14"></td>
+                    <td colspan="5">U L ・ C S A</td>
+                    <td colspan="16">
+                        <input type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="5">マーク 寸 法</td>
+                    <td colspan="14">x</td>
+                    <td colspan="5">面 数</td>
+                    <td colspan="16">x</td>
+
+                </tr>
+                <tr>
+                    <td colspan="5">材料 寸法</td>
+                    <td colspan="14">x</td>
+                    <td colspan="5">フィルム 送り</td>
+                    <td colspan="16">x</td>
+
+                </tr>
+                <tr>
+                    <td colspan="5" rowspan="2">リール製品</td>
+                    <td colspan="4">地色全長</td>
+                    <td colspan="6">
+                        <input type="text">
+                    </td>
+                    <td rowspan="2" colspan="2">mm</td>
+
+                    <td colspan="4">幅</td>
+                    <td colspan="6">
+                        <input type="text">
+                    </td>
+                    <td rowspan="2" colspan="2">mm</td>
+
+                    <td colspan="4">重量</td>
+                    <td colspan="5">
+                        <input type="text">
+                    </td>
+                    <td rowspan="2" colspan="2">g</td>
+                </tr>
+                <tr>
+                    <td colspan="4">交差</td>
+                    <td colspan="6">
+                        <input type="text">
+                    </td>
+
+                    <td colspan="4">交差</td>
+                    <td colspan="6">
+                        <input type="text">
+                    </td>
+
+                    <td colspan="4">交差</td>
+                    <td colspan="6">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td  rowspan="8">製造履歴特記</td>
+                    <td colspan="5">年 月 日</td>
+                    <td colspan="7">製造区分</td>
+                    <td colspan="18">製 造 履 歴  ・ 社 内 変 更 履 歴</td>
+                    <td colspan="10">不具合履歴</td>
+                </tr>
+                <tr>
+                    <td colspan="5">
+                        <input type="date">
+                    </td>
+                    <td colspan="7"></td>
+                    <td colspan="18"></td>
+                    <td colspan="10"></td>
+                </tr>
+                <tr>
+                    <td colspan="5">
+                        <input type="date">
+                    </td>
+                    <td colspan="7"></td>
+                    <td colspan="18"></td>
+                    <td colspan="10"></td>
+                </tr>
+                <tr>
+                    <td colspan="5">
+                        <input type="date">
+                    </td>
+                    <td colspan="7"></td>
+                    <td colspan="18"></td>
+                    <td colspan="10"></td>
+                </tr>
+                <tr>
+                    <td colspan="5">
+                        <input type="date">
+                    </td>
+                    <td colspan="7"></td>
+                    <td colspan="18"></td>
+                    <td colspan="10"></td>
+                </tr>
+                <tr>
+                    <td colspan="5">
+                        <input type="date">
+                    </td>
+                    <td colspan="7"></td>
+                    <td colspan="18"></td>
+                    <td colspan="10"></td>
+                </tr>
+                <tr>
+                    <td colspan="5">
+                        <input type="date">
+                    </td>
+                    <td colspan="7"></td>
+                    <td colspan="18"></td>
+                    <td colspan="10"></td>
+                </tr>
+                <tr>
+                    <td colspan="5">
+                        <input type="date">
+                    </td>
+                    <td colspan="7"></td>
+                    <td colspan="18"></td>
+                    <td colspan="10"></td>
+                </tr>
+
+                <tr>
+                    <td  rowspan="10">マーク変更通知書</td>
+                    <td colspan="40"> 変　　更　　内　　容　※マーク変更通知書の発行無き4M変更は実施しないこと。</td>
+                </tr>
+                <tr>
+                    <td colspan="5">年 月 日</td>
+                    <td colspan="17">内容</td>
+                    <td colspan="6">在庫</td>
+                    <td colspan="6">版/フィルム</td>
+                    <td colspan="6">ビク型</td>
+                </tr>
+                <tr>
+                    <td colspan="5">
+                        <input type="date">
+                    </td>
+                    <td colspan="17"></td>
+                    <td colspan="6"></td>
+                    <td colspan="6"></td>
+                    <td colspan="6"></td>
+                </tr>
+                <tr>
+                    <td colspan="5">
+                        <input type="date">
+                    </td>
+                    <td colspan="17"></td>
+                    <td colspan="6"></td>
+                    <td colspan="6"></td>
+                    <td colspan="6"></td>
+                </tr>
+                <tr>
+                    <td colspan="5">
+                        <input type="date">
+                    </td>
+                    <td colspan="17"></td>
+                    <td colspan="6"></td>
+                    <td colspan="6"></td>
+                    <td colspan="6"></td>
+                </tr>
+                <tr>
+                    <td colspan="5">
+                        <input type="date">
+                    </td>
+                    <td colspan="17"></td>
+                    <td colspan="6"></td>
+                    <td colspan="6"></td>
+                    <td colspan="6"></td>
+                </tr>
+                <tr>
+                    <td colspan="5">
+                        <input type="date">
+                    </td>
+                    <td colspan="17"></td>
+                    <td colspan="6"></td>
+                    <td colspan="6"></td>
+                    <td colspan="6"></td>
+                </tr>
+                <tr>
+                    <td colspan="5">
+                        <input type="date">
+                    </td>
+                    <td colspan="17"></td>
+                    <td colspan="6"></td>
+                    <td colspan="6"></td>
+                    <td colspan="6"></td>
+                </tr>
+                <tr>
+                    <td colspan="5">
+                        <input type="date">
+                    </td>
+                    <td colspan="17"></td>
+                    <td colspan="6"></td>
+                    <td colspan="6"></td>
+                    <td colspan="6"></td>
+                </tr>
+                <tr>
+                    <td colspan="5">
+                        <input type="date">
+                    </td>
+                    <td colspan="17"></td>
+                    <td colspan="6"></td>
+                    <td colspan="6"></td>
+                    <td colspan="6"></td>
+                </tr>
+                <tr>
+                    <td rowspan="6">管理ポイント</td>
+                    <td colspan="5">生産管理課</td>
+                    <td colspan="35"></td>
+                </tr>
+                <tr>
+                    <td colspan="5">製版係</td>
+                    <td colspan="35"></td>
+                </tr>
+                <tr>
+                    <td colspan="5">印刷係</td>
+                    <td colspan="35"></td>
+                </tr>
+                <tr>
+                    <td colspan="5">加工係</td>
+                    <td colspan="35"></td>
+                </tr>
+                <tr>
+                    <td colspan="5">出荷検査課</td>
+                    <td colspan="35"></td>
+                </tr>
+                <tr>
+                    <td colspan="5">品質管理課</td>
+                    <td colspan="35"></td>
+                </tr>
+                <tr>
+                    <td rowspan="5">外注情報</td>
+
+                    <td colspan="5">委託内容</td>
+                    <td colspan="7">委託先</td>
+
+                    <td colspan="7">委託内容</td>
+                    <td colspan="8">委託先</td>
+
+                    <td colspan="8">委託内容</td>
+                    <td colspan="5">委託先</td>
+                </tr>
+                <tr>
+                    <td colspan="5">A</td>
+                    <td colspan="7"></td>
+                    <td colspan="7"></td>
+                    <td colspan="8"></td>
+                    <td colspan="8"></td>
+                    <td colspan="5"></td>
+                </tr>
+                <tr>
+                    <td colspan="5">A</td>
+                    <td colspan="7"></td>
+                    <td colspan="7"></td>
+                    <td colspan="8"></td>
+                    <td colspan="8"></td>
+                    <td colspan="5"></td>
+                </tr>
+                <tr>
+                    <td colspan="5">A</td>
+                    <td colspan="7"></td>
+                    <td colspan="7"></td>
+                    <td colspan="8"></td>
+                    <td colspan="8"></td>
+                    <td colspan="5"></td>
+                </tr>
+                <tr>
+                    <td colspan="5">A</td>
+                    <td colspan="7"></td>
+                    <td colspan="7"></td>
+                    <td colspan="8"></td>
+                    <td colspan="8"></td>
+                    <td colspan="5"></td>
+                </tr>
+
+                <tr>
+                    <td >フローチャート</td>
+                    <td colspan="40">
+                        <div class="d-flex justify-content-between">
+                            <% 
+                            for (let i = 0; i < 13; i++) { 
+                                let char = String.fromCodePoint(9312 + Number(i)); 
+                            %>
+                            <%if(i==12){%>
+                                <div class="d-flex flex-row text-center align-items-center">
+                                    <div class="d-flex flex-column text-center align-items-center">
+                                        <label><%= char %></label>
+                                        <input class="border" style="height: 80px; width: 50px;">
+                                    </div>
+                                </div>
+                            <% }else{ %>
+                                <div class="d-flex flex-row text-center align-items-center">
+                                    <div class="d-flex flex-column text-center align-items-center">
+                                        <label><%= char %></label>
+                                        <input class="border" style="height: 80px; width: 50px;">
+                                    </div>
+                                        　➝
+                                </div>
+                            <% } %> 
+        
+                            <% 
+                            } 
+                            %>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td rowspan="2">承認フロー</td>
+                    <td colspan="6"> 生産管理課</td>
+                    <td colspan="6"> 製版係</td>
+                    <td colspan="6"> 印刷係</td>
+                    <td colspan="5"> 加工係</td>
+                    <td colspan="6"> 品質管理課</td>
+                    <td colspan="6"> 製造部統括</td>
+                    <td colspan="5"> 生産管理課</td>
+                </tr>
+                <tr>
+                    <td colspan="6" style="height: 100px;"></td>
+                    <td colspan="6"> </td>
+                    <td colspan="6"> </td>
+                    <td colspan="5"> </td>
+                    <td colspan="6"> </td>
+                    <td colspan="6"> </td>
+                    <td colspan="5"> </td>
+                </tr>
+                <tr>
+                    <td rowspan="27">工程情報（製版）</td>
+                    <td colspan="5"> 得意先名</td>
+                    <td colspan="5"> </td>
+                    <td colspan="5"> 部品番号</td>
+                    <td colspan="5"> </td>
+                    <td colspan="5"> 部品名称</td>
+                    <td colspan="15"> </td>
+                </tr>
+                <tr>
+                    <td colspan="10"> フィルム作成業者</td>
+                    <td colspan="10"> </td>
+                    <td colspan="5"> フィルム線数</td>
+                    <td colspan="5"> </td>
+                    <td colspan="5"> 枠寸</td>
+                    <td colspan="5">x </td>
+                </tr>
+                <tr>
+                    <td colspan="4">製版サイト</td>
+                    <td colspan="6">
+                        <select name="" id="">
+                            <option value="社内">社内</option>
+                            <option value="社外">社外</option>
+                            <option value="社内・社外">社内・社外(セ+ム)</option>
+                        </select>
+                    </td>
+                    <td colspan="6">
+                        <select name="" id="">
+                            <option value="社内">社内</option>
+                            <option value="社外">社外</option>
+                            <option value="社内・社外">社内・社外(セ+ム)</option>
+                        </select>
+                    </td>
+                    <td colspan="6">
+                        <select name="" id="">
+                            <option value="社内">社内</option>
+                            <option value="社外">社外</option>
+                            <option value="社内・社外">社内・社外(セ+ム)</option>
+                        </select>
+                    </td>
+                    <td colspan="6">
+                        <select name="" id="">
+                            <option value="社内">社内</option>
+                            <option value="社外">社外</option>
+                            <option value="社内・社外">社内・社外(セ+ム)</option>
+                        </select>
+                    </td>
+                    <td colspan="6">
+                        <select name="" id="">
+                            <option value="社内">社内</option>
+                            <option value="社外">社外</option>
+                            <option value="社内・社外">社内・社外(セ+ム)</option>
+                        </select>
+                    </td>
+                    <td colspan="6">
+                        <select name="" id="">
+                            <option value="社内">社内</option>
+                            <option value="社外">社外</option>
+                            <option value="社内・社外">社内・社外(セ+ム)</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="4">色</td>
+                    <td>①</td>
+                    <td colspan="4"></td>
+                    <td rowspan="11" style="width: 40px;">MS・LC　貼無</td>
+                    <td>②</td>
+                    <td colspan="4"></td>
+                    <td rowspan="11" style="width: 40px;">MS・LC　貼無</td>
+                    <td>③</td>
+                    <td colspan="4"></td>
+                    <td rowspan="11" style="width: 40px;">MS・LC　貼無</td>
+                    <td>④</td>
+                    <td colspan="4"></td>
+                    <td rowspan="11" style="width: 40px;">MS・LC　貼無</td>
+                    <td>⑤</td>
+                    <td colspan="4"></td>
+                    <td rowspan="11" style="width: 40px;">MS・LC　貼無</td>
+                    <td>⑥</td>
+                    <td colspan="4"></td>
+                    <td rowspan="11" style="width: 40px;">MS・LC　貼無</td>
+                </tr>
+                <tr>
+                    <td colspan="4">色番</td>
+                    <td colspan="5"></td>
+                    <td colspan="5"></td>
+                    <td colspan="5"></td>
+                    <td colspan="5"></td>
+                    <td colspan="5"></td>
+                    <td colspan="5"></td>
+                </tr>
+                <tr>
+                    <td colspan="4">刷面</td>
+                    <td colspan="5">
+                        <select name="" id="">
+                            <option value="-">-</option>
+                            <option value="裏">裏</option>
+                            <option value="表">表</option>
+                            <option value="裏・表">裏・表</option>
+                        </select>
+                    </td>
+                    <td colspan="5">
+                        <select name="" id="">
+                            <option value="-">-</option>
+                            <option value="裏">裏</option>
+                            <option value="表">表</option>
+                            <option value="裏・表">裏・表</option>
+                        </select>
+                    </td>
+                    <td colspan="5">
+                        <select name="" id="">
+                            <option value="-">-</option>
+                            <option value="裏">裏</option>
+                            <option value="表">表</option>
+                            <option value="裏・表">裏・表</option>
+                        </select>
+                    </td>
+                    <td colspan="5">
+                        <select name="" id="">
+                            <option value="-">-</option>
+                            <option value="裏">裏</option>
+                            <option value="表">表</option>
+                            <option value="裏・表">裏・表</option>
+                        </select>
+                    </td>
+                    <td colspan="5">
+                        <select name="" id="">
+                            <option value="-">-</option>
+                            <option value="裏">裏</option>
+                            <option value="表">表</option>
+                            <option value="裏・表">裏・表</option>
+                        </select>
+                    </td>
+                    <td colspan="5">
+                        <select name="" id="">
+                            <option value="-">-</option>
+                            <option value="裏">裏</option>
+                            <option value="表">表</option>
+                            <option value="裏・表">裏・表</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">メッシュ</td>
+                    <td ></td>
+                    <td colspan="3"></td>
+                    <td>B</td>
+                    <td ></td>
+                    <td colspan="3"></td>
+                    <td>B</td>
+                    <td ></td>
+                    <td colspan="3"></td>
+                    <td>B</td>
+                    <td ></td>
+                    <td colspan="3"></td>
+                    <td>B</td>
+                    <td ></td>
+                    <td colspan="3"></td>
+                    <td>B</td>
+                    <td ></td>
+                    <td colspan="3"></td>
+                    <td>B</td>
+                </tr>
+                <tr>
+                    <td colspan="4">角度</td>
+                    <td colspan="5"></td>
+                    <td colspan="5"></td>
+                    <td colspan="5"></td>
+                    <td colspan="5"></td>
+                    <td colspan="5"></td>
+                    <td colspan="5"></td>
+                </tr>
+                <tr>
+                    <td colspan="4">膜厚</td>
+                    <td colspan="4"></td>
+                    <td>μ</td>
+                    <td colspan="4"></td>
+                    <td>μ</td>
+                    <td colspan="4"></td>
+                    <td>μ</td>
+                    <td colspan="4"></td>
+                    <td>μ</td>
+                    <td colspan="4"></td>
+                    <td>μ</td>
+                    <td colspan="4"></td>
+                    <td>μ</td>
+                </tr>
+                <tr>
+                    <td colspan="4">露光</td>
+                    <td colspan="4"></td>
+                    <td>mj</td>
+                    <td colspan="4"></td>
+                    <td>mj</td>
+                    <td colspan="4"></td>
+                    <td>mj</td>
+                    <td colspan="4"></td>
+                    <td>mj</td>
+                    <td colspan="4"></td>
+                    <td>mj</td>
+                    <td colspan="4"></td>
+                    <td>mj</td>
+                </tr>
+                <tr>
+                    <td colspan="4">テンション</td>
+                    <td colspan="4"></td>
+                    <td>mm</td>
+                    <td colspan="4"></td>
+                    <td>mm</td>
+                    <td colspan="4"></td>
+                    <td>mm</td>
+                    <td colspan="4"></td>
+                    <td>mm</td>
+                    <td colspan="4"></td>
+                    <td>mm</td>
+                    <td colspan="4"></td>
+                    <td>mm</td>
+                </tr>
+                <tr>
+                    <td colspan="4">区分</td>
+                    <td colspan="6">
+                        <select name="" id="">
+                            <option value="単一">単一</option>
+                            <option value="共通">共通</option>
+                            <option value="ベタ">ベタ</option>
+                            <option value="単一・共通">単一・共通</option>
+                        </select>
+                    </td>
+                    <td colspan="5">
+                        <select name="" id="">
+                            <option value="単一">単一</option>
+                            <option value="共通">共通</option>
+                            <option value="ベタ">ベタ</option>
+                            <option value="単一・共通">単一・共通</option>
+                        </select>
+                    </td>
+                    <td colspan="5">
+                        <select name="" id="">
+                            <option value="単一">単一</option>
+                            <option value="共通">共通</option>
+                            <option value="ベタ">ベタ</option>
+                            <option value="単一・共通">単一・共通</option>
+                        </select>
+                    </td>
+                    <td colspan="5">
+                        <select name="" id="">
+                            <option value="単一">単一</option>
+                            <option value="共通">共通</option>
+                            <option value="ベタ">ベタ</option>
+                            <option value="単一・共通">単一・共通</option>
+                        </select>
+                    </td>
+                    <td colspan="5">
+                        <select name="" id="">
+                            <option value="単一">単一</option>
+                            <option value="共通">共通</option>
+                            <option value="ベタ">ベタ</option>
+                            <option value="単一・共通">単一・共通</option>
+                        </select>
+                    </td>
+                    <td colspan="5">
+                        <select name="" id="">
+                            <option value="単一">単一</option>
+                            <option value="共通">共通</option>
+                            <option value="ベタ">ベタ</option>
+                            <option value="単一・共通">単一・共通</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">共通部番</td>
+                    <td colspan="5"></td>
+                    <td colspan="5"></td>
+                    <td colspan="5"></td>
+                    <td colspan="5"></td>
+                    <td colspan="5"></td>
+                    <td colspan="5"></td>
+                </tr>
+                <tr>
+                    <td colspan="4">フィルムコード</td>
+                    <td colspan="5"></td>
+                    <td colspan="5"></td>
+                    <td colspan="5"></td>
+                    <td colspan="5"></td>
+                    <td colspan="5"></td>
+                    <td colspan="5"></td>
+                </tr>
+                <tr>
+                    <td colspan="4">製版サイト</td>
+                    <td colspan="6">
+                        <select name="" id="">
+                            <option value="社内">社内</option>
+                            <option value="社外">社外</option>
+                            <option value="社内・社外">社内・社外(セ+ム)</option>
+                        </select>
+                    </td>
+                    <td colspan="6">
+                        <select name="" id="">
+                            <option value="社内">社内</option>
+                            <option value="社外">社外</option>
+                            <option value="社内・社外">社内・社外(セ+ム)</option>
+                        </select>
+                    </td>
+                    <td colspan="6">
+                        <select name="" id="">
+                            <option value="社内">社内</option>
+                            <option value="社外">社外</option>
+                            <option value="社内・社外">社内・社外(セ+ム)</option>
+                        </select>
+                    </td>
+                    <td colspan="6">
+                        <select name="" id="">
+                            <option value="社内">社内</option>
+                            <option value="社外">社外</option>
+                            <option value="社内・社外">社内・社外(セ+ム)</option>
+                        </select>
+                    </td>
+                    <td colspan="6">
+                        <select name="" id="">
+                            <option value="社内">社内</option>
+                            <option value="社外">社外</option>
+                            <option value="社内・社外">社内・社外(セ+ム)</option>
+                        </select>
+                    </td>
+                    <td colspan="6">
+                        <select name="" id="">
+                            <option value="社内">社内</option>
+                            <option value="社外">社外</option>
+                            <option value="社内・社外">社内・社外(セ+ム)</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">色</td>
+                    <td>⑦</td>
+                    <td colspan="4"></td>
+                    <td rowspan="11" style="width: 40px;">MS・LC　貼無</td>
+                    <td>⑧</td>
+                    <td colspan="4"></td>
+                    <td rowspan="11" style="width: 40px;">MS・LC　貼無</td>
+                    <td>⑨</td>
+                    <td colspan="4"></td>
+                    <td rowspan="11" style="width: 40px;">MS・LC　貼無</td>
+                    <td>⑩</td>
+                    <td colspan="4"></td>
+                    <td rowspan="11" style="width: 40px;">MS・LC　貼無</td>
+                    <td>⑪</td>
+                    <td colspan="4"></td>
+                    <td rowspan="11" style="width: 40px;">MS・LC　貼無</td>
+                    <td>⑫</td>
+                    <td colspan="4"></td>
+                    <td rowspan="11" style="width: 40px;">MS・LC　貼無</td>
+                </tr>
+                <tr>
+                    <td colspan="4">色番</td>
+                    <td colspan="5"></td>
+                    <td colspan="5"></td>
+                    <td colspan="5"></td>
+                    <td colspan="5"></td>
+                    <td colspan="5"></td>
+                    <td colspan="5"></td>
+                </tr>
+                <tr>
+                    <td colspan="4">刷面</td>
+                    <td colspan="5">
+                        <select name="" id="">
+                            <option value="-">-</option>
+                            <option value="裏">裏</option>
+                            <option value="表">表</option>
+                            <option value="裏・表">裏・表</option>
+                        </select>
+                    </td>
+                    <td colspan="5">
+                        <select name="" id="">
+                            <option value="-">-</option>
+                            <option value="裏">裏</option>
+                            <option value="表">表</option>
+                            <option value="裏・表">裏・表</option>
+                        </select>
+                    </td>
+                    <td colspan="5">
+                        <select name="" id="">
+                            <option value="-">-</option>
+                            <option value="裏">裏</option>
+                            <option value="表">表</option>
+                            <option value="裏・表">裏・表</option>
+                        </select>
+                    </td>
+                    <td colspan="5">
+                        <select name="" id="">
+                            <option value="-">-</option>
+                            <option value="裏">裏</option>
+                            <option value="表">表</option>
+                            <option value="裏・表">裏・表</option>
+                        </select>
+                    </td>
+                    <td colspan="5">
+                        <select name="" id="">
+                            <option value="-">-</option>
+                            <option value="裏">裏</option>
+                            <option value="表">表</option>
+                            <option value="裏・表">裏・表</option>
+                        </select>
+                    </td>
+                    <td colspan="5">
+                        <select name="" id="">
+                            <option value="-">-</option>
+                            <option value="裏">裏</option>
+                            <option value="表">表</option>
+                            <option value="裏・表">裏・表</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">メッシュ</td>
+                    <td ></td>
+                    <td colspan="3"></td>
+                    <td>B</td>
+                    <td ></td>
+                    <td colspan="3"></td>
+                    <td>B</td>
+                    <td ></td>
+                    <td colspan="3"></td>
+                    <td>B</td>
+                    <td ></td>
+                    <td colspan="3"></td>
+                    <td>B</td>
+                    <td ></td>
+                    <td colspan="3"></td>
+                    <td>B</td>
+                    <td ></td>
+                    <td colspan="3"></td>
+                    <td>B</td>
+                </tr>
+                <tr>
+                    <td colspan="4">角度</td>
+                    <td colspan="5"></td>
+                    <td colspan="5"></td>
+                    <td colspan="5"></td>
+                    <td colspan="5"></td>
+                    <td colspan="5"></td>
+                    <td colspan="5"></td>
+                </tr>
+                <tr>
+                    <td colspan="4">膜厚</td>
+                    <td colspan="4"></td>
+                    <td>μ</td>
+                    <td colspan="4"></td>
+                    <td>μ</td>
+                    <td colspan="4"></td>
+                    <td>μ</td>
+                    <td colspan="4"></td>
+                    <td>μ</td>
+                    <td colspan="4"></td>
+                    <td>μ</td>
+                    <td colspan="4"></td>
+                    <td>μ</td>
+                </tr>
+                <tr>
+                    <td colspan="4">露光</td>
+                    <td colspan="4"></td>
+                    <td>mj</td>
+                    <td colspan="4"></td>
+                    <td>mj</td>
+                    <td colspan="4"></td>
+                    <td>mj</td>
+                    <td colspan="4"></td>
+                    <td>mj</td>
+                    <td colspan="4"></td>
+                    <td>mj</td>
+                    <td colspan="4"></td>
+                    <td>mj</td>
+                </tr>
+                <tr>
+                    <td colspan="4">テンション</td>
+                    <td colspan="4"></td>
+                    <td>mm</td>
+                    <td colspan="4"></td>
+                    <td>mm</td>
+                    <td colspan="4"></td>
+                    <td>mm</td>
+                    <td colspan="4"></td>
+                    <td>mm</td>
+                    <td colspan="4"></td>
+                    <td>mm</td>
+                    <td colspan="4"></td>
+                    <td>mm</td>
+                </tr>
+                <tr>
+                    <td colspan="4">区分</td>
+                    <td colspan="6">
+                        <select name="" id="">
+                            <option value="単一">単一</option>
+                            <option value="共通">共通</option>
+                            <option value="ベタ">ベタ</option>
+                            <option value="単一・共通">単一・共通</option>
+                        </select>
+                    </td>
+                    <td colspan="5">
+                        <select name="" id="">
+                            <option value="単一">単一</option>
+                            <option value="共通">共通</option>
+                            <option value="ベタ">ベタ</option>
+                            <option value="単一・共通">単一・共通</option>
+                        </select>
+                    </td>
+                    <td colspan="5">
+                        <select name="" id="">
+                            <option value="単一">単一</option>
+                            <option value="共通">共通</option>
+                            <option value="ベタ">ベタ</option>
+                            <option value="単一・共通">単一・共通</option>
+                        </select>
+                    </td>
+                    <td colspan="5">
+                        <select name="" id="">
+                            <option value="単一">単一</option>
+                            <option value="共通">共通</option>
+                            <option value="ベタ">ベタ</option>
+                            <option value="単一・共通">単一・共通</option>
+                        </select>
+                    </td>
+                    <td colspan="5">
+                        <select name="" id="">
+                            <option value="単一">単一</option>
+                            <option value="共通">共通</option>
+                            <option value="ベタ">ベタ</option>
+                            <option value="単一・共通">単一・共通</option>
+                        </select>
+                    </td>
+                    <td colspan="5">
+                        <select name="" id="">
+                            <option value="単一">単一</option>
+                            <option value="共通">共通</option>
+                            <option value="ベタ">ベタ</option>
+                            <option value="単一・共通">単一・共通</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">共通部番</td>
+                    <td colspan="5"></td>
+                    <td colspan="5"></td>
+                    <td colspan="5"></td>
+                    <td colspan="5"></td>
+                    <td colspan="5"></td>
+                    <td colspan="5"></td>
+                </tr>
+                <tr>
+                    <td colspan="4">フィルムコード</td>
+                    <td colspan="5"></td>
+                    <td colspan="5"></td>
+                    <td colspan="5"></td>
+                    <td colspan="5"></td>
+                    <td colspan="5"></td>
+                    <td colspan="5"></td>
+                </tr>
+                <tr>
+                    <td colspan="4">管理ポイント</td>    
+                    <td colspan="36">
+                        <textarea name="" id="" cols="4" style="width: 100%;border: none;"></textarea>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td rowspan="48">工程情報（印刷）</td>
+                    <td rowspan="2" colspan="4">印刷</td>
+                    <td rowspan="2" colspan="5">
+                        <select name="" id="">
+                            <option value="裏">裏</option>
+                            <option value="表">表</option>
+                            <option value="両面">両面</option>
+                            <option value="裏・表・両面">裏・表・両面</option>
+                        </select>
+                    </td>
+                    <td colspan="7">インキメーカー</td>
+                    <td colspan="6">タイプ</td>
+                    <td rowspan="2" colspan="3">調色者</td>
+                    <td rowspan="2" colspan="6"></td>
+                    <td rowspan="2" colspan="3">製造月日</td>
+                    <td rowspan="2" colspan="6"></td>
+                </tr>
+                <tr>
+                    <td colspan="7">A</td>
+                    <td colspan="6">B</td>
+                </tr>
+                <tr>
+                    <td colspan="5">印刷号機</td>
+                    <td colspan="3"></td>
+                    <td colspan="2">号機</td>
+                    <td colspan="30"></td>
+                </tr>
+
+                <tr>
+                    <td colspan="4" rowspan="2">色指定</td>
+                    <td>①</td>
+                    <td colspan="2">刷面：</td>
+                    <td colspan="3">
+                        <select name="" id="">
+                            <option value="表">表</option>
+                            <option value="裏">裏</option>
+                            <option value="表・裏">表・裏</option>
+                        </select>
+                    </td>
+                    <td>②</td>
+                    <td colspan="2">刷面：</td>
+                    <td colspan="3">
+                        <select name="" id="">
+                            <option value="表">表</option>
+                            <option value="裏">裏</option>
+                            <option value="表・裏">表・裏</option>
+                        </select>
+                    </td>
+                    <td>③</td>
+                    <td colspan="2">刷面：</td>
+                    <td colspan="3">
+                        <select name="" id="">
+                            <option value="表">表</option>
+                            <option value="裏">裏</option>
+                            <option value="表・裏">表・裏</option>
+                        </select>
+                    </td>
+                    <td>④</td>
+                    <td colspan="2">刷面：</td>
+                    <td colspan="3">
+                        <select name="" id="">
+                            <option value="表">表</option>
+                            <option value="裏">裏</option>
+                            <option value="表・裏">表・裏</option>
+                        </select>
+                    </td>
+                    <td>⑤</td>
+                    <td colspan="2">刷面：</td>
+                    <td colspan="3">
+                        <select name="" id="">
+                            <option value="表">表</option>
+                            <option value="裏">裏</option>
+                            <option value="表・裏">表・裏</option>
+                        </select>
+                    </td>
+                    <td>⑥</td>
+                    <td colspan="2">刷面：</td>
+                    <td colspan="3">
+                        <select name="" id="">
+                            <option value="表">表</option>
+                            <option value="裏">裏</option>
+                            <option value="表・裏">表・裏</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">刷面M/S色</td>
+                    <td colspan="3"></td>
+                    <td colspan="3">刷面M/S色</td>
+                    <td colspan="3"></td>
+                    <td colspan="3">刷面M/S色</td>
+                    <td colspan="3"></td>
+                    <td colspan="3">刷面M/S色</td>
+                    <td colspan="3"></td>
+                    <td colspan="3">刷面M/S色</td>
+                    <td colspan="3"></td>
+                    <td colspan="3">刷面M/S色</td>
+                    <td colspan="3"></td> 
+                </tr>
+                <tr>
+                    <td colspan="4">色 名</td>
+                    <td colspan="6"></td>
+                    <td colspan="6"></td>
+                    <td colspan="6"></td>
+                    <td colspan="6"></td>
+                    <td colspan="6"></td>
+                    <td colspan="6"></td>
+                </tr>
+                <tr>
+                    <td colspan="4" rowspan="9">調色比率</td>
+                    <td colspan="3">インキ</td>
+                    <td colspan="3">
+                        <select name="" id="">
+                            <option value="g">g</option>
+                            <option value="%">%</option>
+                            <option value="-">-</option>
+                        </select>
+                    </td>
+                    <td colspan="3">インキ</td>
+                    <td colspan="3">
+                        <select name="" id="">
+                            <option value="g">g</option>
+                            <option value="%">%</option>
+                            <option value="-">-</option>
+                        </select>
+                    </td>
+                    <td colspan="3">インキ</td>
+                    <td colspan="3">
+                        <select name="" id="">
+                            <option value="g">g</option>
+                            <option value="%">%</option>
+                            <option value="-">-</option>
+                        </select>
+                    </td>
+                    <td colspan="3">インキ</td>
+                    <td colspan="3">
+                        <select name="" id="">
+                            <option value="g">g</option>
+                            <option value="%">%</option>
+                            <option value="-">-</option>
+                        </select>
+                    </td>
+                    <td colspan="3">インキ</td>
+                    <td colspan="3">
+                        <select name="" id="">
+                            <option value="g">g</option>
+                            <option value="%">%</option>
+                            <option value="-">-</option>
+                        </select>
+                    </td>
+                    <td colspan="3">インキ</td>
+                    <td colspan="3">
+                        <select name="" id="">
+                            <option value="g">g</option>
+                            <option value="%">%</option>
+                            <option value="-">-</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">A</td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                </tr>
+                <tr>
+                    <td colspan="3">A</td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                </tr>
+                <tr>
+                    <td colspan="3">A</td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                </tr>
+                <tr>
+                    <td colspan="3">A</td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                </tr>
+                <tr>
+                    <td colspan="3">A</td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                </tr>
+
+                <tr>
+                    <td colspan="3">A</td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                </tr>
+                <tr>
+                    <td colspan="2">溶</td>
+                    <td colspan="3"></td>
+                    <td>%</td>
+                    <td colspan="2">溶</td>
+                    <td colspan="3"></td>
+                    <td>%</td>
+                    <td colspan="2">溶</td>
+                    <td colspan="3"></td>
+                    <td>%</td>
+                    <td colspan="2">溶</td>
+                    <td colspan="3"></td>
+                    <td>%</td>
+                    <td colspan="2">溶</td>
+                    <td colspan="3"></td>
+                    <td>%</td>
+                    <td colspan="2">溶</td>
+                    <td colspan="3"></td>
+                    <td>%</td>
+                </tr>
+                <tr>
+                    <td colspan="2">便</td>
+                    <td colspan="3"></td>
+                    <td>%</td>
+                    <td colspan="2">便</td>
+                    <td colspan="3"></td>
+                    <td>%</td>
+                    <td colspan="2">便</td>
+                    <td colspan="3"></td>
+                    <td>%</td>
+                    <td colspan="2">便</td>
+                    <td colspan="3"></td>
+                    <td>%</td>
+                    <td colspan="2">便</td>
+                    <td colspan="3"></td>
+                    <td>%</td>
+                    <td colspan="2">便</td>
+                    <td colspan="3"></td>
+                    <td>%</td>
+                </tr>
+                <tr>
+                    <td colspan="4">版洗枚数/乾燥時間</td>
+                    <td></td>
+                    <td>枚</td>
+                    <td></td>
+                    <td>℃</td>
+                    <td></td>
+                    <td>分</td>
+
+                    <td></td>
+                    <td>枚</td>
+                    <td></td>
+                    <td>℃</td>
+                    <td></td>
+                    <td>分</td>
+
+                    <td></td>
+                    <td>枚</td>
+                    <td></td>
+                    <td>℃</td>
+                    <td></td>
+                    <td>分</td>
+
+                    <td></td>
+                    <td>枚</td>
+                    <td></td>
+                    <td>℃</td>
+                    <td></td>
+                    <td>分</td>
+
+                    <td></td>
+                    <td>枚</td>
+                    <td></td>
+                    <td>℃</td>
+                    <td></td>
+                    <td>分</td>
+
+                    <td></td>
+                    <td>枚</td>
+                    <td></td>
+                    <td>℃</td>
+                    <td></td>
+                    <td>分</td>
+                </tr>
+                <tr>
+                    <td colspan="4">ｽｷｰｼﾞ硬度・角度・切れ</td>
+                    <td>(</td>
+                    <td></td>
+                    <td>)</td>
+                    <td></td>
+                    <td>°</td>
+                    <td>
+                        <select name="" id="">
+                            <option value="切">切</option>
+                            <option value="標">標</option>
+                            <option value="丸">丸</option>
+                            <option value="‐">‐</option>
+                            <option value="切・標・丸">切・標・丸</option>
+                        </select>
+                    </td>
+                    <td>(</td>
+                    <td></td>
+                    <td>)</td>
+                    <td></td>
+                    <td>°</td>
+                    <td>
+                        <select name="" id="">
+                            <option value="切">切</option>
+                            <option value="標">標</option>
+                            <option value="丸">丸</option>
+                            <option value="‐">‐</option>
+                            <option value="切・標・丸">切・標・丸</option>
+                        </select>
+                    </td>
+                    <td>(</td>
+                    <td></td>
+                    <td>)</td>
+                    <td></td>
+                    <td>°</td>
+                    <td>
+                        <select name="" id="">
+                            <option value="切">切</option>
+                            <option value="標">標</option>
+                            <option value="丸">丸</option>
+                            <option value="‐">‐</option>
+                            <option value="切・標・丸">切・標・丸</option>
+                        </select>
+                    </td>
+                    <td>(</td>
+                    <td></td>
+                    <td>)</td>
+                    <td></td>
+                    <td>°</td>
+                    <td>
+                        <select name="" id="">
+                            <option value="切">切</option>
+                            <option value="標">標</option>
+                            <option value="丸">丸</option>
+                            <option value="‐">‐</option>
+                            <option value="切・標・丸">切・標・丸</option>
+                        </select>
+                    </td>
+                    <td>(</td>
+                    <td></td>
+                    <td>)</td>
+                    <td></td>
+                    <td>°</td>
+                    <td>
+                        <select name="" id="">
+                            <option value="切">切</option>
+                            <option value="標">標</option>
+                            <option value="丸">丸</option>
+                            <option value="‐">‐</option>
+                            <option value="切・標・丸">切・標・丸</option>
+                        </select>
+                    </td>
+                    <td>(</td>
+                    <td></td>
+                    <td>)</td>
+                    <td></td>
+                    <td>°</td>
+                    <td>
+                        <select name="" id="">
+                            <option value="切">切</option>
+                            <option value="標">標</option>
+                            <option value="丸">丸</option>
+                            <option value="‐">‐</option>
+                            <option value="切・標・丸">切・標・丸</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">ｸﾘｱﾗﾝｽ</td>
+                    <td colspan="4"></td>
+                    <td colspan="2">mm</td>
+                    <td colspan="4"></td>
+                    <td colspan="2">mm</td>
+                    <td colspan="4"></td>
+                    <td colspan="2">mm</td>
+                    <td colspan="4"></td>
+                    <td colspan="2">mm</td>
+                    <td colspan="4"></td>
+                    <td colspan="2">mm</td>
+                    <td colspan="4"></td>
+                    <td colspan="2">mm</td>
+                </tr>
+                <tr>
+                    <td colspan="4">ｵﾌｺﾝ</td>
+                    <td colspan="4"></td>
+                    <td colspan="2">mm</td>
+                    <td colspan="4"></td>
+                    <td colspan="2">mm</td>
+                    <td colspan="4"></td>
+                    <td colspan="2">mm</td>
+                    <td colspan="4"></td>
+                    <td colspan="2">mm</td>
+                    <td colspan="4"></td>
+                    <td colspan="2">mm</td>
+                    <td colspan="4"></td>
+                    <td colspan="2">mm</td>
+                </tr>
+                <tr>
+                    <td colspan="4">ｽｷｰｼﾞｽﾋﾟｰﾄﾞ</td>
+                    <td colspan="6"></td>
+                    <td colspan="6"></td>
+                    <td colspan="6"></td>
+                    <td colspan="6"></td>
+                    <td colspan="6"></td>
+                    <td colspan="6"></td>
+                </tr>
+                <tr>
+                    <td colspan="4">ｺｰﾄｽﾋﾟｰﾄﾞ</td>
+                    <td colspan="6"></td>
+                    <td colspan="6"></td>
+                    <td colspan="6"></td>
+                    <td colspan="6"></td>
+                    <td colspan="6"></td>
+                    <td colspan="6"></td>
+                </tr>
+                <tr>
+                    <td colspan="4">スキージ印圧</td>
+                    <td colspan="4"></td>
+                    <td colspan="2">
+                        <select name="" id="">
+                            <option value="mpa">mpa</option>
+                            <option value="kg">kg</option>
+                            <option value="-">-</option>
+                        </select>
+                    </td>
+                    <td colspan="4"></td>
+                    <td colspan="2">
+                        <select name="" id="">
+                            <option value="mpa">mpa</option>
+                            <option value="kg">kg</option>
+                            <option value="-">-</option>
+                        </select>
+                    </td>
+                    <td colspan="4"></td>
+                    <td colspan="2">
+                        <select name="" id="">
+                            <option value="mpa">mpa</option>
+                            <option value="kg">kg</option>
+                            <option value="-">-</option>
+                        </select>
+                    </td>
+                    <td colspan="4"></td>
+                    <td colspan="2">
+                        <select name="" id="">
+                            <option value="mpa">mpa</option>
+                            <option value="kg">kg</option>
+                            <option value="-">-</option>
+                        </select>
+                    </td>
+                    <td colspan="4"></td>
+                    <td colspan="2">
+                        <select name="" id="">
+                            <option value="mpa">mpa</option>
+                            <option value="kg">kg</option>
+                            <option value="-">-</option>
+                        </select>
+                    </td>
+                    <td colspan="4"></td>
+                    <td colspan="2">
+                        <select name="" id="">
+                            <option value="mpa">mpa</option>
+                            <option value="kg">kg</option>
+                            <option value="-">-</option>
+                        </select>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td colspan="4">ｽｷｰｼﾞ押込量</td>
+                    <td colspan="6"></td>
+                    <td colspan="6"></td>
+                    <td colspan="6"></td>
+                    <td colspan="6"></td>
+                    <td colspan="6"></td>
+                    <td colspan="6"></td>
+                </tr>
+                <tr>
+                    <td colspan="4">1ｓ/ｲﾝｷ量</td>
+                    <td colspan="4"></td>
+                    <td colspan="2">g</td>
+                    <td colspan="4"></td>
+                    <td colspan="2">g</td>
+                    <td colspan="4"></td>
+                    <td colspan="2">g</td>
+                    <td colspan="4"></td>
+                    <td colspan="2">g</td>
+                    <td colspan="4"></td>
+                    <td colspan="2">g</td>
+                    <td colspan="4"></td>
+                    <td colspan="2">g</td>
+                </tr>
+                <tr>
+                    <td colspan="4" rowspan="2">色指定</td>
+                    <td>⑦</td>
+                    <td colspan="2">刷面：</td>
+                    <td colspan="3">
+                        <select name="" id="">
+                            <option value="表">表</option>
+                            <option value="裏">裏</option>
+                            <option value="表・裏">表・裏</option>
+                        </select>
+                    </td>
+                    <td>⑧</td>
+                    <td colspan="2">刷面：</td>
+                    <td colspan="3">
+                        <select name="" id="">
+                            <option value="表">表</option>
+                            <option value="裏">裏</option>
+                            <option value="表・裏">表・裏</option>
+                        </select>
+                    </td>
+                    <td>⑨</td>
+                    <td colspan="2">刷面：</td>
+                    <td colspan="3">
+                        <select name="" id="">
+                            <option value="表">表</option>
+                            <option value="裏">裏</option>
+                            <option value="表・裏">表・裏</option>
+                        </select>
+                    </td>
+                    <td>⑩</td>
+                    <td colspan="2">刷面：</td>
+                    <td colspan="3">
+                        <select name="" id="">
+                            <option value="表">表</option>
+                            <option value="裏">裏</option>
+                            <option value="表・裏">表・裏</option>
+                        </select>
+                    </td>
+                    <td>⑪</td>
+                    <td colspan="2">刷面：</td>
+                    <td colspan="3">
+                        <select name="" id="">
+                            <option value="表">表</option>
+                            <option value="裏">裏</option>
+                            <option value="表・裏">表・裏</option>
+                        </select>
+                    </td>
+                    <td>⑫</td>
+                    <td colspan="2">刷面：</td>
+                    <td colspan="3">
+                        <select name="" id="">
+                            <option value="表">表</option>
+                            <option value="裏">裏</option>
+                            <option value="表・裏">表・裏</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">刷面M/S色</td>
+                    <td colspan="3"></td>
+                    <td colspan="3">刷面M/S色</td>
+                    <td colspan="3"></td>
+                    <td colspan="3">刷面M/S色</td>
+                    <td colspan="3"></td>
+                    <td colspan="3">刷面M/S色</td>
+                    <td colspan="3"></td>
+                    <td colspan="3">刷面M/S色</td>
+                    <td colspan="3"></td>
+                    <td colspan="3">刷面M/S色</td>
+                    <td colspan="3"></td> 
+                </tr>
+                <tr>
+                    <td colspan="4">色 名</td>
+                    <td colspan="6"></td>
+                    <td colspan="6"></td>
+                    <td colspan="6"></td>
+                    <td colspan="6"></td>
+                    <td colspan="6"></td>
+                    <td colspan="6"></td>
+                </tr>
+                <tr>
+                    <td colspan="4" rowspan="9">調色比率</td>
+                    <td colspan="3">インキ</td>
+                    <td colspan="3">
+                        <select name="" id="">
+                            <option value="g">g</option>
+                            <option value="%">%</option>
+                            <option value="-">-</option>
+                        </select>
+                    </td>
+                    <td colspan="3">インキ</td>
+                    <td colspan="3">
+                        <select name="" id="">
+                            <option value="g">g</option>
+                            <option value="%">%</option>
+                            <option value="-">-</option>
+                        </select>
+                    </td>
+                    <td colspan="3">インキ</td>
+                    <td colspan="3">
+                        <select name="" id="">
+                            <option value="g">g</option>
+                            <option value="%">%</option>
+                            <option value="-">-</option>
+                        </select>
+                    </td>
+                    <td colspan="3">インキ</td>
+                    <td colspan="3">
+                        <select name="" id="">
+                            <option value="g">g</option>
+                            <option value="%">%</option>
+                            <option value="-">-</option>
+                        </select>
+                    </td>
+                    <td colspan="3">インキ</td>
+                    <td colspan="3">
+                        <select name="" id="">
+                            <option value="g">g</option>
+                            <option value="%">%</option>
+                            <option value="-">-</option>
+                        </select>
+                    </td>
+                    <td colspan="3">インキ</td>
+                    <td colspan="3">
+                        <select name="" id="">
+                            <option value="g">g</option>
+                            <option value="%">%</option>
+                            <option value="-">-</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">A</td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                </tr>
+                <tr>
+                    <td colspan="3">A</td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                </tr>
+                <tr>
+                    <td colspan="3">A</td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                </tr>
+                <tr>
+                    <td colspan="3">A</td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                </tr>
+                <tr>
+                    <td colspan="3">A</td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                </tr>
+
+                <tr>
+                    <td colspan="3">A</td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                    <td colspan="3"></td>
+                </tr>
+                <tr>
+                    <td colspan="2">溶</td>
+                    <td colspan="3"></td>
+                    <td>%</td>
+                    <td colspan="2">溶</td>
+                    <td colspan="3"></td>
+                    <td>%</td>
+                    <td colspan="2">溶</td>
+                    <td colspan="3"></td>
+                    <td>%</td>
+                    <td colspan="2">溶</td>
+                    <td colspan="3"></td>
+                    <td>%</td>
+                    <td colspan="2">溶</td>
+                    <td colspan="3"></td>
+                    <td>%</td>
+                    <td colspan="2">溶</td>
+                    <td colspan="3"></td>
+                    <td>%</td>
+                </tr>
+                <tr>
+                    <td colspan="2">便</td>
+                    <td colspan="3"></td>
+                    <td>%</td>
+                    <td colspan="2">便</td>
+                    <td colspan="3"></td>
+                    <td>%</td>
+                    <td colspan="2">便</td>
+                    <td colspan="3"></td>
+                    <td>%</td>
+                    <td colspan="2">便</td>
+                    <td colspan="3"></td>
+                    <td>%</td>
+                    <td colspan="2">便</td>
+                    <td colspan="3"></td>
+                    <td>%</td>
+                    <td colspan="2">便</td>
+                    <td colspan="3"></td>
+                    <td>%</td>
+                </tr>
+                <tr>
+                    <td colspan="4">版洗枚数/乾燥時間</td>
+                    <td></td>
+                    <td>枚</td>
+                    <td></td>
+                    <td>℃</td>
+                    <td></td>
+                    <td>分</td>
+
+                    <td></td>
+                    <td>枚</td>
+                    <td></td>
+                    <td>℃</td>
+                    <td></td>
+                    <td>分</td>
+
+                    <td></td>
+                    <td>枚</td>
+                    <td></td>
+                    <td>℃</td>
+                    <td></td>
+                    <td>分</td>
+
+                    <td></td>
+                    <td>枚</td>
+                    <td></td>
+                    <td>℃</td>
+                    <td></td>
+                    <td>分</td>
+
+                    <td></td>
+                    <td>枚</td>
+                    <td></td>
+                    <td>℃</td>
+                    <td></td>
+                    <td>分</td>
+
+                    <td></td>
+                    <td>枚</td>
+                    <td></td>
+                    <td>℃</td>
+                    <td></td>
+                    <td>分</td>
+                </tr>
+                <tr>
+                    <td colspan="4">ｽｷｰｼﾞ硬度・角度・切れ</td>
+                    <td>(</td>
+                    <td></td>
+                    <td>)</td>
+                    <td></td>
+                    <td>°</td>
+                    <td>
+                        <select name="" id="">
+                            <option value="切">切</option>
+                            <option value="標">標</option>
+                            <option value="丸">丸</option>
+                            <option value="‐">‐</option>
+                            <option value="切・標・丸">切・標・丸</option>
+                        </select>
+                    </td>
+                    <td>(</td>
+                    <td></td>
+                    <td>)</td>
+                    <td></td>
+                    <td>°</td>
+                    <td>
+                        <select name="" id="">
+                            <option value="切">切</option>
+                            <option value="標">標</option>
+                            <option value="丸">丸</option>
+                            <option value="‐">‐</option>
+                            <option value="切・標・丸">切・標・丸</option>
+                        </select>
+                    </td>
+                    <td>(</td>
+                    <td></td>
+                    <td>)</td>
+                    <td></td>
+                    <td>°</td>
+                    <td>
+                        <select name="" id="">
+                            <option value="切">切</option>
+                            <option value="標">標</option>
+                            <option value="丸">丸</option>
+                            <option value="‐">‐</option>
+                            <option value="切・標・丸">切・標・丸</option>
+                        </select>
+                    </td>
+                    <td>(</td>
+                    <td></td>
+                    <td>)</td>
+                    <td></td>
+                    <td>°</td>
+                    <td>
+                        <select name="" id="">
+                            <option value="切">切</option>
+                            <option value="標">標</option>
+                            <option value="丸">丸</option>
+                            <option value="‐">‐</option>
+                            <option value="切・標・丸">切・標・丸</option>
+                        </select>
+                    </td>
+                    <td>(</td>
+                    <td></td>
+                    <td>)</td>
+                    <td></td>
+                    <td>°</td>
+                    <td>
+                        <select name="" id="">
+                            <option value="切">切</option>
+                            <option value="標">標</option>
+                            <option value="丸">丸</option>
+                            <option value="‐">‐</option>
+                            <option value="切・標・丸">切・標・丸</option>
+                        </select>
+                    </td>
+                    <td>(</td>
+                    <td></td>
+                    <td>)</td>
+                    <td></td>
+                    <td>°</td>
+                    <td>
+                        <select name="" id="">
+                            <option value="切">切</option>
+                            <option value="標">標</option>
+                            <option value="丸">丸</option>
+                            <option value="‐">‐</option>
+                            <option value="切・標・丸">切・標・丸</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">ｸﾘｱﾗﾝｽ</td>
+                    <td colspan="4"></td>
+                    <td colspan="2">mm</td>
+                    <td colspan="4"></td>
+                    <td colspan="2">mm</td>
+                    <td colspan="4"></td>
+                    <td colspan="2">mm</td>
+                    <td colspan="4"></td>
+                    <td colspan="2">mm</td>
+                    <td colspan="4"></td>
+                    <td colspan="2">mm</td>
+                    <td colspan="4"></td>
+                    <td colspan="2">mm</td>
+                </tr>
+                <tr>
+                    <td colspan="4">ｵﾌｺﾝ</td>
+                    <td colspan="4"></td>
+                    <td colspan="2">mm</td>
+                    <td colspan="4"></td>
+                    <td colspan="2">mm</td>
+                    <td colspan="4"></td>
+                    <td colspan="2">mm</td>
+                    <td colspan="4"></td>
+                    <td colspan="2">mm</td>
+                    <td colspan="4"></td>
+                    <td colspan="2">mm</td>
+                    <td colspan="4"></td>
+                    <td colspan="2">mm</td>
+                </tr>
+                <tr>
+                    <td colspan="4">ｽｷｰｼﾞｽﾋﾟｰﾄﾞ</td>
+                    <td colspan="6"></td>
+                    <td colspan="6"></td>
+                    <td colspan="6"></td>
+                    <td colspan="6"></td>
+                    <td colspan="6"></td>
+                    <td colspan="6"></td>
+                </tr>
+                <tr>
+                    <td colspan="4">ｺｰﾄｽﾋﾟｰﾄﾞ</td>
+                    <td colspan="6"></td>
+                    <td colspan="6"></td>
+                    <td colspan="6"></td>
+                    <td colspan="6"></td>
+                    <td colspan="6"></td>
+                    <td colspan="6"></td>
+                </tr>
+                <tr>
+                    <td colspan="4">スキージ印圧</td>
+                    <td colspan="4"></td>
+                    <td colspan="2">
+                        <select name="" id="">
+                            <option value="mpa">mpa</option>
+                            <option value="kg">kg</option>
+                            <option value="-">-</option>
+                        </select>
+                    </td>
+                    <td colspan="4"></td>
+                    <td colspan="2">
+                        <select name="" id="">
+                            <option value="mpa">mpa</option>
+                            <option value="kg">kg</option>
+                            <option value="-">-</option>
+                        </select>
+                    </td>
+                    <td colspan="4"></td>
+                    <td colspan="2">
+                        <select name="" id="">
+                            <option value="mpa">mpa</option>
+                            <option value="kg">kg</option>
+                            <option value="-">-</option>
+                        </select>
+                    </td>
+                    <td colspan="4"></td>
+                    <td colspan="2">
+                        <select name="" id="">
+                            <option value="mpa">mpa</option>
+                            <option value="kg">kg</option>
+                            <option value="-">-</option>
+                        </select>
+                    </td>
+                    <td colspan="4"></td>
+                    <td colspan="2">
+                        <select name="" id="">
+                            <option value="mpa">mpa</option>
+                            <option value="kg">kg</option>
+                            <option value="-">-</option>
+                        </select>
+                    </td>
+                    <td colspan="4"></td>
+                    <td colspan="2">
+                        <select name="" id="">
+                            <option value="mpa">mpa</option>
+                            <option value="kg">kg</option>
+                            <option value="-">-</option>
+                        </select>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td colspan="4">ｽｷｰｼﾞ押込量</td>
+                    <td colspan="6"></td>
+                    <td colspan="6"></td>
+                    <td colspan="6"></td>
+                    <td colspan="6"></td>
+                    <td colspan="6"></td>
+                    <td colspan="6"></td>
+                </tr>
+                <tr>
+                    <td colspan="4">1ｓ/ｲﾝｷ量</td>
+                    <td colspan="4"></td>
+                    <td colspan="2">g</td>
+                    <td colspan="4"></td>
+                    <td colspan="2">g</td>
+                    <td colspan="4"></td>
+                    <td colspan="2">g</td>
+                    <td colspan="4"></td>
+                    <td colspan="2">g</td>
+                    <td colspan="4"></td>
+                    <td colspan="2">g</td>
+                    <td colspan="4"></td>
+                    <td colspan="2">g</td>
+                </tr>
+                <tr>
+                    <td colspan="40">UV</td>
+                </tr>
+                <tr>
+                    <td colspan="3">ランプ</td>
+                    <td colspan="7">  ハーフ ・ フル</td>
+                    <td colspan="2"></td>
+                    <td>灯</td>
+                    <td colspan="5">ランプ高さ</td>
+                    <td colspan="2"></td>
+                    <td>cm</td>
+                    <td colspan="5">ベルトスピード</td>
+                    <td colspan="2"></td>
+                    <td>m</td>
+                    <td colspan="6">チヂミランプ</td>
+                    <td colspan="2">2・3</td>
+                    <td colspan="2"></td>
+                    <td>灯</td>
+
+                </tr>
+                <tr>
+                    <td colspan="4">管理ポイント</td>    
+                    <td colspan="36">
+                        <textarea name="" id="" cols="4" style="width: 100%;border: none;"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="6">得意先名</td>
+                    <td colspan="6"></td>
+                    <td colspan="6">部品番号</td>
+                    <td colspan="6"></td>
+                    <td colspan="6">部品名称</td>
+                    <td colspan="11"></td>
+
+                </tr>
+                <tr>
+                    <td rowspan="22">工程情報（加工）</td>
+                    <td colspan="40">＜ 加　　工 ＞</td>
+                </tr>
+                <tr>
+                    <td colspan="4" rowspan="2">
+                        <select name="" id="">
+                            <option value="□">□</option>
+                            <option value="■">■</option>
+                        </select>
+                    </td>
+                    <td colspan="8">
+                        ビ ク 抜 き 加 工
+                    </td>
+                    <td colspan="10" >
+                        <select name="" id="">
+                            <option value="■全抜き">■全抜き</option>
+                            <option value="■半抜き">■半抜き</option>
+                        </select>
+                    </td>
+                    <td colspan="5">抜き仕様</td>
+                    <td colspan="3"></td>
+                    <td colspan="2">面</td>
+                    <td colspan="2">x</td>
+                    <td colspan="3"></td>
+                    <td colspan="3">回送り</td>
+                </tr>
+                <tr>
+
+                    <td colspan="8">
+                        抜 き 型 共 通 部 番 有 無
+                    </td>
+                    <td colspan="10" >
+                        <select name="" id="">
+                            <option value="■有">■有</option>
+                            <option value="■無">■無</option>
+                        </select>
+                    </td>
+                    <td colspan="5">抜き時 備考：</td>
+                    <td colspan="13"></td>
+
+                </tr>
+                <tr>
+                    <td colspan="4" rowspan="3">
+                        <select name="" id="">
+                            <option value="□">□</option>
+                            <option value="■">■</option>
+                        </select>
+                    </td>
+                    <td   colspan="8" rowspan="3">M / S 加 工</td>
+                    <td colspan="3">仕入先</td>
+                    <td colspan="7"></td>
+                    <td colspan="5">材 料 名</td>
+                    <td colspan="13"></td>
+                </tr>
+                <tr>
+                    <td colspan="3">材料サイズ</td>
+                    <td colspan="7">x</td>
+
+                    <td colspan="5">材 厚</td>
+                    <td colspan="13"></td>
+                </tr>
+                <tr>
+                    <td colspan="3">貼 面</td>
+                    <td colspan="7">
+                        <select name="" id="">
+                            <option value="■表面"></option>
+                            <option value="■裏面"></option>
+                            <option value="■裏面・表面"></option>
+                        </select>
+                    </td>
+
+                    <td colspan="5">M/S 色</td>
+                    <td colspan="13"></td>
+                </tr>
+                <tr>
+                    <td colspan="4" rowspan="2">
+                        <select name="" id="">
+                            <option value="□">□</option>
+                            <option value="■">■</option>
+                        </select>
+                    </td>
+                    <td   colspan="8" rowspan="2">L / C 加 工</td>
+                    <td colspan="3">仕入先</td>
+                    <td colspan="7"></td>
+                    <td colspan="5">材 料 名</td>
+                    <td colspan="13"></td>
+                </tr>
+                <tr>
+                    <td colspan="3">材料サイズ</td>
+                    <td colspan="7">x</td>
+
+                    <td colspan="5">材 厚</td>
+                    <td colspan="13"></td>
+                </tr>
+
+                <tr>
+                    <td colspan="4" rowspan="2">
+                        <select name="" id="">
+                            <option value="□">□</option>
+                            <option value="■">■</option>
+                        </select>
+                    </td>
+                    <td   colspan="8" rowspan="2">W / F 加 工</td>
+                    <td colspan="3">仕入先</td>
+                    <td colspan="7"></td>
+                    <td colspan="5">材 料 名</td>
+                    <td colspan="13"></td>
+                </tr>
+                <tr>
+                    <td colspan="3">材料サイズ</td>
+                    <td colspan="7">x</td>
+
+                    <td colspan="5">材 厚</td>
+                    <td colspan="13"></td>
+                </tr>
+                
+                <tr>
+                    <td colspan="4" rowspan="2">
+                        <select name="" id="">
+                            <option value="□">□</option>
+                            <option value="■">■</option>
+                        </select>
+                    </td>
+                    <td   colspan="8" rowspan="2">セパレータ 加 工</td>
+                    <td colspan="3">仕入先</td>
+                    <td colspan="7"></td>
+                    <td colspan="5">材 料 名</td>
+                    <td colspan="13"></td>
+                </tr>
+                <tr>
+                    <td colspan="3">材料サイズ</td>
+                    <td colspan="7">x</td>
+
+                    <td colspan="5">材 厚</td>
+                    <td colspan="13"></td>
+                </tr>
+
+                <tr>
+                    <td colspan="4" >
+                        <select name="" id="">
+                            <option value="□">□</option>
+                            <option value="■">■</option>
+                        </select>
+                    </td>
+                    <td   colspan="8" >ス リ ッ タ ー 加 工</td>
+                    <td colspan="28"></td>
+
+                </tr>
+
+                <tr>
+                    <td colspan="4" >
+                        <select name="" id="">
+                            <option value="□">□</option>
+                            <option value="■">■</option>
+                        </select>
+                    </td>
+                    <td   colspan="8" >カ ス 取 り、バラシ（はずし）</td>
+                    <td colspan="28"></td>
+
+                </tr>
+                <tr>
+                    <td colspan="4" >
+                        <select name="" id="">
+                            <option value="□">□</option>
+                            <option value="■">■</option>
+                        </select>
+                    </td>
+                    <td   colspan="8" >断　裁</td>
+                    <td   colspan="8" >断 裁 方 法※含むコーナーカット</td>
+                    <td colspan="20"></td>
+                </tr>
+                <tr>
+                    <td colspan="4" rowspan="2" >
+                        <select name="" id="">
+                            <option value="□">□</option>
+                            <option value="■">■</option>
+                        </select>
+                    </td>
+                    <td   colspan="8"  rowspan="2">パ ス タ 加 工</td>
+                    <td   colspan="3" >速 度</td>
+                    <td   colspan="4" ></td>
+                    <td   colspan="3" >m / sec</td>
+                    <td colspan="8">釜 温 度</td>
+                    <td colspan="8"></td>
+                    <td colspan="2">℃</td>
+                </tr>
+                <tr>
+                    <td   colspan="3" >パスタ液温度</td>
+                    <td   colspan="4" ></td>
+                    <td   colspan="3" >℃</td>
+                    <td colspan="18"></td>
+                </tr>
+
+                <tr>
+                    <td colspan="4" rowspan="5" >
+                        <select name="" id="">
+                            <option value="□">□</option>
+                            <option value="■">■</option>
+                        </select>
+                    </td>
+                    <td   colspan="8"  rowspan="5">ポ ッ テ ィ ン グ 加 工</td>
+                    <td   colspan="3" >① 樹脂使用量/個</td>
+                    <td   colspan="4" ></td>
+                    <td   colspan="3" >mm</td>
+                    <td colspan="8">⑥ 治具</td>
+                    <td colspan="10"></td>
+                </tr>
+                <tr>
+                    <td   colspan="3" >② 厚 さ</td>
+                    <td   colspan="4" ></td>
+                    <td   colspan="3" >g</td>
+                    <td colspan="8">⑦ ノ ズ ル 数</td>
+                    <td colspan="8"></td>
+                    <td colspan="2">本</td>
+                </tr>
+                <tr>
+                    <td   colspan="3" >③ 樹 脂 目 盛</td>
+                    <td   colspan="7" ></td>
+                    <td colspan="8" rowspan="3">⑧ 自 動 設 定 値</td>
+                    <td colspan="3" rowspan="3">①<br>②<br>③</td>
+                    <td colspan="7" rowspan="3"></td>
+                </tr>
+                <tr>
+                    <td   colspan="3" >④ ミ キ サ ー</td>
+                    <td   colspan="7" ></td>
+                </tr>
+                <tr>
+                    <td   colspan="3" >⑤ 作 動 方 法</td>
+                    <td   colspan="7" ></td>
+                </tr>
+
+
+                <tr>
+                    <td colspan="42">＜ 出　　荷 ）</td>
+                </tr>
+                <tr>
+                    <td rowspan="8">出荷情報（加工）</td>
+                    <td colspan="8"> 出 荷 区 分</td>
+                    <td colspan="6">
+                        <select name="" id="">
+                            <option value="□工場出荷">□ 工場出荷</option>
+                            <option value="■工場出荷">■ 工場出荷</option>
+                        </select>
+                    </td>
+                    <td colspan="8">
+                        <select name="" id="">
+                            <option value="□本社出荷">□ 本社出荷</option>
+                            <option value="■本社出荷">■ 本社出荷</option>
+                        </select>
+                    </td>
+                    <td colspan="8">
+                        <select name="" id="">
+                            <option value="□外注先出荷">□ 外注先出荷</option>
+                            <option value="■外注先出荷">■ 外注先出荷</option>
+                        </select>
+                    </td>
+                    <td colspan="5">外注先名</td>
+                    <td colspan="5"></td>
+                </tr>
+                <tr>
+                    <td colspan="8"> 梱 包 仕 様</td>
+                    <td colspan="14">
+                        <select name="" id="">
+                            <option value="□梱包仕様書による">□ 梱包仕様書による</option>
+                            <option value="■梱包仕様書による">■ 梱包仕様書による</option>
+                        </select>
+                    </td>
+                    <td colspan="18">
+                        <select name="" id="">
+                            <option value="□社内仕様　/　得意先指定無">□ 社内仕様　/　得意先指定無</option>
+                            <option value="■社内仕様　/　得意先指定無">■ 社内仕様　/　得意先指定無</option>
+                        </select>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td colspan="8"> 外 箱 仕 様</td>
+                    <td colspan="8">
+                        <select name="" id="">
+                            <option value="□ダンボール箱">□ ダンボール箱</option>
+                            <option value="■ダンボール箱">■ ダンボール箱</option>
+                        </select>
+                    </td>
+                    <td colspan="2">No.</td>
+                    <td colspan="4"></td>
+                    <td colspan="18">
+                        <select name="" id="">
+                            <option value="□その他">□ その他</option>
+                            <option value="■その他">■ その他</option>
+                        </select>
+                    </td>
+                <tr>
+                    <td colspan="8"> 内 梱 包</td>
+                    <td colspan="8">
+                        <select name="" id="">
+                            <option value="□ビニール袋">□ ビニール袋</option>
+                            <option value="■ビニール袋">■ ビニール袋</option>
+                        </select>
+                    </td>
+                    <td colspan="2">No.</td>
+                    <td colspan="4"></td>
+                    <td colspan="9">
+                        <select name="" id="">
+                            <option value="□専用箱">□ 専用箱</option>
+                            <option value="■専用箱">■ 専用箱</option>
+                        </select>
+                    </td>
+                    <td colspan="9">
+                        <select name="" id="">
+                            <option value="□その他">□ その他</option>
+                            <option value="■その他">■ その他</option>
+                        </select>
+                    </td>
+                <tr>
+                    <td colspan="8"> 緩 衝 材</td>
+                    <td colspan="8">
+                        <select name="" id="">
+                            <option value="□リケイ紙">□ リケイ紙</option>
+                            <option value="■リケイ紙">■ リケイ紙</option>
+                        </select>
+                    </td>
+
+                    <td colspan="6">
+                        <select name="" id="">
+                            <option value="□エアーパッキン">□ エアーパッキン</option>
+                            <option value="■エアーパッキン">■ エアーパッキン</option>
+                        </select>
+                    </td>
+                    <td colspan="18">
+                        <select name="" id="">
+                            <option value="□その他">□ その他</option>
+                            <option value="■その他">■ その他</option>
+                        </select>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td colspan="8">梱 包 基 準 数</td>
+                    <td colspan="8">
+                        <select name="" id="">
+                            <option value="□指定無">□ 指定無</option>
+                            <option value="■指定無">■ 指定無</option>
+                        </select>
+                    </td>
+
+                    <td colspan="6">
+                        <select name="" id="">
+                            <option value="□指定有">□ 指定有</option>
+                            <option value="■指定有">■ 指定有</option>
+                        </select>
+                    </td>
+                    <td colspan="16">
+                    </td>
+                    <td colspan="2">枚/1梱包</td>
+                </tr>
+                <tr>
+                    <td colspan="8"> 必 要 添 付 書 類</td>
+                    <td colspan="8">
+                        <select name="" id="">
+                            <option value="□現品票">□ 現品票</option>
+                            <option value="■現品票">■ 現品票</option>
+                        </select>
+                    </td>
+
+                    <td colspan="6">
+                        <select name="" id="">
+                            <option value="□納品書">□ 納品書</option>
+                            <option value="■納品書">■ 納品書</option>
+                        </select>
+                    </td>
+                    <td colspan="9">
+                        <select name="" id="">
+                            <option value="□検査成績書">□ 検査成績書</option>
+                            <option value="■検査成績書">■ 検査成績書</option>
+                        </select>
+                    </td>
+                    <td colspan="9">
+                        <select name="" id="">
+                            <option value="□その他">□ その他</option>
+                            <option value="■その他">■ その他</option>
+                        </select>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td colspan="8">運 送 業 者 指 定</td>
+                    <td colspan="8">
+                        <select name="" id="">
+                            <option value="□指定無">□ 指定無</option>
+                            <option value="■指定無">■ 指定無</option>
+                        </select>
+                    </td>
+
+                    <td colspan="6">
+                        <select name="" id="">
+                            <option value="□指定有">□ 指定有</option>
+                            <option value="■指定有">■ 指定有</option>
+                        </select>
+                    </td>
+                    <td colspan="9">指定先業者</td>
+                    <td colspan="9"></td>
+
+                </tr>
+                <tr>
+                    <td >管理ポイント（加工）</td>
+                    <td colspan="40">
+                        <textarea name="" id="" cols="5" style="width: 100%;border: none;height: 110px;"></textarea>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="41">＜ 検　　査 ＞</td>
+                </tr>
+                <tr>
+                    <td rowspan="12">完成検査情報（検査）</td>
+                    <td colspan="8" rowspan="3">検 査 基 準</td>
+                    <td colspan="12">得意先支給の検査基準書</td>
+                    <td colspan="10">
+                        <select name="" id="">
+                            <option value="□有">□ 有</option>
+                            <option value="■有">■ 有</option>
+                        </select>
+                    </td>
+                    <td colspan="10">
+                        <select name="" id="">
+                            <option value="□無">□ 無</option>
+                            <option value="■無">■ 無</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="12">得意先支給の見本品</td>
+                    <td colspan="10">
+                        <select name="" id="">
+                            <option value="□有">□ 有</option>
+                            <option value="■有">■ 有</option>
+                        </select>
+                    </td>
+                    <td colspan="10">
+                        <select name="" id="">
+                            <option value="□無">□ 無</option>
+                            <option value="■無">■ 無</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="12">社内の検査基準書</td>
+                    <td colspan="10">
+                        <select name="" id="">
+                            <option value="□適用する">□ 適用する</option>
+                            <option value="■適用する">■ 適用する</option>
+                        </select>
+                    </td>
+                    <td colspan="10">
+                        <select name="" id="">
+                            <option value="□適用しない">□ 適用しない</option>
+                            <option value="■適用しない">■ 適用しない</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="8" >検 査 区 分</td>
+                    <td colspan="12">
+                        <select name="" id="">
+                            <option value="□社内">□ 社内</option>
+                            <option value="■社内">■ 社内</option>
+                        </select>
+                    </td>
+                    <td colspan="10">
+                        <select name="" id="">
+                            <option value="□社外">□ 社外</option>
+                            <option value="■社外">■ 社外</option>
+                        </select>
+                    </td>
+                    <td colspan="10">
+                        <select name="" id="">
+                            <option value="□社内/社外併 用">□ 社内/社外併 用</option>
+                            <option value="■社内/社外併 用">■ 社内/社外併 用</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="8" rowspan="2">外 観 検 査</td>
+                    <td colspan="12">
+                        <select name="" id="">
+                            <option value="□透過検査">□ 透過検査</option>
+                            <option value="■透過検査">■ 透過検査</option>
+                        </select>
+                    </td>
+                    <td colspan="10">
+                        <select name="" id="">
+                            <option value="□表面">□ 表面</option>
+                            <option value="■表面">■ 表面</option>
+                        </select>
+                    </td>
+                    <td colspan="10">
+                        <select name="" id="">
+                            <option value="□裏面">□ 裏面</option>
+                            <option value="■裏面">■ 裏面</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="12">
+                        <select name="" id="">
+                            <option value="□反射検査">□ 反射検査</option>
+                            <option value="■反射検査">■ 反射検査</option>
+                        </select>
+                    </td>
+                    <td colspan="10">
+                        <select name="" id="">
+                            <option value="□表面">□ 表面</option>
+                            <option value="■表面">■ 表面</option>
+                        </select>
+                    </td>
+                    <td colspan="10">
+                        <select name="" id="">
+                            <option value="□裏面">□ 裏面</option>
+                            <option value="■裏面">■ 裏面</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="8" rowspan="2">寸 法 検 査</td>
+                    <td colspan="12">
+                        <select name="" id="">
+                            <option value="□有">□ 有</option>
+                            <option value="■有">■ 有</option>
+                        </select>
+                    </td>
+                    <td colspan="10">
+                        <select name="" id="">
+                            <option value="□無">□ 無</option>
+                            <option value="■無">■ 無</option>
+                        </select>
+                    </td>
+                    <td colspan="10">
+
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="12">
+                        <select name="" id="">
+                            <option value="□全数">□ 全数</option>
+                            <option value="■全数">■ 全数</option>
+                        </select>
+                    </td>
+                    <td colspan="10">
+                        <select name="" id="">
+                            <option value="□抜き取り">□ 抜き取り</option>
+                            <option value="■抜き取り">■ 抜き取り</option>
+                        </select>
+                    </td>
+                    <td colspan="4">抜き取り数</td>
+                    <td colspan="2">ｎ =</td>
+                    <td colspan="2"></td>
+                    <td colspan="2">個</td>
+                </tr>
+                <tr>
+                    <td colspan="8" rowspan="2">反 り 検 査</td>
+                    <td colspan="12">
+                        <select name="" id="">
+                            <option value="□有">□ 有</option>
+                            <option value="■有">■ 有</option>
+                        </select>
+                    </td>
+                    <td colspan="10">
+                        <select name="" id="">
+                            <option value="□無">□ 無</option>
+                            <option value="■無">■ 無</option>
+                        </select>
+                    </td>
+                    <td colspan="10">
+
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="12">
+                        <select name="" id="">
+                            <option value="□全数">□ 全数</option>
+                            <option value="■全数">■ 全数</option>
+                        </select>
+                    </td>
+                    <td colspan="10">
+                        <select name="" id="">
+                            <option value="□抜き取り">□ 抜き取り</option>
+                            <option value="■抜き取り">■ 抜き取り</option>
+                        </select>
+                    </td>
+                    <td colspan="4">抜き取り数</td>
+                    <td colspan="2">ｎ =</td>
+                    <td colspan="2"></td>
+                    <td colspan="2">個</td>
+                </tr>
+
+                <tr>
+                    <td colspan="8">重 量 検 査</td>
+                    <td colspan="12">
+                        <select name="" id="">
+                            <option value="□有">□ 有</option>
+                            <option value="■有">■ 有</option>
+                        </select>
+                    </td>
+                    <td colspan="10">
+                        <select name="" id="">
+                            <option value="□無">□ 無</option>
+                            <option value="■無">■ 無</option>
+                        </select>
+                    </td>
+                    <td colspan="4">基準値</td>
+                    <td colspan="4"></td>
+                    <td colspan="2">g</td>
+                </tr>
+
+                <tr>
+                    <td colspan="8" >そ の 他 の <br>検 査 項 目</td>
+                    <td colspan="33">
+                        <textarea name="" id="" cols="10" style="width: 100%; border:none; height: 100px;"></textarea>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td colspan="42">＜ 出　　荷 ＞</td>
+                </tr>
+                <tr>
+                    <td rowspan="8">出荷情報（出荷）</td>
+                    <td colspan="8"> 出 荷 区 分</td>
+                    <td colspan="6">
+                        <select name="" id="">
+                            <option value="□工場出荷">□ 工場出荷</option>
+                            <option value="■工場出荷">■ 工場出荷</option>
+                        </select>
+                    </td>
+                    <td colspan="8">
+                        <select name="" id="">
+                            <option value="□本社出荷">□ 本社出荷</option>
+                            <option value="■本社出荷">■ 本社出荷</option>
+                        </select>
+                    </td>
+                    <td colspan="8">
+                        <select name="" id="">
+                            <option value="□外注先出荷">□ 外注先出荷</option>
+                            <option value="■外注先出荷">■ 外注先出荷</option>
+                        </select>
+                    </td>
+                    <td colspan="5">外注先名</td>
+                    <td colspan="5"></td>
+                </tr>
+                <tr>
+                    <td colspan="8"> 梱 包 仕 様</td>
+                    <td colspan="14">
+                        <select name="" id="">
+                            <option value="□梱包仕様書による">□ 梱包仕様書による</option>
+                            <option value="■梱包仕様書による">■ 梱包仕様書による</option>
+                        </select>
+                    </td>
+                    <td colspan="18">
+                        <select name="" id="">
+                            <option value="□社内仕様　/　得意先指定無">□ 社内仕様　/　得意先指定無</option>
+                            <option value="■社内仕様　/　得意先指定無">■ 社内仕様　/　得意先指定無</option>
+                        </select>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td colspan="8"> 外 箱 仕 様</td>
+                    <td colspan="8">
+                        <select name="" id="">
+                            <option value="□ダンボール箱">□ ダンボール箱</option>
+                            <option value="■ダンボール箱">■ ダンボール箱</option>
+                        </select>
+                    </td>
+                    <td colspan="2">No.</td>
+                    <td colspan="4"></td>
+                    <td colspan="18">
+                        <select name="" id="">
+                            <option value="□その他">□ その他</option>
+                            <option value="■その他">■ その他</option>
+                        </select>
+                    </td>
+                <tr>
+                    <td colspan="8"> 内 梱 包</td>
+                    <td colspan="8">
+                        <select name="" id="">
+                            <option value="□ビニール袋">□ ビニール袋</option>
+                            <option value="■ビニール袋">■ ビニール袋</option>
+                        </select>
+                    </td>
+                    <td colspan="2">No.</td>
+                    <td colspan="4"></td>
+                    <td colspan="9">
+                        <select name="" id="">
+                            <option value="□専用箱">□ 専用箱</option>
+                            <option value="■専用箱">■ 専用箱</option>
+                        </select>
+                    </td>
+                    <td colspan="9">
+                        <select name="" id="">
+                            <option value="□その他">□ その他</option>
+                            <option value="■その他">■ その他</option>
+                        </select>
+                    </td>
+                <tr>
+                    <td colspan="8"> 緩 衝 材</td>
+                    <td colspan="8">
+                        <select name="" id="">
+                            <option value="□リケイ紙">□ リケイ紙</option>
+                            <option value="■リケイ紙">■ リケイ紙</option>
+                        </select>
+                    </td>
+
+                    <td colspan="6">
+                        <select name="" id="">
+                            <option value="□エアーパッキン">□ エアーパッキン</option>
+                            <option value="■エアーパッキン">■ エアーパッキン</option>
+                        </select>
+                    </td>
+                    <td colspan="18">
+                        <select name="" id="">
+                            <option value="□その他">□ その他</option>
+                            <option value="■その他">■ その他</option>
+                        </select>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td colspan="8">梱 包 基 準 数</td>
+                    <td colspan="8">
+                        <select name="" id="">
+                            <option value="□指定無">□ 指定無</option>
+                            <option value="■指定無">■ 指定無</option>
+                        </select>
+                    </td>
+
+                    <td colspan="6">
+                        <select name="" id="">
+                            <option value="□指定有">□ 指定有</option>
+                            <option value="■指定有">■ 指定有</option>
+                        </select>
+                    </td>
+                    <td colspan="16">
+                    </td>
+                    <td colspan="2">枚/1梱包</td>
+                </tr>
+                <tr>
+                    <td colspan="8"> 必 要 添 付 書 類</td>
+                    <td colspan="8">
+                        <select name="" id="">
+                            <option value="□現品票">□ 現品票</option>
+                            <option value="■現品票">■ 現品票</option>
+                        </select>
+                    </td>
+
+                    <td colspan="6">
+                        <select name="" id="">
+                            <option value="□納品書">□ 納品書</option>
+                            <option value="■納品書">■ 納品書</option>
+                        </select>
+                    </td>
+                    <td colspan="9">
+                        <select name="" id="">
+                            <option value="□検査成績書">□ 検査成績書</option>
+                            <option value="■検査成績書">■ 検査成績書</option>
+                        </select>
+                    </td>
+                    <td colspan="9">
+                        <select name="" id="">
+                            <option value="□その他">□ その他</option>
+                            <option value="■その他">■ その他</option>
+                        </select>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td colspan="8">運 送 業 者 指 定</td>
+                    <td colspan="8">
+                        <select name="" id="">
+                            <option value="□指定無">□ 指定無</option>
+                            <option value="■指定無">■ 指定無</option>
+                        </select>
+                    </td>
+
+                    <td colspan="6">
+                        <select name="" id="">
+                            <option value="□指定有">□ 指定有</option>
+                            <option value="■指定有">■ 指定有</option>
+                        </select>
+                    </td>
+                    <td colspan="9">指定先業者</td>
+                    <td colspan="9"></td>
+
+                </tr>
+                <tr>
+                    <td >管理ポイント（加工）</td>
+                    <td colspan="40">
+                        <textarea name="" id="" cols="5" style="width: 100%;border: none;height: 110px;"></textarea>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td rowspan="10">管理ポイント（出荷検査）</td>
+                    <td colspan="40">～出荷履歴～</td>
+                </tr>
+                <tr>
+                    <td colspan="6">年月日</td>
+                    <td colspan="8">出荷先</td>
+                    <td colspan="6">数量</td>
+                    <td colspan="20">備考</td>
+                </tr>
+                <tr>
+                    <td colspan="6">
+                        <input type="date">
+                    </td>
+                    <td colspan="8"></td>
+                    <td colspan="6"></td>
+                    <td colspan="20"></td>
+                </tr>
+                <tr>
+                    <td colspan="6">
+                        <input type="date">
+                    </td>
+                    <td colspan="8"></td>
+                    <td colspan="6"></td>
+                    <td colspan="20"></td>
+                </tr>
+                <tr>
+                    <td colspan="6">
+                        <input type="date">
+                    </td>
+                    <td colspan="8"></td>
+                    <td colspan="6"></td>
+                    <td colspan="20"></td>
+                </tr>
+                <tr>
+                    <td colspan="6">
+                        <input type="date">
+                    </td>
+                    <td colspan="8"></td>
+                    <td colspan="6"></td>
+                    <td colspan="20"></td>
+                </tr>
+                <tr>
+                    <td colspan="41">～その他～</td>
+                </tr>
+                <tr>
+                    <td colspan="41">
+                        <textarea name="" id="" cols="5" style="width: 100%;border: none;height: 110px;"></textarea>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="d-flex justify-content-center align-items-center">
+            <button class="btn btn-primary mb-3 p-2 mt-2" id="btn">保存する</button>
+        </div>
+    </form>
+</body>
+<%- include('../partials/footer') %>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/start/jquery-ui.css"/>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+<script src="/javascript/flash.js"></script>
+<script src="/javascript/forForm.js"></script>
+
+</html>

@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/stylesheet2.css">
+
+    <style>
+
+        body{
+                font-size: medium;
+                padding-top: 102px; 
+            }
+
+        input[class=form_radio] {
+          display: none;
+        }
+
+        #form_label{ 
+          text-align: center;
+          padding : 1px 6px;
+          width : fit-content;
+          min-width: 60px;
+          font-size: large;
+
+        }
+        #form_label_sm{ 
+          text-align: center;
+          padding : 1px 6px;
+          width : fit-content;
+          font-size: medium;
+
+        }
+        [class=form_radio]:checked + #form_label_sm ,[class=form_radio]:checked + #form_label {
+            border: 1px solid black;
+            border-radius: 50%;
+            padding : 0px 5px;
+
+        }
+
+        input{
+            text-align: center;
+            border: none;
+            width: 70%;
+            margin: 2px;
+        }
+        select{
+            border: none;
+
+        }
+
+
+    </style>
+</head>
+<body class="d-flex flex-column vh-100" >
+    <%- include('../partials/navbar2') %>
+    <%- include('../partials/flash') %>
+    <p id ="docId" style="display:none"><?= data.id ?></p>
+    <div class="container">
+        <form class="text-center  mx-3" action="/products/<%= data.id %>/quotation?_method=PUT" method="POST" novalidate class="validated-form"> 
+            <div class="d-flex flex-row justify-content-between">
+                <div class="row col-md-3 align-self-center mx-3">
+                    <input type="date" value="<%= data.date %>" class="mt-3 text-start w-50" name = "create_date" value="<%= data.create_date %>">
+                    <div class="d-flex flex-row mt-3  justify-start ">
+                        手配先
+                        <input name="place" id="place" placeHolder="Click to input" value="<%= data.place %>" onclick="selectPlace(event)" readonly>
+                    </div>
+                </div>
+                <div class="row col-md-4 align-self-center mx-3">
+                    <h2 class="mb-0">見 積 計 算 書</h2>
+                    <div class="d-flex flex-row mt-3  justify-content-center ">
+                        <% 
+                        let q_session1_1 = data.q_session1_1?"checked":"";
+                        let q_session1_2 = data.q_session1_2?"checked":"";
+                        let q_session1_3 = data.q_session1_3?"checked":"";
+                        let q_session2_1 = data.q_session2=="決定"?"checked":"";
+                        let q_session2_2 = data.q_session2=="未定"?"checked":"";
+                        %>
+                        <label  style="font-size: large;">(</label>
+                        <input class="form_radio" type="checkbox"  name="q_session1_1" id="session11"  value="参考" <%-q_session1_1%>>
+                        <label for="session11" id="form_label">参考</label>
+                        <label style="font-size: large;">・</label>
+                        <input class="form_radio" type="checkbox" name="q_session1_2" id="session12"  value="合見" <%-q_session1_2%>>
+                        <label for="session12" id="form_label">合見</label>
+                        <label style="font-size: large;">・</label>
+                        <input class="form_radio" type="checkbox" name="q_session1_3" id="session13" value="指値" <%-q_session1_3%>>
+                        <label for="session13" id="form_label">指値</label>
+                        <label style="font-size: large;">)　</label>
+
+                        <input class="form_radio" type="radio"  name="q_session2" id="session21"  value="決定"   <%-q_session2_1%>>
+                        <label  for="session21" id="form_label">決定</label>
+                        <label style="font-size: large;">・</label>
+                        <input class="form_radio" type="radio" name="q_session2" id="session22"  value="未定"  <%-q_session2_2%>>
+                        <label for="session22" id="form_label">未定</label>
+                    </div> 
+
+                    <div class="d-flex flex-row  mt-3">
+                        合見先
+                        <input type="text" name="competitor" class="mx-2 border-bottom w-75"  value="<%= data.competitor %>">
+                    </div>
+                </div>
+                <table  class="table table-bordered  table-sm border-dark-subtle text-center  mb-1 mt-5">
+                    <tr>
+                        <td>担当</td>
+                        <td>上長</td>
+                        <td>本部長</td>
+                        <td>社長</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input class="w-75  text-primary"   name="staff1"  value="<%= data.staff1  %>">
+                        </td>
+                        <td>
+                            <input class="w-75  text-primary"   name="staff10"  value="<%= data.staff10  %>">
+                        </td>
+                        <td>
+                            <input class="w-75  text-primary"   name="staff11"  value="<%= data.staff11  %>">
+                        </td>
+                        <td>
+                            <input class="w-75  text-primary"   name="staff12"  value="<%= data.staff12  %>">
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+            <table class="table table-bordered  table-sm border-dark-subtle text-center  mb-1 mt-1">
+                <tr>
+                    <td style="width: 10%;">社 名</td>
+                    <td colspan="3">
+                        <input type="text" class="w-100" value="<%= data.cus_name  %>">
+                    </td>
+                    <td colspan="4">
+                        <div  class="d-flex flex-row justify-content-between">
+                            品 名
+                            <input type="text"  class="mx-auto text-start"  value="<%=  data.machine_name + " " + data.path_no + " " + data.product_name  %>" readonly>
+                        </div>                    
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>材 料 名</td>
+                    <td colspan="3">
+                        <input type="text" class="w-100" value="<%= data.material_name  %>" readonly>
+                    </td>
+                    <td colspan="2">
+                        <div  class="d-flex flex-row justify-content-between">
+                            仕入先
+                            <input type="text" class="w-75"  value="<%= data.material_cus_name  %>" readonly>
+                        </div>
+                    </td>
+                    <td colspan="2">
+                        <div class="d-flex flex-row justify-content-between">
+                            定尺<input class="w-25" value="<%= data.t_material_x  %>" readonly>
+                            ×
+                            <input class="w-25" value="<%= data.t_material_y  %>" readonly>
+                            ￥
+                            <input  class="w-25" value="<%= data.t_material_price  %>" readonly>円
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td >色    数</td>
+                    <td>
+                        <% 
+                            let colors = [];
+                            let sum_colors = 0;
+                            for(let i = 1; i < 16; i++ ) {
+                                let spec_type = data["specs_1_" + i];
+                                if(spec_type === "インク"){
+                                    let type = data["specs_2_" + i];
+                                    let number = Number(data["specs_3_" + i]);
+                                    colors.push({type: type, number: number});
+                                    sum_colors += number;
+                                }
+                            }
+                    
+                            const countColorType = (type) => {
+                                return colors.filter(c => c.type === type).reduce((acc, curr) => acc + curr.number, 0);
+                            };
+                        %>
+                        <div class="d-flex flex-row justify-content-between">
+                            計
+                            <input type="number" class="w-50" value="<%= sum_colors %>" readonly>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex flex-row justify-content-between">
+                            文字
+                            <input type="number" class="w-50" value="<%= countColorType('文字') %>" readonly>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex flex-row justify-content-between">
+                            ベタ
+                            <input type="number" class="w-50" value="<%= countColorType('ベタ') %>" readonly>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex flex-row justify-content-between">
+                            アミ
+                            <input type="number" class="w-50" value="<%= countColorType('アミ') %>" readonly>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex flex-row justify-content-between">
+                            鏡面
+                            <input type="number" class="w-50" value="<%= countColorType('鏡面') %>" readonly>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex flex-row justify-content-between">
+                            チヂミ
+                            <input type="number" class="w-50" value="<%= countColorType('チヂミ') %>" readonly>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex flex-row justify-content-between">
+                            糊
+                            <input type="number"  class="w-50"  value="<%= countColorType('糊') %>" readonly>
+                        </div>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td >マ ー ク 寸 法</td>
+                    <td colspan="3">
+                        <input class="w-100"  value="<%= data.mark %>" readonly>
+                    </td>
+                    <td  colspan="2">
+                        <div  class="d-flex flex-row justify-content-between">
+                            面数
+                            <input class="w-25"   value="<%= data.layout_x %>" readonly>
+                            ×
+                            <input  class="w-25"     value="<%= data.layout_y %>" readonly>
+                            = 
+                            <input   class="w-25"  value="<%= Number(data.layout_x) *  Number(data.layout_y) %>" readonly id="layout_sum">
+                        </div>
+                    </td>
+                    <td colspan="2">
+                        <div  class="d-flex flex-row justify-content-between">
+                            ビク型
+                            <input class="w-25"   value="<%= data.die_quantity_x %>" readonly>
+                            ×
+                            <input  class="w-25"     value="<%= data.die_quantity_x %>" readonly>
+                            = 
+                            <input   class="w-25"  value="<%= Number(data.die_quantity_x) *  Number(data.die_quantity_y) %>" readonly>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td >材 料 寸 法</td>
+                    <td  colspan="3">
+                        <div  class="d-flex flex-row justify-content-between">
+                            裁断
+                            <input class="w-25"   value="<%= data.cut_x %>" readonly>
+                            ×
+                            <input  class="w-25"     value="<%= data.cut_y %>" readonly>
+                            = 
+                            <input   class="w-25"  value="<%= data.cut_sum %>" readonly>
+                        </div>
+                    </td>
+                    <td colspan="2">
+                        <div  class="d-flex flex-row justify-content-between">
+                            材寸
+                            <input class="w-25"   value="<%= data.material_x %>" readonly>
+                            ×
+                            <input  class="w-25"     value="<%= data.material_y %>" readonly>
+                        </div>
+                    </td>
+                    <td colspan="2">
+                        <div  class="d-flex flex-row justify-content-between">
+                            送り
+                            <input class="w-25"   value="<%= data.pitch_x %>" readonly>
+                            ×
+                            <input  class="w-25"   value="<%= data.pitch_y %>" readonly>
+                        </div>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>注 文 数</td>
+                    <td  colspan="5">
+                        <div  class="d-flex flex-row justify-content-between">
+                            総ロット
+                            <input type="number" name="sum_lot"  class="text-primary" value="<%= data.sum_lot  %>">ヶ
+                        </div>
+                    </td>
+                    <td >
+                        <div  class="d-flex flex-row justify-content-between">
+                            <input class="w-75 text-primary" type="number" name="lot_1"  value="<%= data.lot_1  %>" onchange="changeLot(event)">ヶ
+                        </div>
+                    </td>
+                    <td>
+                        <div  class="d-flex flex-row justify-content-between">
+                            <input  class="w-75 text-primary" type="number" name="lot_2"  value="<%= data.lot_2  %>" onchange="changeLot(event)">ヶ
+                        </div>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>シ ー ト 数</td>
+                    <td  class="diagonal_line"  colspan="5"> </td>
+                    <td> 
+                        <div  class="d-flex flex-row justify-content-evenly">
+                            <input type="number" name="sheet_quantity_1_1"  value="<%= data.sheet_quantity_1_1 %>" readonly>
+                            /
+                            <input type="number" name="sheet_quantity_1_2"  value="<%= data.sheet_quantity_1_2 %>" readonly>
+                        </div>
+                    </td>
+                    <td> 
+                        <div  class="d-flex flex-row justify-content-evenly">
+                            <input type="number" name="sheet_quantity_2_1"  value="<%= data.sheet_quantity_2_1 %>" readonly>
+                            /
+                            <input type="number" name="sheet_quantity_2_2"  value="<%= data.sheet_quantity_2_2 %>" readonly>
+                        </div>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>予 備</td>
+                    <td class="diagonal_line"  colspan="5"></td>
+                    <td >
+                        <div  class="d-flex flex-row justify-content-evenly">
+                            <input type="number" class="text-primary" type="number" name="sheet_quantity_spare_1_per"  value="<%= data.sheet_quantity_spare_1_per? data.sheet_quantity_spare_1_per : 10 %>" onchange="changeSpare(event)">
+                            %/
+                            <input type="number"  name="sheet_quantity_spare_1"  value="<%= data.sheet_quantity_spare_1 %>" readonly> 
+                            枚
+                        </div>
+                    </td>
+                    <td >
+                        <div  class="d-flex flex-row justify-content-evenly">
+                            <input type="number" class="text-primary" type="number"  name="sheet_quantity_spare_2_per"  value="<%= data.sheet_quantity_spare_2_per?data.sheet_quantity_spare_2_per:10 %>"  onchange="changeSpare(event)">
+                            %/
+                            <input type="number"  name="sheet_quantity_spare_2"  value="<%= data.sheet_quantity_spare_2 %>"  readonly> 
+                            枚
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <div class="text-start text-danger">①材料費</div>
+            <table table class="table table-bordered  table-sm border-dark-subtle text-center  mb-1 mt-1">
+                <tr>
+                    <td style="width:  50px;">印順</td>
+                    <td style="width:  10%;">種類①</td>
+                    <td style="width:  10%;">種類②</td>
+                    <td >詳細</td>
+                    <td style="width:  9%;">1枚 単価</td>
+                    <td style="width:  9%;">1ヶ 単価</td>
+                    <td style="width:  9%;">1枚 単価</td>
+                    <td style="width:  9%;">1ヶ 単価</td>
+                </tr>
+                <% 
+                    let specs_no = 0;
+                    for(let i = 1; i <= 15; i++ ) {
+                        if(data["specs_1_" + i]){
+                            specs_no++;
+                        }
+                    }
+                    for(let i = 1; i <= specs_no; i++ ) {
+                        let specs_1 = data["specs_1_" + i];
+                        let specs_2 = data["specs_2_" + i];
+                        let specs_3 = Number(data["specs_3_" + i])>0?data["specs_3_" + i]+"色":"";
+                        let specs_31 = data["specs_31_" + i];
+                        let specs_4 = data["specs_4_" + i];
+                        let specs_5 = data["specs_5_" + i]
+                        if(specs_2 === "文字"){
+                            specs_5 = ""
+                        }
+                        if(specs_2 !== "文字" && specs_1=="インク"){
+                            specs_5 =  Number(data["specs_5_" + i])
+                        }
+                        let specs_6 = Math.ceil(Number(data["specs_6_" + i])*10)/10;
+                        let layout_num = Number(data.layout_x) *  Number(data.layout_y)
+                        let specs_7 = Math.ceil((specs_6/layout_num)*10)/10;
+                %>
+                <tr>
+                    <td style="min-width: 30px;"><%= String.fromCodePoint(9312 + i) %></td>
+                    <td>
+                        <input class="w-100"  name="specs_1_<%=i%>" readonly value="<%= specs_1 %>">
+                    </td>
+                    <td>
+                        <input class="w-100"  name="specs_2_<%=i%>" readonly value="<%= specs_2 %>">
+                    </td>
+                    <td>
+                        <div class="d-flex flex-row justify-content-between">
+                                                        
+                            <% if(specs_1=="インク"||specs_1=="材料"){ %>
+                                <input name="specs_31_<%=i%>" readonly value="<%= specs_31?specs_31:specs_3 %>">
+                            <% }else{ %>
+                                <input name="specs_31_<%=i%>" readonly value="<%= specs_31?specs_31:data.material_x + '×' + data.material_y  %>" onclick="changeSpec31(event)"  class="text-primary">
+                            <% } %>
+                            <input name="specs_4_<%=i%>" readonly value="<%= specs_4 %>">
+                            
+                            <% if(specs_2 !== "文字"&& specs_1=="インク"){ %>
+                                <input name="specs_5_<%=i%>" class="text-primary" value="<%= specs_5 %>" onclick="changeSpec5(event)">
+                                <label> %</label>
+                            <% }else{ %>
+                                <input name="specs_5_<%=i%>"readonly value="<%= specs_5 %>">
+                            <% } %>
+                        </div>
+                    </td>
+                    <td>
+                        <input name="specs_6_<%=i%>" readonly value="<%= specs_6 %>">
+                    </td>
+                    <td>
+                        <input name="specs_7_<%=i%>" readonly value="<%= specs_7 %>">
+                    </td>
+                    <td>
+                        <input name="specs_8_<%=i%>" readonly value="">
+                    </td>
+                    <td>
+                        <input name="specs_9_<%=i%>" readonly value="">
+                    </td>
+                </tr>
+                <% 
+                    }
+                %>
+            
+            </table>
+            <div class="text-start text-danger">①外注 加工費</div>
+            <table table class="table table-bordered  table-sm border-dark-subtle text-center  mb-1 mt-1">
+                <tr>
+                    <td style="width:  50px;">工順</td>
+                    <td style="width:  9%;">種類</td>
+                    <td style="width:  12%;">工程</td>
+                    <td style="width:  12%;">加工先</td>
+                    <td>加工方法</td>
+                    <td style="width:  9%;">1枚 単価</td>
+                    <td style="width:  9%;">1ヶ 単価</td>
+                    <td style="width:  9%;">1枚 単価</td>
+                    <td style="width:  9%;">1ヶ 単価</td>
+                </tr>
+                <% 
+                    let out_process_list = [];
+                    let in_process_list = []
+                    for(let i = 1; i <= 15; i++ ) {
+                        let obj_line = 
+                        {
+                            process_0 : i,
+                            process_1 : data["process_1_" + i],
+                            process_2 : data["process_2_" + i],
+                            process_3 : data["process_3_" + i],
+                            process_31 : data["process_31_" + i],
+                            process_4 : data["process_4_" + i],
+                            process_5 : data["process_5_" + i],
+                            process_6 : data["process_6_" + i],
+                            process_7 : data["process_7_" + i],
+                            process_8 : data["process_8_" + i],
+                            process_9 : data["process_9_" + i],
+
+                        };
+
+                        if(data["process_1_" + i] && data["process_1_" + i].includes("外注")){
+                            out_process_list.push(obj_line)
+                        }
+                        if(data["process_1_" + i] && data["process_1_" + i].includes("内製")){
+                            in_process_list.push(obj_line)
+                        }
+                    }
+
+                %>
+                <% 
+                    for( let out_process of  out_process_list) {
+                        let process_char = String.fromCodePoint(9312 + Number(out_process.process_0 - 1));
+
+                %>
+                <tr>
+                    <td style="min-width: 30px;"><%=process_char%></td>
+                    <td>
+                        <input class="w-100" name="process_1_<%= out_process.process_0 %>" readonly value="<%= out_process.process_1 %>">
+                    </td>
+                    <td>
+                        <input class="w-100"  name="process_2_<%= out_process.process_0 %>" readonly value="<%= out_process.process_2 %>">
+                    </td>
+                    <td>
+                        <input class="w-100"  name="process_3_<%= out_process.process_0 %>" readonly value="<%= out_process.process_3 %>">
+                    </td>
+                    <td>
+                        <input  class="w-100 text-primary"  name="process_31_<%= out_process.process_0 %>" readonly value="<%= out_process.process_31 %>" placeHolder="Click to input" onclick="to_input_out_process(event)">
+                    </td>
+                    <td>
+                        <input class="w-100"  name="process_6_<%= out_process.process_0 %>" readonly value="<%= out_process.process_6 %>">
+                    </td>
+                    <td>
+                        <input class="w-100"  name="process_7_<%= out_process.process_0 %>" readonly value="<%= out_process.process_7 %>">
+                    </td>
+                    <td>
+                        <input class="w-100"  name="process_8_<%= out_process.process_0 %>" readonly value="">
+                    </td>
+                    <td>
+                        <input class="w-100"  name="process_9_<%= out_process.process_0 %>" readonly value="">
+                    </td>
+                </tr>
+                <% 
+                    }
+                %>
+                <tr>
+                    <td colspan="4">予      備</td>
+                    <td><input class="w-100"  name="out_procdess_spare_per"  value="<%=data.out_procdess_spare_per%>"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
+                </tr>
+                <tr>
+                    <td colspan="4">外製費 小計</td>
+                    <td><input class="w-100"  name="out_procdess_remark2"  value="<%=data.out_procdess_remark2%>"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+            <div class="text-start text-danger">② 内製 加工費</div>
+            <table table class="table table-bordered  table-sm border-dark-subtle text-center  mb-1 mt-1">
+                <tr>
+                    <td style="width:  50px;">工順</td>
+                    <td style="width:  11%;">種類</td>
+                    <td style="width:  11%;">工程</td>
+                    <td style="width:  11%;">加工先</td>
+                    <td>加工方法</td>
+                    <td style="width:  9%;">1枚 単価</td>
+                    <td style="width:  9%;">1ヶ 単価</td>
+                    <td style="width:  9%;">1枚 単価</td>
+                    <td style="width:  9%;">1ヶ 単価</td>
+                </tr>
+                <% 
+                    for( let in_process of  in_process_list) {
+                        let process_char = String.fromCodePoint(9312 + Number(in_process.process_0 - 1));
+
+                %>
+                <tr>
+                    <td style="min-width: 30px;"><%=process_char%></td>
+                    <td>
+                        <input class="w-100" name="process_1_<%= in_process.process_0 %>" readonly value="<%= in_process.process_1 %>">
+                    </td>
+                    <td>
+                        <input class="w-100"  name="process_2_<%= in_process.process_0 %>" readonly value="<%= in_process.process_2 %>">
+                    </td>
+                    <td>
+                        <input class="w-100"  name="process_3_<%= in_process.process_0 %>" readonly value="<%= in_process.process_3 %>">
+                    </td>
+                    <td>
+                        <input  class="w-100 text-primary"  name="process_31_<%= in_process.process_0 %>" readonly value="<%= in_process.process_31 %>" placeHolder="Click to input" onclick="to_input_in_process(event)" >
+                    </td>
+                    <td>
+                        <input class="w-100"  name="process_6_<%= in_process.process_0 %>" readonly value="<%= in_process.process_6 %>">
+                    </td>
+                    <td>
+                        <input class="w-100"  name="process_7_<%= in_process.process_0 %>" readonly value="<%= in_process.process_7 %>">
+                    </td>
+                    <td>
+                        <input class="w-100"  name="process_8_<%= in_process.process_0 %>" readonly value="">
+                    </td>
+                    <td>
+                        <input class="w-100"  name="process_9_<%= in_process.process_0 %>" readonly value="">
+                    </td>
+                </tr>
+                <% 
+                    }
+                %>
+
+                <tr>
+                    <td colspan="4">内 製 費  小  計</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
+                </tr>
+            </table>
+            <table table class="table table-bordered  table-sm border-dark-subtle text-center  mb-1 mt-1">
+                <tr>
+                    <td class="text-start text-danger" style="width: 14%;">③  原   価   ( ① + ② )  </td>
+        
+                    <td class="w-50"> 
+                    </td>
+                    <td>
+                        <input type="number" class="w-100" name ="maru3_1">
+                    </td>
+                    <td>
+                        <input type="number" class="w-100" name ="maru3_2">
+                    </td>
+
+                </tr>
+                <tr>
+                    <td class="text-start text-danger">   外 製 率 ( ① ÷ ④ )</td>
+                    <td> </td>
+                    <td>
+                        <input type="number" class="w-100"  name ="1wari4_1">
+                    </td>
+
+                    <td>
+                        <input type="number" class="w-100"  name ="1wari4_2">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-start text-danger">マー ジ ン ( ③ ÷ ④ )</td>
+                    <td> </td>
+                    <td>
+                        <input type="number" class="w-100"  name ="3wari4_1">
+                    </td>
+                    <td>
+                        <input type="number" class="w-100" name ="3wari4_2">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-start text-danger">④  合   計   単   価</td>
+                    <td> </td>
+
+                    <td>
+                        <input type="number" class="w-100" name ="maru4_1">
+                    </td>
+                    <td>
+                        <input type="number" class="w-100"  name ="maru4_2">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-start text-danger">⑤  内  製  不  要  率</td>
+                    <td> 
+                        <div class="d-flex flex-row justify-content-between">
+                            <input type="number" class="w-25"  name ="maru5_en">円
+                            <input type="number" class="w-25"  name ="maru5_per">%
+                        </div>
+                    </td>
+
+                    <td>
+                        <input type="number" class="w-100"  name ="maru5_1">
+                    </td>
+                    <td>
+                        <input type="number" class="w-100"  name ="maru5_2">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-start text-danger">⑥  版           代</td>
+                    <td> 
+                        <div class="d-flex flex-row justify-content-between">
+                            <input type="number" style="width: 15%;">版×
+                            <input type="number" style="width: 15%;">円×
+                            <input type="number" style="width: 15%;">点
+                            <input type="number" style="width: 15%;">ヶ
+                        </div>
+                    </td>
+
+                    <td>
+                        <input type="number" class="w-100"  name ="maru6_1">
+                    </td>
+                    <td>
+                        <input type="number" class="w-100" name ="maru6_2">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-start text-danger">⑦  製     版     料</td>
+                    <td> 
+                        <div class="d-flex flex-row justify-content-between">
+                            <input type="number" style="width: 15%;">版×
+                            <input type="number" style="width: 15%;">円×
+                            <input type="number" style="width: 15%;">点
+                            <input type="number" style="width: 15%;">ヶ
+                        </div>
+                    </td>
+
+                    <td>
+                        <input type="number" class="w-100" name ="maru7_1">
+                    </td>
+                    <td>
+                        <input type="number" class="w-100" name ="maru7_2">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-start text-danger">⑧  製 版  目 止 め  料</td>
+                    <td> 
+                        <div class="d-flex flex-row justify-content-between">
+                            <input type="number" style="width: 15%;" name ="maru8_input_1">版×
+                            <input type="number" style="width: 15%;" name ="maru8_input_2">円×
+                            <input type="number" style="width: 15%;" name ="maru8_input_3">点
+                            <input type="number" style="width: 15%;" name ="maru8_input_4">ヶ
+                        </div>
+                    </td>
+                    <td>
+                        <input type="number" class="w-100"  name ="maru8_1">
+                    </td>
+
+                    <td>
+                        <input type="number" class="w-100"  name ="maru8_2">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-start text-danger">⑨  梱  包  輸  送  費</td>
+                    <td> 
+                        <div class="d-flex flex-row justify-content-between">
+                            <input type="number" class="w-75" name ="maru9_input_1">
+                            円
+                        </div>
+                    </td>
+
+                    <td>
+                        <input type="number" class="w-100"  name ="maru9_1">
+                    </td>
+                    <td>
+                        <input type="number" class="w-100"  name ="maru9_2">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-start text-danger">⑩  売     単     価</td>
+                    <td class="diagonal_line"> </td>
+                    <td>
+                        <input type="number" class="w-100"  name ="maru10_1">
+                    </td>
+
+                    <td>
+                        <input type="number" class="w-100"  name ="maru10_2">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-start text-danger">⑪  計   上   合   計</td>
+                    <td class="diagonal_line"> </td>
+                    <td>
+                        <input type="number" class="w-100"  name ="maru11_2">
+                    </td>
+
+                    <td colspan="2">
+                        <input type="number" class="w-100"  name ="maru12_2">
+                    </td>
+                </tr>
+            </table>
+            <table table class="table table-bordered  table-sm border-dark-subtle text-center mb-0 mt-2">
+                <tr>
+                    <td style="width: 5%;"></td>
+                    <td> フィルム </td>
+                    <td> 製版 </td>
+                    <td> 紗張 </td>
+                    <td> データ補正</td>
+                    <td> 型</td>
+                    <td> 治具</td>
+                    <td colspan="2" class="w-50"> 備考</td>
+                </tr>
+                <tr>
+                    <td>仕入</td>
+                    <td> <input type="number" name="import_1" class="w-100"> </td>
+                    <td> <input type="number" name="import_2" class="w-100"> </td>
+                    <td> <input type="number" name="import_3" class="w-100"> </td>
+                    <td> <input type="number" name="import_4" class="w-100"> </td>
+                    <td> <input type="number" name="import_5" class="w-100"> </td>
+                    <td> <input type="number" name="import_6" class="w-100"> </td>
+                    <td colspan="2"> <input name="import_remark" class="w-100"></td>
+                </tr>
+                <tr>
+                    <td>売上</td>
+                    <td> <input type="number" name="export_1" class="w-100"> </td>
+                    <td> <input type="number" name="export_2" class="w-100"> </td>
+                    <td> <input type="number" name="export_3" class="w-100"> </td>
+                    <td> <input type="number" name="export_4" class="w-100"> </td>
+                    <td> <input type="number" name="export_5" class="w-100"> </td>
+                    <td> <input type="number" name="export_6" class="w-100"> </td>
+                    <td colspan="2"> <input name="export_remark" class="w-100"></td>
+                </tr>
+            </table>
+            <div class="d-flex justify-content-center align-items-center">
+                <button class="btn btn-primary mb-3 p-2 mt-2" id="btn">保存する</button>
+            </div>
+        </form>
+    </div>
+</body>
+<%- include('../partials/footer') %>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/start/jquery-ui.css"/>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+<script src="/javascript/flash.js"></script>
+<script src="/javascript/forForm.js"></script>
+
+</html>

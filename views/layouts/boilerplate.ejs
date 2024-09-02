@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+    
+    <title>工程管理</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/stylesheet.css">
+</head>
+
+<body class="d-flex flex-column vh-100" style="padding-top: 56px;">
+    <%- include('../partials/navbar') %>
+    <main class="mt-5">
+        <%- include('../partials/flash') %>
+
+        <%- body -%>
+    </main>
+    <%- include('../partials/footer') %>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+        crossorigin="anonymous"></script>
+
+    <script>
+        
+        document.addEventListener("DOMContentLoaded", function() {
+            const currentLocation = window.location.pathname;
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === currentLocation) {
+                    link.classList.add('active');
+                }
+            });
+            const successAlert = document.getElementById('success-alert');
+            const errorAlert = document.getElementById('error-alert');
+            
+            if (successAlert) {
+                setTimeout(() => {
+                    const alert = new bootstrap.Alert(successAlert);
+                    alert.close();
+                }, 3000); 
+            }
+
+            if (errorAlert) {
+                setTimeout(() => {
+                    const alert = new bootstrap.Alert(errorAlert);
+                    alert.close();
+                }, 3000); 
+            }
+        });
+
+
+        (function () {
+            'use strict'
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            const forms = document.querySelectorAll('.validated-form')
+
+            // Loop over them and prevent submission
+            Array.from(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
+        
+    </script>
+</body>
+
+</html>

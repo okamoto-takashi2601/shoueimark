@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <link rel="stylesheet" href="/css/stylesheet2.css">
+        <style>
+            input{
+                text-align: center;
+                border : none;
+                width: 100%;
+                padding: 1px;
+            }
+
+            select {
+                -webkit-appearance: none; /* Safari and Chrome */
+                -moz-appearance: none; /* Firefox */
+                appearance: none; /* Modern browsers */
+            }
+
+            select::-ms-expand {
+                display: none; 
+            }
+
+            .caption-center {
+                caption-side: top;
+                text-align: center;
+                font-weight: bold;
+                font-size: larger;                
+            }
+            .no-resize {
+                resize: none; /* リサイズを無効にする */
+            }
+
+
+            .box {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                border: 1px solid silver;
+                border-right: none; 
+                border-bottom: none;
+            }
+            .box:last-child {
+            border-right: 1px solid silver; /* 最後のボックスに右側のボーダーを追加 */
+            }
+            .box-row:first-child .box {
+                border-top: 1px solid silver; /* 最初の行のボックスに上部ボーダーを追加 */
+            }
+            .box-border-bottom {
+                border-bottom: 1px solid silver; /* 最後の行のボックスに下部ボーダーを追加 */
+            }
+
+             .w-70{
+                width: 70%;
+             }
+             .w-30{
+                width: 30%;
+             }
+             .d-flex-center {
+                display: flex;
+                align-items: center;
+            }
+            .p-l-0{
+                padding-left: 0;
+            }
+
+            body{
+                padding-top: 102px; 
+            }
+        </style>
+
+    </head>
+    <body class="d-flex flex-column vh-100">
+        <%- include('../partials/navbar2') %>
+        <%- include('../partials/flash') %>
+        <p id ="docId" style="display:none"><?= data.id ?></p>
+        <div class="container">
+            <form class="text-center  mx-2" action="/products/<%= data.id %>/structural_work_chedule?_method=PUT" method="POST" novalidate class="validated-form"> 
+                <div class="d-flex justify-content-between  mt-2">
+                    <div class="d-flex flex-column w-70">
+                        <div class="d-flex flex-row justify-content-around align-middle">
+                            <h1 class="fs-1">構造工程表</h1>
+                            <input class="w-50 fs-2 border" name="order_no"  value="<%= data.order_no %>">
+                        </div>
+                        <h6 class="mt-3 text-muted">※ 新版・試作時に発行（営業部） ※ 製品仕様書へ添付保管（製造本部）</h6>
+                        <table class="table table-bordered  table-sm border-dark-subtle">
+                            <tr>
+                                <th>社名</th>
+                                <td >
+                                    <input name="cus_id" style="display: none;" value="<%= data.cus_id  %>" readonly >
+                                    <input name="cus_name" value="<%= data.cus_name  %>"  readonly  onclick="setCusName(<%= data.cus_id  %>)">
+                                </td>
+
+                                <th >機種名</th>
+                                <td>
+                                    <input name="machine_name"  value="<%= data.machine_name  %>">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>部番</th>
+                                <td>
+                                    <input name="path_no"  value="<%= data.path_no  %>">
+                                </td>
+                                <th >品名</th>
+                                <td >
+                                    <input name="product_name"  value="<%= data.product_name  %>">
+                                </td>
+                            </tr>
+                            <tr style="display: none;">
+                                <td>
+                                    <input  id="material_cus_name" name="material_cus_name"  onclick="selectMaterialCusName(event)"
+                                    value="<%= data.material_cus_name?data.material_cus_name:'' %>"  placeHolder="Click to select" readonly>
+                                </td>
+                                <th >材料名</th>
+                                <td>
+                                    <input name="material_name" id="material_name" value="<%= data.material_name %>"  onclick="selectMaterialCusName(event)"  readonly >
+                                </td>
+                            </tr>
+                            <tr>
+                                <th >定尺</th>
+                                <td>
+                                    <div class="d-flex flex-row   justify-content-evenly ">
+                                        <input type="number" name="t_material_x" id="t_material_x" placeholder="X"  value="<%= data.t_material_x  %>"  readonly  onclick="selectMaterialCusName(event)" >
+                                        x
+                                        <input name="t_material_y" id="t_material_y" placeholder="Y" value="<%= data.t_material_type =="Roll"?"M":data.t_material_y  %>"  readonly  onclick="selectMaterialCusName(event)" >
+                                        <input name="t_material_price" id="t_material_price" style="display: none;" value="<%= data.t_material_price  %>"  readonly >
+                                        <input name="t_material_type" id="t_material_type" style="display: none;" value="<%= data.t_material_type  %>"  readonly >
+                                    </div>
+                                </td>
+                                <th >材寸</th>
+                                <td>
+                                    <div class="d-flex flex-row   justify-content-evenly ">
+                                        <input type="number" name="material_x" id="material_x" placeholder="X"  value="<%= data.material_x  %>"  readonly   onclick="inputCutNo(event)">
+                                        x
+                                        <input type="number" name="material_y" id="material_y" placeholder="Y" value="<%= data.material_y  %>"  readonly   onclick="inputCutNo(event)">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr style="display: none;">
+                                <th >裁断 回数</th>
+                                <td>
+                                    <div class="d-flex flex-row   justify-content-evenly ">
+                                        <input  type="number" name="cut_x" id="cut_x" placeholder="X"  value="<%= data.cut_x  %>"  readonly  onclick="inputCutNo(event)">
+                                        x
+                                        <input  type="number" name="cut_y" id="cut_y" placeholder="Y" value="<%= data.cut_y  %>"  readonly  onclick="inputCutNo(event)">
+                                    </div>
+                                </td>
+                                <th >裁断計</th>
+                                <td>
+                                    <input   name="cut_sum"  value="<%= Number(data.cut_y)==0?Number(data.cut_x):Number(data.cut_x)*Number(data.cut_y)  %>"  readonly  onclick="inputCutNo(event)">
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th >面付</th>
+                                <td >
+                                    <div class="d-flex flex-row  justify-content-evenly">
+                                        <input type="number" name="layout_x" placeholder="X"  value="<%= data.layout_x  %>"  >
+                                        x
+                                        <input type="number" name="layout_y" placeholder="Y"  value="<%= data.layout_y  %>"  >
+                                    </div>
+                                </td>
+                                <th>ﾏｰｸ寸</th>
+                                <td>
+                                    <input id="mark" name="mark"  value="<%= data.mark  %>"  readonly  onclick="selectKindOfMark(event)">
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th >型面数</th>
+                                <td>
+                                    <div class="d-flex flex-row   justify-content-evenly ">
+                                        <input type="number" name="die_quantity_x" placeholder="X"  value="<%= data.die_quantity_x  %>">
+                                        x
+                                        <input type="number" name="die_quantity_y" placeholder="Y" value="<%= data.die_quantity_y  %>">
+                                    </div>
+                                </td>
+                                <th>送り</th>
+                                <td >
+                                    <div class="d-flex flex-row   justify-content-evenly ">
+                                        <input type="number" name="pitch_x" placeholder="X"  value="<%= data.pitch_x  %>">
+                                        x
+                                        <input type="number" name="pitch_y" placeholder="Y" value="<%= data.pitch_y  %>">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th >手配先</th>
+                                <td>
+                                    <input name="place" id="place" placeHolder="Click to input" value="<%= data.place %>" onclick="selectPlace(event)" readonly>
+                                </td>
+                                <th>線数</th>
+                                <td>
+                                    <input name="line_no"  value="<%= data.line_no  %>">
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="row w-30 mb-3 p-l-0">
+                        <div class="d-flex flex-row d-flex-center">
+                            発行日：<input class="w-50 text-start" type="date" name="create_date"  value="<%= data.date  %>">
+                        </div>
+                        <div class="d-flex flex-row p-l-0">
+                            <div class="box">
+                                    <label class="border-bottom">発行</label>
+                                    <div class="text-center">
+                                        <input class="w-75  text-primary"   name="staff1"  value="<%= data.staff1  %>">
+                                    </div>
+                                    <label class="text-muted">担当営業</label>
+                            </div>
+                            <div class="box">
+                                    <label class="border-bottom">確認</label>
+                                    <div class="text-center">
+                                        <input class="w-75  text-primary"  name="staff2"   value="<%= data.staff2  %>">
+                                    </div>
+                                    <label class="text-muted">クリエイティブ</label>
+
+                                </div>
+                                <div class="box">
+                                    <label class="border-bottom">確認</label>
+                                    <div class="text-center">
+                                        <input class="w-75  text-primary"  name="staff3"   value="<%= data.staff3  %>">
+                                    </div>
+                                    <label class="text-muted">生産管理課</label>
+
+                                </div>
+                                <div class="box">
+                                    <label class="border-bottom">確認</label>
+                                    <div class="text-center">
+                                        <input class="w-75  text-primary"  name="staff4"   value="<%= data.staff4  %>">
+                                    </div>
+                                    <label class="text-muted">製版係</label>
+                            
+                            </div>
+                        </div>
+
+                        <div  class="d-flex flex-row p-l-0">
+                            <div class="box">
+                                <label class="border-bottom">確認</label>
+                                <div class="text-center">
+                                    <input class="w-75  text-primary"  name="staff5"  value="<%= data.staff5  %>">
+                                </div>
+                                <label class="text-muted">印刷係</label>
+                            </div>
+                            <div class="box">
+                                <label class="border-bottom">確認</label>
+                                <div class="text-center">
+                                    <input class="w-75  text-primary"  name="staff6"   value="<%= data.staff6  %>">
+                                </div>
+                                <label class="text-muted">加工係</label>
+                            </div>
+                            <div class="box">
+                                <label class="border-bottom">確認</label>
+                                <div class="text-center">
+                                    <input class="w-75  text-primary"  name="staff7"  value="<%= data.staff7  %>">
+                                </div>
+                                <label class="text-muted">出荷検査課</label>
+                            </div>
+                            <div class="box">
+                                <label class="border-bottom">確認</label>
+                                <div class="text-center">
+                                    <input class="w-75  text-primary"   name="staff8"  value="<%= data.staff8  %>">
+                                </div>
+                                <label class="text-muted">品質管理課</label>
+                            </div>
+                        </div>
+
+                        <div   class="d-flex flex-row p-l-0">
+                            <div class="box w-75  box-border-bottom">
+                                <h6 class="text-danger border-bottom">＜版・型 申送り事項＞</h6>
+                                <div class="text-center">
+                                    <input class="w-75 mb-1 border-bottom text-start" name="remark_1" value="<%= data.remark_1  %>">
+                                </div>
+                                <div class="text-center">
+                                    <input class="w-75 text-start" name="remark_2"value="<%= data.remark_2  %>">
+                                </div>
+                            </div>
+                            <div  class="box w-25  box-border-bottom">
+                                <label class="border-bottom">確認</label>
+                                <div class="text-center">
+                                    <input class="w-75  text-primary"  name="staff9"   value="<%= data.staff9  %>">
+                                </div>
+                                <label class="text-muted">製造部統括</label>
+                            </div> 
+                        </div>
+
+                    </div>
+                </div>
+                <div class="d-flex flex-row">
+                    <table class="table table-bordered  table-sm border-dark-subtle w-50"  style="margin-right: 10px;"   id="specs_tbl">
+                        <thead>
+                            <tr>
+                                <th rowspan="2" >
+                                    <div class="d-flex flex-column">
+                                        <button class ="btn btn-light border-0 btn-sm" id="specs_tbl_add_row" onclick="to_specs_tbl_add_row()"  type="button">✚</button>
+                                        刷順
+                                    </div>
+                                </th>
+                                <th colspan="3" >構造仕様</th>
+                            </tr>
+                            <tr>
+                                <th>種類①</th>
+                                <th>種類②</th>
+                                <th>詳細</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% 
+                            let specs_tbl_no = 0; flowchat_tbl_no = 0;
+                                for(let i = 0; i < 15;i++){ 
+                                    if(data['specs_1_' + (i+1)])specs_tbl_no++
+                                    if(data['process_1_' + (i+1)])flowchat_tbl_no++
+                                }
+                            %>
+                            <% for(let i = 0; i < specs_tbl_no ;i++){ 
+                                let specs_1 = data['specs_1_' + (i+1)]; 
+                                let specs_2 = data['specs_2_' + (i+1)];
+                                let specs_3 = data['specs_3_' + (i+1)];
+                                let specs_4 = data['specs_4_' + (i+1)];
+                                let specs_5 = data['specs_5_' + (i+1)];
+                                let specs_6 = data['specs_6_' + (i+1)];
+                                %>
+                                <tr>
+                                    <td onclick="remove_last_row('specs_tbl')"><%= String.fromCodePoint(9312 + i) %></td>
+                                    <td >
+                                        <input name="specs_1_<%=i+1%>" id="specs_1_<%=i+1%>" placeholder="Click to add new" readonly onclick="input_print_line(event)" value="<%= specs_1 %>">
+                                    </td>
+                                    <td >
+                                        <input name="specs_2_<%=i+1%>" id="specs_2_<%=i+1%>" readonly  onclick="input_print_line(event)" value="<%= specs_2%>">
+                                    </td>
+                                    <td >
+                                        <input name="specs_3_<%=i+1%>" id="specs_3_<%=i+1%>"  value="<%= specs_3 %>">
+                                        <input style="display:none;" name="specs_4_<%=i+1%>" id="specs_4_<%=i+1%>" value="<%= specs_4 %>">
+                                        <input style="display:none;" name="specs_5_<%=i+1%>" id="specs_5_<%=i+1%>" value="<%= specs_5 %>">
+                                        <input style="display:none;" name="specs_6_<%=i+1%>" id="specs_6_<%=i+1%>" value="<%= specs_6 %>">
+                                    </td>
+                                </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
+                    <table class="table table-bordered  table-sm border-dark-subtle w-50"  id="flowchat_tbl">
+                        <thead>
+                            <tr>
+                                <th rowspan="2"  style="min-width: 50px;">
+                                    <div class="d-flex flex-column">
+                                        <button class ="btn btn-light border-0 btn-sm" id="flowchat_tbl_add_row"  onclick="to_flowchat_tbl_add_row()"  type="button">✚</button>
+                                        工順
+                                    </div>
+                                </th>
+                                <th colspan="4">フローチャート</th>
+                            </tr>
+                            <tr>
+                                <th>種類</th>
+                                <th>工程</th>
+                                <th>加工先</th>
+                                <th>加工方法</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% for(let i = 0; i < flowchat_tbl_no;i++){ 
+                                let process_1 =  data['process_1_' + (i+1)] ; 
+                                let process_2 =  data['process_2_' + (i+1)];
+                                let process_3 =  data['process_3_' + (i+1)];
+                                let process_4 =  data['process_4_' + (i+1)];
+                                let process_5 =  data['process_5_' + (i+1)];
+                                let process_6 =  data['process_6_' + (i+1)];
+                            %>
+                                <tr>
+                                    <td  onclick="remove_last_row('flowchat_tbl')"><%= String.fromCodePoint(9312 + i) %></td>
+
+                                    <td >
+                                        <input name="process_1_<%=i+1%>" id="process_1_<%=i+1%>"  placeholder="Click to select"  readonly  onclick="input_process_line(event)"  value="<%= process_1 %>">
+                                    </td>
+                                    <td >
+                                        <input name="process_2_<%=i+1%>" id="process_2_<%=i+1%>"  readonly  onclick="input_process_line(event)"  value="<%= process_2 %>">
+                                    </td>
+                                    <td >
+                                        <input name="process_3_<%=i+1%>"  id="process_3_<%=i+1%>" readonly onclick="input_process_line(event)"  value="<%= process_3 %>">
+                                    </td>
+                                    <td >
+                                        <input name="process_4_<%=i+1%>"  id="process_4_<%=i+1%>" value="<%= process_4 %>">
+                                        <input  style="display:none;" name="process_5_<%=i+1%>" id="process_5_<%=i+1%>"  readonly  value="<%= process_5 %>">
+                                        <input  style="display:none;" name="process_6_<%=i+1%>" id="process_6_<%=i+1%>"  readonly  value="<%= process_6 %>">
+                                    </td>
+                                </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+                <table class="table table-bordered  caption-top  table-sm border-dark-subtle">
+                    <caption class="caption-center">最終検査項目 / 完成品</caption>
+                    <tr>
+                        <th rowspan="3" class="align-middle" >検査基準</th>
+                        <td class="text-start">得意先支給の検査基準書の有無</td>
+                        <td >
+                            <%
+                                let request_check_form = data.request_check_form?data.request_check_form:"no" ;
+                                let not_request_check_form =["no","yes"].filter(sa =>sa!= request_check_form)[0]
+
+                            %>
+                            <select class="w-100 border-0" name="request_check_form" id="">
+                                <option value="<%= request_check_form %>" selected ><%= request_check_form =="no"?"□無し":"■有り" %></option>
+                                <option value="<%= not_request_check_form %>" ><%= not_request_check_form =="no"?"□無し":"■有り" %></option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="d-flex flex-row justify-content-start">
+                                得意先支給の見本品の有無　　「
+                                <input type="number" name="sample_number"  class="mx-2 border border-0 w-50" value="<%= data.sample_number %>">
+                                見本 　」
+                            </div>
+                        </td>
+                        <td >
+                            <%
+                                let sample = data.sample? data.sample : "no" ;
+                                let not_sample =["no","yes"].filter(sa =>sa!= sample)[0]
+
+                            %>
+                            <select class="w-100 border-0" name="sample" id="">
+                                <option value="<%= sample %>" selected ><%= sample =="no"?"□無し":"■有り" %></option>
+                                <option value="<%= not_sample %>" ><%= not_sample =="no"?"□無し":"■有り" %></option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-start">一般検査基準書／社内</td>
+                        <td>
+                            <%
+                                let application_check = data.application_check ? data.application_check : "no" ;
+                                let not_application_check = ["no","yes"].filter(sa =>sa!= application_check)[0]
+                            %>
+                            <select class="w-100 border-0" name="application_check" id="">
+                                <option value="<%= application_check %>" selected ><%= application_check =="no"?"□適用しない":"■適用する" %></option>
+                                <option value="<%= not_application_check %>" ><%= not_application_check =="no"?"□適用しない":"■適用する" %></option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th >検査区分</th>
+                        <td>
+                            <%
+                                let session_check = data.session_check? data.session_check :  "■社内";
+                                let session_check_arr = ["■社内","■社外","■社内・社外兼用"].filter(se => se!= session_check)
+                            %>
+                            <select class="w-100 border-0" name="session_check" id="">
+                                <option value="<%= session_check %>" selected ><%= session_check %></option>
+                                <% for(let sec of session_check_arr){ %>
+                                    <option value="<%= sec %>" ><%= sec %></option>
+                                <% } %>
+                            </select>
+                        </td>
+                        <td>
+                            <div class="d-flex flex-row">
+                                <label class="mx-2" style="font-weight: 700;min-width: fit-content;">検査外注先名 :</label>
+                                <input name="check_company_name"  class="border w-75 border-0 mx-2 text-start" value="<%= data.check_company_name%>">
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <table class="table table-bordered  caption-top  table-sm border-dark-subtle text-start">
+                    <caption class="caption-center">検 査 方 法</caption>
+                    <tr>
+                        <th>検 査 項 目</th>
+                        <th >検 査 方 法</th>
+                        <th>検 査 面</th>
+                        <th colspan="2">特 記 事 項</th>
+                    </tr>
+                    <tr>
+                        <th rowspan="2"  class="align-middle" >外観検査</th>
+                        <td>透過検査</td>
+                        <td >
+                            <%  
+                                let trans_refs =  ["□無し","■表面のみ","■裏面のみ","■両面"]
+                                let transparent_check = data.transparent_check? data.transparent_check :  "□無し";
+                                let transparent_check_arr = trans_refs.filter(se => se!= transparent_check)
+
+                                let reflection_check = data.reflection_check? data.reflection_check :  "□無し";
+                                let reflection_check_arr = trans_refs.filter(se => se!= reflection_check)
+                            %>
+                            <select class="w-100 border-0 text-center" name="transparent_check" id="">
+                                <option value="<%= transparent_check %>" selected ><%= transparent_check %></option>
+                                <% for(let sec of transparent_check_arr){ %>
+                                    <option value="<%= sec %>" ><%= sec %></option>
+                                <% } %>
+                            </select>
+                        </td>
+                        <td rowspan="2"  colspan="2">
+                            <textarea name ="exterior_note" class="w-100 border-0 no-resize"><%= data.exterior_note %></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> 反射検査</td>
+                        <td >
+                            <select class="w-100 border-0 text-center" name="reflection_check" id="">
+                                <option value="<%= reflection_check %>" selected ><%= reflection_check %></option>
+                                <% for(let sec of reflection_check_arr){ %>
+                                    <option value="<%= sec %>" ><%= sec %></option>
+                                <% } %>
+                            </select>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <th >寸法検査</th>
+                        <td >
+                            <%  
+                                let check123_arr =  ["□無し","■全数検査","■抜き取り検査"]
+                                let dimenson_check = data.dimenson_check? data.dimenson_check :  "□無し";
+                                let dimenson_check_arr = check123_arr.filter(se => se!= dimenson_check)
+
+                                let warp_check = data.warp_check? data.warp_check :  "□無し";
+                                let warp_check_arr = check123_arr.filter(se => se!= warp_check)
+
+                                let weight_check = data.weight_check? data.weight_check :  "□無し";
+                                let weight_check_arr = check123_arr.filter(se => se!= weight_check)
+                            %>
+                            <select class="w-100 border-0 text-center" name="dimenson_check" id="">
+                                <option value="<%= dimenson_check %>" selected ><%= dimenson_check %></option>
+                                <% for(let sec of dimenson_check_arr){ %>
+                                    <option value="<%= sec %>" ><%= sec %></option>
+                                <% } %>
+                            </select>
+                        </td>
+                        <td>
+                            <div class="d-flex flex-row w-100 justify-content-around">
+                                n =
+                                <input class="mx-2 border-0 w-50" type="number" name="dimenson_check_number" value="<%= data.dimenson_check_number %>">
+                                個
+                            </div>
+                        </td>
+                        <td colspan="2">
+                            <input name ="dimenson_note" class="w-100 text-start" value="<%= data.dimenson_note %>">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th >反り検査</th>
+                        <td>
+                            <select class="w-100 border-0 text-center" name="warp_check" id="">
+                                <option value="<%= warp_check %>" selected ><%= warp_check %></option>
+                                <% for(let sec of warp_check_arr){ %>
+                                    <option value="<%= sec %>" ><%= sec %></option>
+                                <% } %>
+                            </select>
+                        </td>
+                        <td>
+                            <div class="d-flex flex-row w-100 justify-content-around">
+                                n =
+                                <input class="mx-2 border-0 w-50" type="number" name="warp_check_number" value="<%= data.warp_check_number %>">
+                                個
+                            </div>
+                        </td>
+                        <td  colspan="2">
+                            <input name ="warp_note" class="w-100 text-start" value="<%= data.warp_note %>">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th >重量検査</th>
+                        <td >
+                            <select class="w-100 border-0 text-center" name="weight_check" id="">
+                                <option value="<%= weight_check %>" selected ><%= weight_check %></option>
+                                <% for(let sec of weight_check_arr){ %>
+                                    <option value="<%= sec %>" ><%= sec %></option>
+                                <% } %>
+                            </select>
+                        </td>
+                        <td>
+                            <div class="d-flex flex-row w-100 justify-content-around">
+                                n =
+                                <input class="mx-2 border-0 w-50" type="number" name="weight_check_number" value="<%= data.weight_check_number %>">
+                                個
+                            </div>
+                        </td>
+                        <td colspan="2">
+                            <input name="weight_note" class="w-100 text-start" value="<%= data.weight_note %>">
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <th colspan="2">検査成績書の添付要否</th>
+                        <td>
+                            <%  
+                                let is_attached = data.is_attached? data.is_attached :  "■不要";
+                                let not_is_attached = ["■不要","■要"].filter(se => se!= is_attached)[0]
+                            %>
+                            <select class="w-100 border-0 text-center" name="is_attached" id="">
+                                <option value="<%= is_attached %>" selected ><%= is_attached %></option>
+                                <option value="<%= not_is_attached %>" ><%= not_is_attached %></option>
+                            </select>
+                        </td>
+                        <th>検査成績書</th>
+                        <td>
+                            <%  
+                                let checkform_addtact = data.checkform_addtact? data.checkform_addtact :  "□無し";
+                                let checkform_addtact_arr = ["□無し","■社内書式","■得意先書式"].filter(se => se!= checkform_addtact)
+                            %>
+                            <select class="w-100 border-0" name="checkform_addtact" id="">
+                                <option value="<%= checkform_addtact %>" selected ><%= checkform_addtact %></option>
+                                <% for(let sec of checkform_addtact_arr){ %>
+                                    <option value="<%= sec %>" ><%= sec %></option>
+                                <% } %>
+                            </select>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <th colspan="2">
+                            出荷時に必要となるその他の添付帳票類
+                        </th>
+                        <td  colspan="3">
+                            <div class="w-auto d-flex flex-row">
+                                <input  name ="other_1" class="w-25" value="<%= data.other_1 %>">
+                                <input  name ="other_2" class="w-25" value="<%= data.other_2 %>">
+                                <input  name ="other_3" class="w-25" value="<%= data.other_3 %>">
+                                <input  name ="other_4" class="w-25" value="<%= data.other_4 %>">
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <table class="table table-bordered  table-sm border-dark-subtle">
+                    <tr>
+                        <th class="text-start text-danger">【申し送り事項】ex.管理ポイント</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input class="w-100 text-start" name ="other_5" value="<%= data.other_5 %>">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input class=" w-100 text-start" name ="other_6" value="<%= data.other_6 %>">
+                        </td>
+                    </tr>
+                </table>
+                <div class="d-flex justify-content-center align-items-center">
+                    <button class="btn btn-primary mb-3 p-2" id="btn">保存する</button>
+                </div>
+            </form>
+        </div>
+    </body>
+    <%- include('../partials/footer') %>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/start/jquery-ui.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script src="/javascript/flash.js"></script>
+    <script src="/javascript/forForm.js"></script>
+</html>

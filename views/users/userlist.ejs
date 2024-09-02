@@ -1,0 +1,66 @@
+<% layout('layouts/boilerplate') %>
+<h3 class="w-25 offset-5">ユーザー登録</h3>
+<form class="w-25 offset-4 mb-5" action="/register" method="POST" class="validated-form" novalidate>
+    <div class="d-flex flex-column ">  
+        <div class="mb-3">
+            <label class="form-label" for="email">メールアドレス</label>
+            <input class="form-control" type="email" name="email" id="email" required>
+            <div class="valid-feedback">
+                OK!
+            </div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="password">パスワード</label>
+            <input class="form-control" type="password" name="password" id="password" required>
+            <div class="valid-feedback">
+                OK!
+            </div>
+        </div>
+        <div class="d-flex flex-row  justify-content-center mt-3 mb-5">
+            <div class="d-flex flex-row  justify-content-center mx-5">
+                <input type="radio" class="mx-3"  name="type" id="user"  value="user" checked>
+                <label  for="user">ユーザー</label>
+            </div>
+            <div class="d-flex flex-row  justify-content-center mx-3">
+                <input type="radio"  class="mx-3" name="type" id="admin"  value="admin">
+                <label  for="admin"  >管理者</label>
+            </div>
+        </div>
+        <div class="text-center">
+            <button class="btn btn-success w-25 ">追加する</button>
+        </div>
+    </div>
+</form>
+
+<h3 class="w-25 offset-5">ユーザー 一覧</h3>
+<div class="w-25 offset-4">
+    <% for (const user of users) { %>
+        <div class="card mb-3">
+            <div class="card-header">
+                <form method="POST" action="/users/<%= user.uid %>">
+                    <div class="col d-flex flex-row mb-3">
+                        <input type="radio" class="mx-3" name="type" id="user_<%= user.uid %>" value="user" <%= user.customClaims && user.customClaims.admin ? '' : 'checked' %>>
+                        <label for="user_<%= user.uid %>">ユーザー</label>
+                        <input type="radio" class="mx-3" name="type" id="admin_<%= user.uid %>" value="admin" <%= user.customClaims && user.customClaims.admin ? 'checked' : '' %>>
+                        <label for="admin_<%= user.uid %>">管理者</label>
+                    </div>
+                    <div class="d-flex flex-column">
+                        <label for="email">Email</label>
+                        <input class="mb-3 w-100" type="email" name="email" value="<%= user.email %>">
+                    </div>
+                    <div class="d-flex flex-column">
+                        <label for="password">Password</label>
+                        <input class="w-100" name="password" placeholder="*******">
+                    </div>
+                    <div class="text-center mt-3">
+                        <button class="btn btn-success btn-sm mx-3">更新</button>
+                    </div>
+                </form>
+                <form method="POST" action="/users/<%= user.uid %>?_method=DELETE" class=" text-end">
+                    <button class="btn btn-danger btn-sm mx-3">削除</button>
+                </form>
+            </div>
+          </div>
+
+    <% } %>
+</div>

@@ -1,0 +1,35 @@
+<nav id="nav" class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img class="logo" src=" /images/logo.png" alt="株式会社 正栄マーク製作所">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <!-- <a class="nav-link" href="/">ホーム</a> -->
+                <a class="nav-link" href="/settings/other">設定</a>
+                <a class="nav-link" href="/products/new">案件登録</a>
+                <a class="nav-link" href="/products">案件一覧</a>
+                <a class="nav-link" href="/products/<%= data.id %>/structural_work_chedule">構造工程表</a>
+                <a class="nav-link" href="/products/<%= data.id %>/quotation">見積書 概算書</a>
+                <a class="nav-link" href="/products/<%= data.id %>/quoteForm">見積書</a>
+                <a class="nav-link" href="/products/<%= data.id %>/specs">製品仕様書</a>
+                <a class="nav-link" href="/products/<%= data.id %>/checksheet">工程チェックシート</a>
+            </div>
+        </div>
+        <div class="navbar-nav ms-auto">
+            <% if(!currentUser) { %> 
+            <a class="nav-link" href="/login">Login
+            </a>
+            <% } else { %> 
+            <div class="nav-link text-danger"><%=currentUser.email %></div>
+            
+            <a class="nav-link" href="/logout">Logout
+            </a>
+            <% } %> 
+        </div>
+    </div>
+</nav>
